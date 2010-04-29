@@ -13,7 +13,5 @@ public class TreeTest {
 		node.addDeclaration( nodeFactory.createFunctionNode( ) );
 		
 		node.generateToStream( System.out );
-		
-		System.out.println( "Hello, World!" );
 	}
 }
