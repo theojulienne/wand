@@ -15,10 +15,8 @@ public abstract class GeneratorFactory {
 		return generatorFactory;
 	}
 	
-	public static void generateNode( TreeNode node, PrintStream out ) {
-		Generator generator = generatorFactory.generatorForType( node.getClass() );
-		generator.generateNode( node, out );
-	}
 	
-	public abstract Generator generatorForType( Class type );
+	
+	public abstract FunctionGenerator getFunctionGenerator( );
+	public abstract ProgramGenerator getProgramGenerator( );
 }

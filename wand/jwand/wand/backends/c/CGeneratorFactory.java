@@ -4,15 +4,11 @@ import wand.generators.*;
 import wand.nodes.*;
 
 public class CGeneratorFactory extends GeneratorFactory {
-	public Generator generatorForType( Class type ) {
-		Generator generator = null;
-		
-		if ( FunctionNode.class.isAssignableFrom( type ) ) {
-			generator = new CFunctionGenerator( );
-		} else if ( ProgramNode.class.isAssignableFrom( type ) ) {
-			generator = new CProgramGenerator( );
-		}
-		
-		return generator;
+	public FunctionGenerator getFunctionGenerator( ) {
+		return new CFunctionGenerator( );
+	}
+	
+	public ProgramGenerator getProgramGenerator( ) {
+		return new CProgramGenerator( );
 	}
 }

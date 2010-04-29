@@ -14,7 +14,7 @@ public class CProgramGenerator implements ProgramGenerator {
 		for ( int i = 0; i < childNodes.size(); i++ ) {
 			DeclarationNode childNode = (DeclarationNode)childNodes.get(i);
 			
-			GeneratorFactory.generateNode( childNode, out );
+			childNode.generateToStream( out );
 		}
 		out.println( "// end program!" );
 	}

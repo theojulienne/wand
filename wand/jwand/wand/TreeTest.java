@@ -12,7 +12,7 @@ public class TreeTest {
 		ProgramNode node = nodeFactory.createProgramNode( );
 		node.addDeclaration( nodeFactory.createFunctionNode( ) );
 		
-		GeneratorFactory.generateNode( node, System.out );
+		node.generateToStream( System.out );
 		
 		System.out.println( "Hello, World!" );
 	}
