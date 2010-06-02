@@ -1,7 +1,7 @@
 package wand.backends.c;
 
 import wand.generators.*;
-import wand.nodes.*;
+import wand.core.WandNode;
 
 public class CGeneratorFactory extends GeneratorFactory {
 	public FunctionGenerator getFunctionGenerator( ) {

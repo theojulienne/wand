@@ -1,12 +1,12 @@
 package wand.backends.c;
 
 import wand.generators.FunctionGenerator;
-import wand.nodes.*;
+import wand.core.WandNode;
 
 import java.io.PrintStream;
 
 public class CFunctionGenerator implements FunctionGenerator {
-	public void generateNode( TreeNode node, PrintStream out ) {
+	public void generateNode( WandNode node, PrintStream out ) {
 		out.println( "function!" );
 	}
 }

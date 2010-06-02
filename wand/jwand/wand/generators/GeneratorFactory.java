@@ -1,7 +1,5 @@
 package wand.generators;
 
-import wand.nodes.TreeNode;
-
 import java.io.PrintStream;
 
 public abstract class GeneratorFactory {

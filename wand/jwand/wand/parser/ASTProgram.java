@@ -2,6 +2,8 @@
 /* JavaCCOptions:MULTI=true,NODE_USES_PARSER=false,VISITOR=false,TRACK_TOKENS=false,NODE_PREFIX=AST,NODE_EXTENDS=wand.core.WandNode,NODE_FACTORY=,SUPPORT_CLASS_VISIBILITY_PUBLIC=true */
 package wand.parser;
 
+import wand.generators.*;
+
 public
 class ASTProgram extends SimpleNode {
     public ASTProgram(int id) {
@@ -15,6 +17,10 @@ class ASTProgram extends SimpleNode {
     private ASTDeclarations declarations;
     public void setDeclarations( ASTDeclarations declarations ) {
         this.declarations = declarations;
+    }
+    
+    public Generator getGenerator( ) {
+        return GeneratorFactory.getGeneratorFactory( ).getProgramGenerator( );
     }
 
 }

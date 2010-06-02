@@ -116,6 +116,8 @@ ASTDeclaration Declaration() : {}
 	(
 	    jjtThis=FunctionDeclaration()
 	)
+	
+	{ return jjtThis; }
 }
 
 // FunctionDeclaration -> "void" Identifier "(" ")" "{" FunctionBody "}"

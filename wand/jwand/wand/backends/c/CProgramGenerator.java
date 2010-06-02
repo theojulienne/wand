@@ -1,18 +1,19 @@
 package wand.backends.c;
 
 import wand.generators.*;
-import wand.nodes.*;
+import wand.core.WandNode;
+import wand.parser.*;
 
 import java.io.PrintStream;
 import java.util.ArrayList;
 
 public class CProgramGenerator implements ProgramGenerator {
-	public void generateNode( TreeNode node, PrintStream out ) {
-		ArrayList<TreeNode> childNodes = node.getChildNodes( );
+	public void generateNode( WandNode node, PrintStream out ) {
+		int numChildren = node.jjtGetNumChildren( );
 		
 		out.println( "// program!" );
-		for ( int i = 0; i < childNodes.size(); i++ ) {
-			DeclarationNode childNode = (DeclarationNode)childNodes.get(i);
+		for ( int i = 0; i < numChildren; i++ ) {
+			ASTDeclarations childNode = (ASTDeclarations)node.jjtGetChild(i);
 			
 			childNode.generateToStream( out );
 		}

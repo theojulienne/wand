@@ -1,8 +1,9 @@
 package wand.generators;
 
-import wand.nodes.TreeNode;
+import wand.core.WandNode;
+
 import java.io.PrintStream;
 
 public interface Generator {
-	public void generateNode( TreeNode node, PrintStream out );
+	public void generateNode( WandNode node, PrintStream out );
 }
