@@ -1,2 +1,3 @@
 all:
-	javac wand/backends/c/*.java wand/generators/*.java wand/nodes/*.java wand/*.java
+	make -C wand/parser
+	javac wand/backends/c/*.java wand/generators/*.java wand/*.java wand/parser/*.java

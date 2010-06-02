@@ -1,0 +1,153 @@
+/*
+
+Task: Make this parser implement a basic Wand language instead
+
+Program -> Declarations
+
+Declarations -> Declaration [Declarations]
+
+Declaration -> FunctionDeclaration
+
+FunctionDeclaration -> "void" Identifier "(" ")" "{" FunctionBody "}"
+
+FunctionBody -> FunctionDeclaration
+
+
+*/
+
+
+
+/* This example shows how to specify a simple parser for a toy calculator
+   language with floats, multiplication, and let-expressions.
+   Here is an example program in this language:
+   
+      let radius = 5.0 in
+        let pi = 3.14 in
+          2.0 * pi * radius 
+
+*/
+
+options {
+    MULTI=true;
+	NODE_EXTENDS="wand.core.WandNode";
+	NODE_PACKAGE="wand.parser";
+}
+
+
+/* *** Specification of the parser class *** */
+
+PARSER_BEGIN(WandParser)
+package wand.parser;
+
+public class WandParser {}
+PARSER_END(WandParser)
+
+/* *** Token specification *** */
+
+/* Skip whitespace */
+SKIP : { " " | "\t" | "\n" | "\r" }
+
+/* Reserved words */
+TOKEN: {
+	< VOID: "void">
+|	< INT: "int">
+|	< FLOAT: "float">
+}
+
+/* Literals */
+TOKEN: {
+  < FPLIT: (["0"-"9"])+ "." (["0"-"9"])+ >    // Floating point literal
+}
+
+/* Operators */
+TOKEN: {
+  < LPAREN: "(" >
+| < RPAREN: ")" >
+| < OPENBLOCK: "{" >
+| < CLOSEBLOCK: "}" >
+}
+
+/* Identifiers */
+TOKEN: {
+  < ID: (["A"-"Z", "a"-"z", "_"])(["A"-"Z", "a"-"z", "_", "0"-"9"])* >
+}
+
+/* *** Context-free grammar (EBNF) *** */
+
+/* The start nonterminal and its productions. */
+
+ASTProgram Program() : {
+    ASTDeclarations declarations;
+}
+{
+    (
+        declarations=Declarations()
+        {
+            jjtThis.setDeclarations( declarations );
+        }
+    )
+    
+    { return jjtThis; }
+}
+
+/* Other nonterminals and their productions */
+
+// Declarations -> Declaration [Declarations]
+ASTDeclarations Declarations() : {
+    ASTDeclarations rest;
+    ASTDeclaration declaration;
+}
+{
+    (
+	    declaration=Declaration() [ rest=Declarations() { jjtThis = rest; } ]
+	)
+	
+	{
+	    jjtThis.addDeclaration( declaration );
+	    return jjtThis;
+	}
+}
+
+
+
+// Declaration -> FunctionDeclaration
+ASTDeclaration Declaration() : {}
+{
+	(
+	    jjtThis=FunctionDeclaration()
+	)
+}
+
+// FunctionDeclaration -> "void" Identifier "(" ")" "{" FunctionBody "}"
+void FunctionDeclaration() : {
+	Token functionName;
+}
+{
+	(
+	    Type() functionName=<ID> <LPAREN> <RPAREN> <OPENBLOCK> FunctionBody() <CLOSEBLOCK>
+	)
+	
+	{ return jjtThis; }
+}
+
+// FunctionBody -> FunctionDeclaration
+void FunctionBody() : {}
+{
+	[ Declarations() ]
+}
+
+// Type ->
+void Type() : {}
+{
+	BuiltinType() [ArrayType()]
+}
+
+void BuiltinType() : {}
+{
+	"void" | "int" | "float" | <ID>
+}
+
+void ArrayType() : {}
+{
+	"[" "]" [ ArrayType() ]
+}
