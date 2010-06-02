@@ -4,13 +4,18 @@ package wand.parser;
 
 public
 class ASTProgram extends SimpleNode {
-  public ASTProgram(int id) {
-    super(id);
-  }
-
-  public ASTProgram(WandParser p, int id) {
-    super(p, id);
-  }
+    public ASTProgram(int id) {
+        super(id);
+    }
+    
+    public ASTProgram(WandParser p, int id) {
+        super(p, id);
+    }
+    
+    private ASTDeclarations declarations;
+    public void setDeclarations( ASTDeclarations declarations ) {
+        this.declarations = declarations;
+    }
 
 }
 /* JavaCC - OriginalChecksum=7b0d917801b31d2c38afb1a55a722f26 (do not edit this line) */

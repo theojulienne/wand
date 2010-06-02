@@ -120,8 +120,8 @@ public class WandParser/*@bgen(jjtree)*/implements WandParserTreeConstants, Wand
   }
 
 // FunctionDeclaration -> "void" Identifier "(" ")" "{" FunctionBody "}"
-  static final public void FunctionDeclaration() throws ParseException {
-                              /*@bgen(jjtree) FunctionDeclaration */
+  static final public ASTFunctionDeclaration FunctionDeclaration() throws ParseException {
+                                                /*@bgen(jjtree) FunctionDeclaration */
         ASTFunctionDeclaration jjtn000 = new ASTFunctionDeclaration(JJTFUNCTIONDECLARATION);
         boolean jjtc000 = true;
         jjtree.openNodeScope(jjtn000);Token functionName;
@@ -155,6 +155,7 @@ public class WandParser/*@bgen(jjtree)*/implements WandParserTreeConstants, Wand
             jjtree.closeNodeScope(jjtn000, true);
           }
     }
+    throw new Error("Missing return statement in function");
   }
 
 // FunctionBody -> FunctionDeclaration

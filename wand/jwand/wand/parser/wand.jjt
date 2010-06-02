@@ -119,7 +119,7 @@ ASTDeclaration Declaration() : {}
 }
 
 // FunctionDeclaration -> "void" Identifier "(" ")" "{" FunctionBody "}"
-void FunctionDeclaration() : {
+ASTFunctionDeclaration FunctionDeclaration() : {
 	Token functionName;
 }
 {
