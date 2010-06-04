@@ -39,7 +39,7 @@ Test types
   required to pass for a release, however none must crash
   (see procedures below). Otherwise, same as "core-graceful".
 
-Release Test Procedures
+Release test procedures
 -----------------------
 
 * A "crash" (NullPointerException, ArrayOutOfBoundsException, etc) 
