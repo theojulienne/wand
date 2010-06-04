@@ -40,5 +40,9 @@ def run_tests( ):
 
 if __name__ == '__main__':
 	print 'Running Wand tests...'
+	print
+	
 	run_tests( )
+	
+	print
 	print 'All tests passed. You are AWESOME!'
