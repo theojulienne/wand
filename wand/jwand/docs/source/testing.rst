@@ -12,6 +12,11 @@ the feature being tested (eg "functions", "delegates", "classes", "templates"), 
 This directory should contain one or more wand source files, which will be
 automatically compiled and run.
 
+* If a ``test.sh`` file exists, it will be run instead of any automatic compilation.
+  It should exit with status "0" for a pass and "1" for a fail.
+* If a ``main.c`` file exists, it will be compiled with gcc and linked with the wand
+  file(s).
+
 .. _test-types:
 
 Test types
