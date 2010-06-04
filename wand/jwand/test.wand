@@ -1,5 +1,6 @@
 int foo( ) {
-	
+	int foo = 123.0;
+	foo = 456;
 }
 
 int[][] baz( ) {

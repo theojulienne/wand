@@ -57,6 +57,7 @@ TOKEN: {
 /* Literals */
 TOKEN: {
   < FPLIT: (["0"-"9"])+ "." (["0"-"9"])+ >    // Floating point literal
+| < INTLIT: (["0"-"9"])+ >    // Integer literal
 }
 
 /* Operators */
@@ -65,6 +66,15 @@ TOKEN: {
 | < RPAREN: ")" >
 | < OPENBLOCK: "{" >
 | < CLOSEBLOCK: "}" >
+
+| < OPINC: "++" >
+| < OPDEC: "--" >
+
+| < OPADD: "+" >
+| < OPSUB: "-" >
+
+| < OPASSIGN: "=" >
+
 }
 
 /* Identifiers */
@@ -126,7 +136,7 @@ ASTFunctionDeclaration FunctionDeclaration() : {
 }
 {
 	(
-	    Type() functionName=<ID> <LPAREN> <RPAREN> <OPENBLOCK> FunctionBody() <CLOSEBLOCK>
+	    Type() functionName=<ID> <LPAREN> <RPAREN> Block()
 	    { jjtThis.setFunctionName( functionName.image ); }
 	)
 	
@@ -134,10 +144,10 @@ ASTFunctionDeclaration FunctionDeclaration() : {
 }
 
 // FunctionBody -> FunctionDeclaration
-ASTFunctionBody FunctionBody() : {}
+/*ASTFunctionBody FunctionBody() : {}
 {
     { return jjtThis; }
-}
+}*/
 
 // Type ->
 void Type() : {}
@@ -153,4 +163,209 @@ void BuiltinType() : {}
 void ArrayType() : {}
 {
 	"[" "]" [ ArrayType() ]
+}
+
+
+
+
+
+void QualifiedIdentifier() : {}
+{
+    (
+        <ID> [ "." QualifiedIdentifier() ]
+    )
+}
+
+void Literal() : {}
+{
+    (
+        IntegerLiteral() |
+        FloatingPointLiteral()/* |
+        CharacterLiteral() |
+        StringLiteral() |
+        BooleanLiteral() |
+        NullLiteral()*/
+    )
+}
+
+void Expression() : {}
+{
+    AssignExpression()
+}
+
+void AssignExpression() : {}
+{
+    // was: InfixExpression() [AssignOperator() InfixExpression()]
+    // but this allowed syntax "3 += 1" which would be invalid and need
+    // to be picked up elsewhere
+    [<ID> AssignOperator()] InfixExpression()
+}
+
+void InfixExpression() : {}
+{
+    PrefixExpression() [InfixOperator() PrefixExpression()]
+}
+
+void PrefixExpression() : {}
+{
+    PrefixOperator() PrefixExpression() |
+    PostfixExpression()
+}
+
+void PostfixExpression() : {}
+{
+    Primary() (PostfixOperator())*
+    
+}
+
+void Primary() : {}
+{
+    <LPAREN> Expression() <RPAREN> |
+    Literal()
+}
+
+
+
+void AssignOperator() : {}
+{
+    "=" |
+    "+=" |
+    "-=" |
+    "*=" |
+    "/=" |
+    "&=" |
+    "|=" |
+    "^=" |
+    "%=" |
+    "<<=" |
+    ">>=" |
+    ">>>="
+}
+
+void InfixOperator() : {}
+{
+    "||" |
+    "&&" |
+    "|" |
+    "^" |
+    "&" |
+    "==" |
+    "!=" |
+    "<" |
+    ">" |
+    "<=" |
+    ">=" |
+    "<<" |
+    ">>" |
+    ">>>" |
+    "+" |
+    "-" |
+    "*" |
+    "/" |
+    "%"
+}
+
+void PrefixOperator() : {}
+{
+    "++" |
+    "--" |
+    "!" |
+    "~" |
+    "+" |
+    "-"
+}
+
+void PostfixOperator() : {}
+{
+    "++" | "--"
+}
+
+
+
+void IntegerLiteral() : {}
+{
+    <INTLIT>
+}
+
+void FloatingPointLiteral() : {}
+{
+    <FPLIT>
+}
+
+void CharacterLiteral() : {}
+{
+    <FPLIT>
+}
+
+void StringLiteral() : {}
+{
+    <FPLIT>
+}
+
+void BooleanLiteral() : {}
+{
+    <FPLIT>
+}
+
+void NullLiteral() : {}
+{
+    <FPLIT>
+}
+
+
+
+void Block() : {}
+{
+    "{" BlockStatements() "}"
+}
+
+void BlockStatements() : {}
+{
+    (BlockStatement())*
+}
+
+void BlockStatement() : {}
+{
+    LOOKAHEAD(2)
+    LocalVariableDeclarationStatement() |
+    Statement()
+}
+
+void LocalVariableDeclarationStatement() : {}
+{
+    Type() VariableDeclarators() ";"
+}
+
+void Statement() : {}
+{
+    Block() |
+    ExpressionStatement()
+}
+
+void ExpressionStatement() : {}
+{
+    Expression() ";"
+}
+
+void VariableDeclarators() : {}
+{
+    VariableDeclarator() ("," VariableDeclarator())*
+}
+
+void VariableDeclarator() : {}
+{
+    Identifier() ["=" VariableInitializer()]
+}
+
+void VariableInitializer() : {}
+{
+    Expression()
+    // | ArrayInitializer()
+}
+
+
+
+void Identifier() : {}
+{
+    <ID>
 }

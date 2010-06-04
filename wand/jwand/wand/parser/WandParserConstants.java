@@ -19,15 +19,27 @@ public interface WandParserConstants {
   /** RegularExpression Id. */
   int FPLIT = 8;
   /** RegularExpression Id. */
-  int LPAREN = 9;
+  int INTLIT = 9;
   /** RegularExpression Id. */
-  int RPAREN = 10;
+  int LPAREN = 10;
   /** RegularExpression Id. */
-  int OPENBLOCK = 11;
+  int RPAREN = 11;
   /** RegularExpression Id. */
-  int CLOSEBLOCK = 12;
+  int OPENBLOCK = 12;
   /** RegularExpression Id. */
-  int ID = 13;
+  int CLOSEBLOCK = 13;
+  /** RegularExpression Id. */
+  int OPINC = 14;
+  /** RegularExpression Id. */
+  int OPDEC = 15;
+  /** RegularExpression Id. */
+  int OPADD = 16;
+  /** RegularExpression Id. */
+  int OPSUB = 17;
+  /** RegularExpression Id. */
+  int OPASSIGN = 18;
+  /** RegularExpression Id. */
+  int ID = 19;
 
   /** Lexical state. */
   int DEFAULT = 0;
@@ -43,13 +55,52 @@ public interface WandParserConstants {
     "\"int\"",
     "\"float\"",
     "<FPLIT>",
+    "<INTLIT>",
     "\"(\"",
     "\")\"",
     "\"{\"",
     "\"}\"",
+    "\"++\"",
+    "\"--\"",
+    "\"+\"",
+    "\"-\"",
+    "\"=\"",
     "<ID>",
     "\"[\"",
     "\"]\"",
+    "\".\"",
+    "\"+=\"",
+    "\"-=\"",
+    "\"*=\"",
+    "\"/=\"",
+    "\"&=\"",
+    "\"|=\"",
+    "\"^=\"",
+    "\"%=\"",
+    "\"<<=\"",
+    "\">>=\"",
+    "\">>>=\"",
+    "\"||\"",
+    "\"&&\"",
+    "\"|\"",
+    "\"^\"",
+    "\"&\"",
+    "\"==\"",
+    "\"!=\"",
+    "\"<\"",
+    "\">\"",
+    "\"<=\"",
+    "\">=\"",
+    "\"<<\"",
+    "\">>\"",
+    "\">>>\"",
+    "\"*\"",
+    "\"/\"",
+    "\"%\"",
+    "\"!\"",
+    "\"~\"",
+    "\";\"",
+    "\",\"",
   };
 
 }
