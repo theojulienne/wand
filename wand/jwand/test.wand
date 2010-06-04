@@ -1,7 +1,5 @@
 int foo( ) {
-	void bah() {
 	
-	}
 }
 
 int[][] baz( ) {

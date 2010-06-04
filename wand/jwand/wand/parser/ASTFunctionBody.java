@@ -2,15 +2,24 @@
 /* JavaCCOptions:MULTI=true,NODE_USES_PARSER=false,VISITOR=false,TRACK_TOKENS=false,NODE_PREFIX=AST,NODE_EXTENDS=wand.core.WandNode,NODE_FACTORY=,SUPPORT_CLASS_VISIBILITY_PUBLIC=true */
 package wand.parser;
 
+import java.util.*;
+
 public
 class ASTFunctionBody extends SimpleNode {
-  public ASTFunctionBody(int id) {
-    super(id);
-  }
+    public ASTFunctionBody(int id) {
+        super(id);
+    }
 
-  public ASTFunctionBody(WandParser p, int id) {
-    super(p, id);
-  }
-
+    public ASTFunctionBody(WandParser p, int id) {
+        super(p, id);
+    }
+    
+    /*
+    private List<ASTStatement> statements = new ArrayList<ASTStatement>();
+    public void addStatement( ASTStatement statement ) {
+        statements.add( statement );
+    }
+    */
+    
 }
 /* JavaCC - OriginalChecksum=ff9835942423dcb929cc191a5aa205fb (do not edit this line) */

@@ -12,7 +12,9 @@ public class ChildGenerator implements Generator {
 		for ( int i = 0; i < numChildren; i++ ) {
 			WandNode childNode = (WandNode)node.jjtGetChild(i);
 			
-			childNode.generateToStream( out );
+			if ( childNode != node ) {
+			    childNode.generateToStream( out );
+			}
 		}
     }
     

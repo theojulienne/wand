@@ -4,6 +4,14 @@ import wand.generators.GeneratorFactory;
 import wand.parser.*;
 
 public class TreeTest {
+    // from: http://java.sun.com/j2se/1.4.2/docs/guide/lang/assert.html
+    static {
+        boolean assertsEnabled = false;
+        assert assertsEnabled = true; // Intentional side effect!!!
+        if (!assertsEnabled)
+            throw new RuntimeException("Asserts must be enabled!!!");
+    }
+    
 	public static void main( String[] args ) {
 		//NodeFactory nodeFactory = NodeFactory.getNodeFactory(  );
 		

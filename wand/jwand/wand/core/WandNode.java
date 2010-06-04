@@ -11,6 +11,10 @@ public abstract class WandNode implements Node {
     }
     
     public void generateToStream( PrintStream out ) {
-        getGenerator( ).generateNode( this, out );
+        Generator generator = getGenerator( );
+        
+        assert generator != null: "Node '" + this + "' provided no code generator!";
+        
+        generator.generateNode( this, out );
     }
 }

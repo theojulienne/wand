@@ -127,15 +127,16 @@ ASTFunctionDeclaration FunctionDeclaration() : {
 {
 	(
 	    Type() functionName=<ID> <LPAREN> <RPAREN> <OPENBLOCK> FunctionBody() <CLOSEBLOCK>
+	    { jjtThis.setFunctionName( functionName.image ); }
 	)
 	
 	{ return jjtThis; }
 }
 
 // FunctionBody -> FunctionDeclaration
-void FunctionBody() : {}
+ASTFunctionBody FunctionBody() : {}
 {
-	[ Declarations() ]
+    { return jjtThis; }
 }
 
 // Type ->

@@ -2,14 +2,30 @@
 /* JavaCCOptions:MULTI=true,NODE_USES_PARSER=false,VISITOR=false,TRACK_TOKENS=false,NODE_PREFIX=AST,NODE_EXTENDS=wand.core.WandNode,NODE_FACTORY=,SUPPORT_CLASS_VISIBILITY_PUBLIC=true */
 package wand.parser;
 
+import wand.generators.*;
+
 public
 class ASTFunctionDeclaration extends ASTDeclaration {
+    private String functionName;
+    
     public ASTFunctionDeclaration(int id) {
         super(id);
     }
 
     public ASTFunctionDeclaration(WandParser p, int id) {
         super(p, id);
+    }
+    
+    public Generator getGenerator( ) {
+        return GeneratorFactory.getGeneratorFactory( ).getFunctionGenerator( );
+    }
+    
+    public void setFunctionName( String name ) {
+        this.functionName = name;
+    }
+    
+    public String getFunctionName( ) {
+        return this.functionName;
     }
 
 }
