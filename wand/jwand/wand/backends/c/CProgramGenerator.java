@@ -9,14 +9,8 @@ import java.util.ArrayList;
 
 public class CProgramGenerator implements ProgramGenerator {
 	public void generateNode( WandNode node, PrintStream out ) {
-		int numChildren = node.jjtGetNumChildren( );
-		
 		out.println( "// program!" );
-		for ( int i = 0; i < numChildren; i++ ) {
-			ASTDeclarations childNode = (ASTDeclarations)node.jjtGetChild(i);
-			
-			childNode.generateToStream( out );
-		}
+		ChildGenerator.generateChildren( node, out );
 		out.println( "// end program!" );
 	}
 }

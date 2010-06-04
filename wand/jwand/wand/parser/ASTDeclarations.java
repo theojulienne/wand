@@ -15,6 +15,5 @@ class ASTDeclarations extends SimpleNode {
     public void addDeclaration( ASTDeclaration declaration ) {
         System.out.println( "addDeclaration( "+declaration+" );" );
     }
-
 }
 /* JavaCC - OriginalChecksum=f5b70d2b1b755b2577252666e38442d0 (do not edit this line) */
