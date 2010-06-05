@@ -2,15 +2,16 @@
 /* JavaCCOptions:MULTI=true,NODE_USES_PARSER=false,VISITOR=false,TRACK_TOKENS=false,NODE_PREFIX=AST,NODE_EXTENDS=wand.core.WandNode,NODE_FACTORY=,SUPPORT_CLASS_VISIBILITY_PUBLIC=true */
 package wand.parser;
 
+import wand.generators.*;
+
 public
 class ASTExpression extends SimpleNode {
-  public ASTExpression(int id) {
-    super(id);
-  }
-
-  public ASTExpression(WandParser p, int id) {
-    super(p, id);
-  }
-
+    public ASTExpression(int id) {
+        super(id);
+    }
+    
+    public ASTExpression(WandParser p, int id) {
+        super(p, id);
+    }
 }
 /* JavaCC - OriginalChecksum=65b8ba52814cbb795c5990fc63dbb563 (do not edit this line) */

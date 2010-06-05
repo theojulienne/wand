@@ -3,14 +3,22 @@
 package wand.parser;
 
 public
-class ASTArrayType extends SimpleNode {
-  public ASTArrayType(int id) {
-    super(id);
-  }
-
-  public ASTArrayType(WandParser p, int id) {
-    super(p, id);
-  }
-
+class ASTArrayType extends ASTType {
+    public ASTArrayType(int id) {
+        super(id);
+    }
+    
+    public ASTArrayType(WandParser p, int id) {
+        super(p, id);
+    }
+    
+    public ASTType getBaseType( ) {
+        return (ASTType) jjtGetChild( 0 );
+    }
+    
+    public String getTypeName( ) {
+        // FIXME: implement this (this will move to the generator anyway)
+        return getBaseType( ).getTypeName( ) + "[]";
+    }
 }
 /* JavaCC - OriginalChecksum=cc7f7c434bd16f5bf90fb500f6dc0769 (do not edit this line) */

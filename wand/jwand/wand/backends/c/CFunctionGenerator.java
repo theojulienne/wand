@@ -10,8 +10,27 @@ public class CFunctionGenerator implements FunctionGenerator {
 	public void generateNode( WandNode node, PrintStream out ) {
 	    ASTFunctionDeclaration declaration = (ASTFunctionDeclaration)node;
 	    
-		out.println( "void " + declaration.getFunctionName() + " () {" );
+	    ASTType type = (ASTType)declaration.getReturnType();
+	    
+		out.print( type.getTypeName() + " " + declaration.getFunctionName() + " ()" );
 		
-		out.println( "}" );
+		ASTBlock block = declaration.getFunctionBody( );
+		if ( block == null ) {
+		    out.println( ";" );
+		} else {
+		    out.println( " {" );
+		    block.generateToStream( out );
+		    out.println( "}" );
+		}
+		/*
+		int numChildren = node.jjtGetNumChildren( );
+		for ( int i = 0; i < numChildren; i++ ) {
+		    SimpleNode child = (SimpleNode)node.jjtGetChild(i);
+		    out.println( "  // " + child.toString() );
+		    //child.dump( "  // --  " );
+		}
+		*/
+		
+		
 	}
 }

@@ -17,4 +17,9 @@ public abstract class GeneratorFactory {
 	
 	public abstract FunctionGenerator getFunctionGenerator( );
 	public abstract ProgramGenerator getProgramGenerator( );
+	public abstract Generator getAssignmentGenerator( );
+	public abstract Generator getIdentifierGenerator( );
+	public abstract Generator getStatementGenerator( );
+	public abstract Generator getLocalDeclarationGenerator( );
+	public abstract Generator getTypeGenerator( );
 }

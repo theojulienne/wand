@@ -13,8 +13,7 @@ public class WandParser/*@bgen(jjtree)*/implements WandParserTreeConstants, Wand
     boolean jjtc000 = true;
     jjtree.openNodeScope(jjtn000);ASTDeclarations declarations;
     try {
-      declarations = Declarations();
-            jjtn000.setDeclarations( declarations );
+      Declarations();
       jjtree.closeNodeScope(jjtn000, true);
       jjtc000 = false;
       {if (true) return jjtn000;}
@@ -43,30 +42,27 @@ public class WandParser/*@bgen(jjtree)*/implements WandParserTreeConstants, Wand
 /* Other nonterminals and their productions */
 
 // Declarations -> Declaration [Declarations]
-  static final public ASTDeclarations Declarations() throws ParseException {
-                                  /*@bgen(jjtree) Declarations */
+  static final public void Declarations() throws ParseException {
+                       /*@bgen(jjtree) Declarations */
     ASTDeclarations jjtn000 = new ASTDeclarations(JJTDECLARATIONS);
     boolean jjtc000 = true;
-    jjtree.openNodeScope(jjtn000);ASTDeclarations rest;
-    ASTDeclaration declaration;
+    jjtree.openNodeScope(jjtn000);ASTDeclaration declaration;
     try {
-      declaration = Declaration();
-      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-      case VOID:
-      case INT:
-      case FLOAT:
-      case ID:
-        rest = Declarations();
-                                                              jjtn000 = rest;
-        break;
-      default:
-        jj_la1[0] = jj_gen;
-        ;
+      label_1:
+      while (true) {
+        switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+        case VOID:
+        case INT:
+        case FLOAT:
+        case ID:
+          ;
+          break;
+        default:
+          jj_la1[0] = jj_gen;
+          break label_1;
+        }
+        Declaration();
       }
-          jjtree.closeNodeScope(jjtn000, true);
-          jjtc000 = false;
-            jjtn000.addDeclaration( declaration );
-            {if (true) return jjtn000;}
     } catch (Throwable jjte000) {
       if (jjtc000) {
         jjtree.clearNodeScope(jjtn000);
@@ -86,45 +82,16 @@ public class WandParser/*@bgen(jjtree)*/implements WandParserTreeConstants, Wand
         jjtree.closeNodeScope(jjtn000, true);
       }
     }
-    throw new Error("Missing return statement in function");
   }
 
 // Declaration -> FunctionDeclaration
-  static final public ASTDeclaration Declaration() throws ParseException {
-                                /*@bgen(jjtree) Declaration */
-  ASTDeclaration jjtn000 = new ASTDeclaration(JJTDECLARATION);
-  boolean jjtc000 = true;
-  jjtree.openNodeScope(jjtn000);
-    try {
-      jjtn000 = FunctionDeclaration();
-          jjtree.closeNodeScope(jjtn000, true);
-          jjtc000 = false;
-          {if (true) return jjtn000;}
-    } catch (Throwable jjte000) {
-          if (jjtc000) {
-            jjtree.clearNodeScope(jjtn000);
-            jjtc000 = false;
-          } else {
-            jjtree.popNode();
-          }
-          if (jjte000 instanceof RuntimeException) {
-            {if (true) throw (RuntimeException)jjte000;}
-          }
-          if (jjte000 instanceof ParseException) {
-            {if (true) throw (ParseException)jjte000;}
-          }
-          {if (true) throw (Error)jjte000;}
-    } finally {
-          if (jjtc000) {
-            jjtree.closeNodeScope(jjtn000, true);
-          }
-    }
-    throw new Error("Missing return statement in function");
+  static final public void Declaration() throws ParseException {
+    FunctionDeclaration();
   }
 
 // FunctionDeclaration -> "void" Identifier "(" ")" "{" FunctionBody "}"
-  static final public ASTFunctionDeclaration FunctionDeclaration() throws ParseException {
-                                                /*@bgen(jjtree) FunctionDeclaration */
+  static final public void FunctionDeclaration() throws ParseException {
+                              /*@bgen(jjtree) FunctionDeclaration */
         ASTFunctionDeclaration jjtn000 = new ASTFunctionDeclaration(JJTFUNCTIONDECLARATION);
         boolean jjtc000 = true;
         jjtree.openNodeScope(jjtn000);Token functionName;
@@ -134,10 +101,9 @@ public class WandParser/*@bgen(jjtree)*/implements WandParserTreeConstants, Wand
       jj_consume_token(LPAREN);
       jj_consume_token(RPAREN);
       Block();
+              jjtree.closeNodeScope(jjtn000, true);
+              jjtc000 = false;
               jjtn000.setFunctionName( functionName.image );
-          jjtree.closeNodeScope(jjtn000, true);
-          jjtc000 = false;
-          {if (true) return jjtn000;}
     } catch (Throwable jjte000) {
           if (jjtc000) {
             jjtree.clearNodeScope(jjtn000);
@@ -157,7 +123,6 @@ public class WandParser/*@bgen(jjtree)*/implements WandParserTreeConstants, Wand
             jjtree.closeNodeScope(jjtn000, true);
           }
     }
-    throw new Error("Missing return statement in function");
   }
 
 // FunctionBody -> FunctionDeclaration
@@ -168,65 +133,51 @@ public class WandParser/*@bgen(jjtree)*/implements WandParserTreeConstants, Wand
 
 // Type ->
   static final public void Type() throws ParseException {
-               /*@bgen(jjtree) Type */
-  ASTType jjtn000 = new ASTType(JJTTYPE);
-  boolean jjtc000 = true;
-  jjtree.openNodeScope(jjtn000);
-    try {
-      BuiltinType();
+    if (jj_2_1(2)) {
+      ArrayType();
+    } else {
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-      case 20:
-        ArrayType();
+      case VOID:
+      case INT:
+      case FLOAT:
+      case ID:
+        BuiltinType();
         break;
       default:
         jj_la1[1] = jj_gen;
-        ;
+        jj_consume_token(-1);
+        throw new ParseException();
       }
-    } catch (Throwable jjte000) {
-          if (jjtc000) {
-            jjtree.clearNodeScope(jjtn000);
-            jjtc000 = false;
-          } else {
-            jjtree.popNode();
-          }
-          if (jjte000 instanceof RuntimeException) {
-            {if (true) throw (RuntimeException)jjte000;}
-          }
-          if (jjte000 instanceof ParseException) {
-            {if (true) throw (ParseException)jjte000;}
-          }
-          {if (true) throw (Error)jjte000;}
-    } finally {
-          if (jjtc000) {
-            jjtree.closeNodeScope(jjtn000, true);
-          }
     }
   }
 
   static final public void BuiltinType() throws ParseException {
                       /*@bgen(jjtree) BuiltinType */
-  ASTBuiltinType jjtn000 = new ASTBuiltinType(JJTBUILTINTYPE);
-  boolean jjtc000 = true;
-  jjtree.openNodeScope(jjtn000);
+    ASTBuiltinType jjtn000 = new ASTBuiltinType(JJTBUILTINTYPE);
+    boolean jjtc000 = true;
+    jjtree.openNodeScope(jjtn000);Token t;
     try {
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
       case VOID:
-        jj_consume_token(VOID);
+        t = jj_consume_token(VOID);
         break;
       case INT:
-        jj_consume_token(INT);
+        t = jj_consume_token(INT);
         break;
       case FLOAT:
-        jj_consume_token(FLOAT);
+        t = jj_consume_token(FLOAT);
         break;
       case ID:
-        jj_consume_token(ID);
+        t = jj_consume_token(ID);
         break;
       default:
         jj_la1[2] = jj_gen;
         jj_consume_token(-1);
         throw new ParseException();
       }
+          jjtree.closeNodeScope(jjtn000, true);
+          jjtc000 = false;
+          jjtn000.setTypeName( t.image );
     } finally {
           if (jjtc000) {
             jjtree.closeNodeScope(jjtn000, true);
@@ -240,15 +191,19 @@ public class WandParser/*@bgen(jjtree)*/implements WandParserTreeConstants, Wand
   boolean jjtc000 = true;
   jjtree.openNodeScope(jjtn000);
     try {
-      jj_consume_token(20);
-      jj_consume_token(21);
-      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-      case 20:
-        ArrayType();
-        break;
-      default:
-        jj_la1[3] = jj_gen;
-        ;
+      BuiltinType();
+      label_2:
+      while (true) {
+        jj_consume_token(29);
+        jj_consume_token(30);
+        switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+        case 29:
+          ;
+          break;
+        default:
+          jj_la1[3] = jj_gen;
+          break label_2;
+        }
       }
     } catch (Throwable jjte000) {
           if (jjtc000) {
@@ -279,8 +234,8 @@ public class WandParser/*@bgen(jjtree)*/implements WandParserTreeConstants, Wand
     try {
       jj_consume_token(ID);
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-      case 22:
-        jj_consume_token(22);
+      case 31:
+        jj_consume_token(31);
         QualifiedIdentifier();
         break;
       default:
@@ -309,41 +264,24 @@ public class WandParser/*@bgen(jjtree)*/implements WandParserTreeConstants, Wand
   }
 
   static final public void Literal() throws ParseException {
-                  /*@bgen(jjtree) Literal */
-  ASTLiteral jjtn000 = new ASTLiteral(JJTLITERAL);
-  boolean jjtc000 = true;
-  jjtree.openNodeScope(jjtn000);
-    try {
-      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-      case INTLIT:
-        IntegerLiteral();
-        break;
-      case FPLIT:
-        FloatingPointLiteral();
-        break;
-      default:
-        jj_la1[5] = jj_gen;
-        jj_consume_token(-1);
-        throw new ParseException();
-      }
-    } catch (Throwable jjte000) {
-      if (jjtc000) {
-        jjtree.clearNodeScope(jjtn000);
-        jjtc000 = false;
-      } else {
-        jjtree.popNode();
-      }
-      if (jjte000 instanceof RuntimeException) {
-        {if (true) throw (RuntimeException)jjte000;}
-      }
-      if (jjte000 instanceof ParseException) {
-        {if (true) throw (ParseException)jjte000;}
-      }
-      {if (true) throw (Error)jjte000;}
-    } finally {
-      if (jjtc000) {
-        jjtree.closeNodeScope(jjtn000, true);
-      }
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case INTEGER_LITERAL:
+      IntegerLiteral();
+      break;
+    case FLOAT_LITERAL:
+      FloatingPointLiteral();
+      break;
+    case 17:
+    case 18:
+      BooleanLiteral();
+      break;
+    case 16:
+      NullLiteral();
+      break;
+    default:
+      jj_la1[5] = jj_gen;
+      jj_consume_token(-1);
+      throw new ParseException();
     }
   }
 
@@ -376,14 +314,14 @@ public class WandParser/*@bgen(jjtree)*/implements WandParserTreeConstants, Wand
   }
 
   static final public void AssignExpression() throws ParseException {
-                           /*@bgen(jjtree) AssignExpression */
+                                                 /*@bgen(jjtree) #AssignExpression(> 1) */
   ASTAssignExpression jjtn000 = new ASTAssignExpression(JJTASSIGNEXPRESSION);
   boolean jjtc000 = true;
   jjtree.openNodeScope(jjtn000);
     try {
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
       case ID:
-        jj_consume_token(ID);
+        Identifier();
         AssignOperator();
         break;
       default:
@@ -407,13 +345,13 @@ public class WandParser/*@bgen(jjtree)*/implements WandParserTreeConstants, Wand
       {if (true) throw (Error)jjte000;}
     } finally {
       if (jjtc000) {
-        jjtree.closeNodeScope(jjtn000, true);
+        jjtree.closeNodeScope(jjtn000, jjtree.nodeArity() > 1);
       }
     }
   }
 
   static final public void InfixExpression() throws ParseException {
-                          /*@bgen(jjtree) InfixExpression */
+                                               /*@bgen(jjtree) #InfixExpression(> 1) */
   ASTInfixExpression jjtn000 = new ASTInfixExpression(JJTINFIXEXPRESSION);
   boolean jjtc000 = true;
   jjtree.openNodeScope(jjtn000);
@@ -422,15 +360,6 @@ public class WandParser/*@bgen(jjtree)*/implements WandParserTreeConstants, Wand
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
       case OPADD:
       case OPSUB:
-      case 34:
-      case 35:
-      case 36:
-      case 37:
-      case 38:
-      case 39:
-      case 40:
-      case 41:
-      case 42:
       case 43:
       case 44:
       case 45:
@@ -439,6 +368,15 @@ public class WandParser/*@bgen(jjtree)*/implements WandParserTreeConstants, Wand
       case 48:
       case 49:
       case 50:
+      case 51:
+      case 52:
+      case 53:
+      case 54:
+      case 55:
+      case 56:
+      case 57:
+      case 58:
+      case 59:
         InfixOperator();
         PrefixExpression();
         break;
@@ -462,13 +400,13 @@ public class WandParser/*@bgen(jjtree)*/implements WandParserTreeConstants, Wand
       {if (true) throw (Error)jjte000;}
     } finally {
       if (jjtc000) {
-        jjtree.closeNodeScope(jjtn000, true);
+        jjtree.closeNodeScope(jjtn000, jjtree.nodeArity() > 1);
       }
     }
   }
 
   static final public void PrefixExpression() throws ParseException {
-                           /*@bgen(jjtree) PrefixExpression */
+                                                 /*@bgen(jjtree) #PrefixExpression(> 1) */
   ASTPrefixExpression jjtn000 = new ASTPrefixExpression(JJTPREFIXEXPRESSION);
   boolean jjtc000 = true;
   jjtree.openNodeScope(jjtn000);
@@ -478,13 +416,16 @@ public class WandParser/*@bgen(jjtree)*/implements WandParserTreeConstants, Wand
       case OPDEC:
       case OPADD:
       case OPSUB:
-      case 51:
-      case 52:
+      case 60:
+      case 61:
         PrefixOperator();
         PrefixExpression();
         break;
-      case FPLIT:
-      case INTLIT:
+      case FLOAT_LITERAL:
+      case INTEGER_LITERAL:
+      case 16:
+      case 17:
+      case 18:
       case LPAREN:
         PostfixExpression();
         break;
@@ -509,19 +450,19 @@ public class WandParser/*@bgen(jjtree)*/implements WandParserTreeConstants, Wand
       {if (true) throw (Error)jjte000;}
     } finally {
       if (jjtc000) {
-        jjtree.closeNodeScope(jjtn000, true);
+        jjtree.closeNodeScope(jjtn000, jjtree.nodeArity() > 1);
       }
     }
   }
 
   static final public void PostfixExpression() throws ParseException {
-                            /*@bgen(jjtree) PostfixExpression */
+                                                   /*@bgen(jjtree) #PostfixExpression(> 1) */
   ASTPostfixExpression jjtn000 = new ASTPostfixExpression(JJTPOSTFIXEXPRESSION);
   boolean jjtc000 = true;
   jjtree.openNodeScope(jjtn000);
     try {
       Primary();
-      label_1:
+      label_3:
       while (true) {
         switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
         case OPINC:
@@ -530,7 +471,7 @@ public class WandParser/*@bgen(jjtree)*/implements WandParserTreeConstants, Wand
           break;
         default:
           jj_la1[9] = jj_gen;
-          break label_1;
+          break label_3;
         }
         PostfixOperator();
       }
@@ -550,101 +491,83 @@ public class WandParser/*@bgen(jjtree)*/implements WandParserTreeConstants, Wand
       {if (true) throw (Error)jjte000;}
     } finally {
       if (jjtc000) {
-        jjtree.closeNodeScope(jjtn000, true);
+        jjtree.closeNodeScope(jjtn000, jjtree.nodeArity() > 1);
       }
     }
   }
 
   static final public void Primary() throws ParseException {
-                  /*@bgen(jjtree) Primary */
-  ASTPrimary jjtn000 = new ASTPrimary(JJTPRIMARY);
-  boolean jjtc000 = true;
-  jjtree.openNodeScope(jjtn000);
-    try {
-      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-      case LPAREN:
-        jj_consume_token(LPAREN);
-        Expression();
-        jj_consume_token(RPAREN);
-        break;
-      case FPLIT:
-      case INTLIT:
-        Literal();
-        break;
-      default:
-        jj_la1[10] = jj_gen;
-        jj_consume_token(-1);
-        throw new ParseException();
-      }
-    } catch (Throwable jjte000) {
-      if (jjtc000) {
-        jjtree.clearNodeScope(jjtn000);
-        jjtc000 = false;
-      } else {
-        jjtree.popNode();
-      }
-      if (jjte000 instanceof RuntimeException) {
-        {if (true) throw (RuntimeException)jjte000;}
-      }
-      if (jjte000 instanceof ParseException) {
-        {if (true) throw (ParseException)jjte000;}
-      }
-      {if (true) throw (Error)jjte000;}
-    } finally {
-      if (jjtc000) {
-        jjtree.closeNodeScope(jjtn000, true);
-      }
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case LPAREN:
+      jj_consume_token(LPAREN);
+      Expression();
+      jj_consume_token(RPAREN);
+      break;
+    case FLOAT_LITERAL:
+    case INTEGER_LITERAL:
+    case 16:
+    case 17:
+    case 18:
+      Literal();
+      break;
+    default:
+      jj_la1[10] = jj_gen;
+      jj_consume_token(-1);
+      throw new ParseException();
     }
   }
 
   static final public void AssignOperator() throws ParseException {
                          /*@bgen(jjtree) AssignOperator */
-  ASTAssignOperator jjtn000 = new ASTAssignOperator(JJTASSIGNOPERATOR);
-  boolean jjtc000 = true;
-  jjtree.openNodeScope(jjtn000);
+    ASTAssignOperator jjtn000 = new ASTAssignOperator(JJTASSIGNOPERATOR);
+    boolean jjtc000 = true;
+    jjtree.openNodeScope(jjtn000);Token t;
     try {
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
       case OPASSIGN:
-        jj_consume_token(OPASSIGN);
-        break;
-      case 23:
-        jj_consume_token(23);
-        break;
-      case 24:
-        jj_consume_token(24);
-        break;
-      case 25:
-        jj_consume_token(25);
-        break;
-      case 26:
-        jj_consume_token(26);
-        break;
-      case 27:
-        jj_consume_token(27);
-        break;
-      case 28:
-        jj_consume_token(28);
-        break;
-      case 29:
-        jj_consume_token(29);
-        break;
-      case 30:
-        jj_consume_token(30);
-        break;
-      case 31:
-        jj_consume_token(31);
+        t = jj_consume_token(OPASSIGN);
         break;
       case 32:
-        jj_consume_token(32);
+        t = jj_consume_token(32);
         break;
       case 33:
-        jj_consume_token(33);
+        t = jj_consume_token(33);
+        break;
+      case 34:
+        t = jj_consume_token(34);
+        break;
+      case 35:
+        t = jj_consume_token(35);
+        break;
+      case 36:
+        t = jj_consume_token(36);
+        break;
+      case 37:
+        t = jj_consume_token(37);
+        break;
+      case 38:
+        t = jj_consume_token(38);
+        break;
+      case 39:
+        t = jj_consume_token(39);
+        break;
+      case 40:
+        t = jj_consume_token(40);
+        break;
+      case 41:
+        t = jj_consume_token(41);
+        break;
+      case 42:
+        t = jj_consume_token(42);
         break;
       default:
         jj_la1[11] = jj_gen;
         jj_consume_token(-1);
         throw new ParseException();
       }
+      jjtree.closeNodeScope(jjtn000, true);
+      jjtc000 = false;
+      jjtn000.setTokenType( t.kind );
     } finally {
       if (jjtc000) {
         jjtree.closeNodeScope(jjtn000, true);
@@ -659,33 +582,6 @@ public class WandParser/*@bgen(jjtree)*/implements WandParserTreeConstants, Wand
   jjtree.openNodeScope(jjtn000);
     try {
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-      case 34:
-        jj_consume_token(34);
-        break;
-      case 35:
-        jj_consume_token(35);
-        break;
-      case 36:
-        jj_consume_token(36);
-        break;
-      case 37:
-        jj_consume_token(37);
-        break;
-      case 38:
-        jj_consume_token(38);
-        break;
-      case 39:
-        jj_consume_token(39);
-        break;
-      case 40:
-        jj_consume_token(40);
-        break;
-      case 41:
-        jj_consume_token(41);
-        break;
-      case 42:
-        jj_consume_token(42);
-        break;
       case 43:
         jj_consume_token(43);
         break;
@@ -701,12 +597,6 @@ public class WandParser/*@bgen(jjtree)*/implements WandParserTreeConstants, Wand
       case 47:
         jj_consume_token(47);
         break;
-      case OPADD:
-        jj_consume_token(OPADD);
-        break;
-      case OPSUB:
-        jj_consume_token(OPSUB);
-        break;
       case 48:
         jj_consume_token(48);
         break;
@@ -715,6 +605,39 @@ public class WandParser/*@bgen(jjtree)*/implements WandParserTreeConstants, Wand
         break;
       case 50:
         jj_consume_token(50);
+        break;
+      case 51:
+        jj_consume_token(51);
+        break;
+      case 52:
+        jj_consume_token(52);
+        break;
+      case 53:
+        jj_consume_token(53);
+        break;
+      case 54:
+        jj_consume_token(54);
+        break;
+      case 55:
+        jj_consume_token(55);
+        break;
+      case 56:
+        jj_consume_token(56);
+        break;
+      case OPADD:
+        jj_consume_token(OPADD);
+        break;
+      case OPSUB:
+        jj_consume_token(OPSUB);
+        break;
+      case 57:
+        jj_consume_token(57);
+        break;
+      case 58:
+        jj_consume_token(58);
+        break;
+      case 59:
+        jj_consume_token(59);
         break;
       default:
         jj_la1[12] = jj_gen;
@@ -741,11 +664,11 @@ public class WandParser/*@bgen(jjtree)*/implements WandParserTreeConstants, Wand
       case OPDEC:
         jj_consume_token(OPDEC);
         break;
-      case 51:
-        jj_consume_token(51);
+      case 60:
+        jj_consume_token(60);
         break;
-      case 52:
-        jj_consume_token(52);
+      case 61:
+        jj_consume_token(61);
         break;
       case OPADD:
         jj_consume_token(OPADD);
@@ -796,7 +719,7 @@ public class WandParser/*@bgen(jjtree)*/implements WandParserTreeConstants, Wand
   boolean jjtc000 = true;
   jjtree.openNodeScope(jjtn000);
     try {
-      jj_consume_token(INTLIT);
+      jj_consume_token(INTEGER_LITERAL);
     } finally {
       if (jjtc000) {
         jjtree.closeNodeScope(jjtn000, true);
@@ -810,7 +733,7 @@ public class WandParser/*@bgen(jjtree)*/implements WandParserTreeConstants, Wand
   boolean jjtc000 = true;
   jjtree.openNodeScope(jjtn000);
     try {
-      jj_consume_token(FPLIT);
+      jj_consume_token(FLOAT_LITERAL);
     } finally {
       if (jjtc000) {
         jjtree.closeNodeScope(jjtn000, true);
@@ -818,41 +741,35 @@ public class WandParser/*@bgen(jjtree)*/implements WandParserTreeConstants, Wand
     }
   }
 
-  static final public void CharacterLiteral() throws ParseException {
-                           /*@bgen(jjtree) CharacterLiteral */
-  ASTCharacterLiteral jjtn000 = new ASTCharacterLiteral(JJTCHARACTERLITERAL);
-  boolean jjtc000 = true;
-  jjtree.openNodeScope(jjtn000);
-    try {
-      jj_consume_token(FPLIT);
-    } finally {
-      if (jjtc000) {
-        jjtree.closeNodeScope(jjtn000, true);
-      }
-    }
-  }
+/*
+void CharacterLiteral() : {}
+{
+    <FPLIT>
+}
 
-  static final public void StringLiteral() throws ParseException {
-                        /*@bgen(jjtree) StringLiteral */
-  ASTStringLiteral jjtn000 = new ASTStringLiteral(JJTSTRINGLITERAL);
-  boolean jjtc000 = true;
-  jjtree.openNodeScope(jjtn000);
-    try {
-      jj_consume_token(FPLIT);
-    } finally {
-      if (jjtc000) {
-        jjtree.closeNodeScope(jjtn000, true);
-      }
-    }
-  }
-
+void StringLiteral() : {}
+{
+    <FPLIT>
+}
+*/
   static final public void BooleanLiteral() throws ParseException {
                          /*@bgen(jjtree) BooleanLiteral */
   ASTBooleanLiteral jjtn000 = new ASTBooleanLiteral(JJTBOOLEANLITERAL);
   boolean jjtc000 = true;
   jjtree.openNodeScope(jjtn000);
     try {
-      jj_consume_token(FPLIT);
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case 17:
+        jj_consume_token(17);
+        break;
+      case 18:
+        jj_consume_token(18);
+        break;
+      default:
+        jj_la1[15] = jj_gen;
+        jj_consume_token(-1);
+        throw new ParseException();
+      }
     } finally {
       if (jjtc000) {
         jjtree.closeNodeScope(jjtn000, true);
@@ -866,7 +783,7 @@ public class WandParser/*@bgen(jjtree)*/implements WandParserTreeConstants, Wand
   boolean jjtc000 = true;
   jjtree.openNodeScope(jjtn000);
     try {
-      jj_consume_token(FPLIT);
+      jj_consume_token(16);
     } finally {
       if (jjtc000) {
         jjtree.closeNodeScope(jjtn000, true);
@@ -905,103 +822,61 @@ public class WandParser/*@bgen(jjtree)*/implements WandParserTreeConstants, Wand
   }
 
   static final public void BlockStatements() throws ParseException {
-                          /*@bgen(jjtree) BlockStatements */
-  ASTBlockStatements jjtn000 = new ASTBlockStatements(JJTBLOCKSTATEMENTS);
-  boolean jjtc000 = true;
-  jjtree.openNodeScope(jjtn000);
-    try {
-      label_2:
-      while (true) {
-        switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-        case VOID:
-        case INT:
-        case FLOAT:
-        case FPLIT:
-        case INTLIT:
-        case LPAREN:
-        case OPENBLOCK:
-        case OPINC:
-        case OPDEC:
-        case OPADD:
-        case OPSUB:
-        case ID:
-        case 51:
-        case 52:
-          ;
-          break;
-        default:
-          jj_la1[15] = jj_gen;
-          break label_2;
-        }
-        BlockStatement();
+    label_4:
+    while (true) {
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case VOID:
+      case INT:
+      case FLOAT:
+      case FLOAT_LITERAL:
+      case INTEGER_LITERAL:
+      case 16:
+      case 17:
+      case 18:
+      case LPAREN:
+      case OPENBLOCK:
+      case OPINC:
+      case OPDEC:
+      case OPADD:
+      case OPSUB:
+      case ID:
+      case 60:
+      case 61:
+        ;
+        break;
+      default:
+        jj_la1[16] = jj_gen;
+        break label_4;
       }
-    } catch (Throwable jjte000) {
-      if (jjtc000) {
-        jjtree.clearNodeScope(jjtn000);
-        jjtc000 = false;
-      } else {
-        jjtree.popNode();
-      }
-      if (jjte000 instanceof RuntimeException) {
-        {if (true) throw (RuntimeException)jjte000;}
-      }
-      if (jjte000 instanceof ParseException) {
-        {if (true) throw (ParseException)jjte000;}
-      }
-      {if (true) throw (Error)jjte000;}
-    } finally {
-      if (jjtc000) {
-        jjtree.closeNodeScope(jjtn000, true);
-      }
+      BlockStatement();
     }
   }
 
   static final public void BlockStatement() throws ParseException {
-                         /*@bgen(jjtree) BlockStatement */
-  ASTBlockStatement jjtn000 = new ASTBlockStatement(JJTBLOCKSTATEMENT);
-  boolean jjtc000 = true;
-  jjtree.openNodeScope(jjtn000);
-    try {
-      if (jj_2_1(2)) {
-        LocalVariableDeclarationStatement();
-      } else {
-        switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-        case FPLIT:
-        case INTLIT:
-        case LPAREN:
-        case OPENBLOCK:
-        case OPINC:
-        case OPDEC:
-        case OPADD:
-        case OPSUB:
-        case ID:
-        case 51:
-        case 52:
-          Statement();
-          break;
-        default:
-          jj_la1[16] = jj_gen;
-          jj_consume_token(-1);
-          throw new ParseException();
-        }
-      }
-    } catch (Throwable jjte000) {
-      if (jjtc000) {
-        jjtree.clearNodeScope(jjtn000);
-        jjtc000 = false;
-      } else {
-        jjtree.popNode();
-      }
-      if (jjte000 instanceof RuntimeException) {
-        {if (true) throw (RuntimeException)jjte000;}
-      }
-      if (jjte000 instanceof ParseException) {
-        {if (true) throw (ParseException)jjte000;}
-      }
-      {if (true) throw (Error)jjte000;}
-    } finally {
-      if (jjtc000) {
-        jjtree.closeNodeScope(jjtn000, true);
+    if (jj_2_2(2)) {
+      LocalVariableDeclarationStatement();
+    } else {
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case FLOAT_LITERAL:
+      case INTEGER_LITERAL:
+      case 16:
+      case 17:
+      case 18:
+      case LPAREN:
+      case OPENBLOCK:
+      case OPINC:
+      case OPDEC:
+      case OPADD:
+      case OPSUB:
+      case ID:
+      case 60:
+      case 61:
+        Statement();
+        break;
+      default:
+        jj_la1[17] = jj_gen;
+        jj_consume_token(-1);
+        throw new ParseException();
       }
     }
   }
@@ -1014,7 +889,7 @@ public class WandParser/*@bgen(jjtree)*/implements WandParserTreeConstants, Wand
     try {
       Type();
       VariableDeclarators();
-      jj_consume_token(53);
+      jj_consume_token(62);
     } catch (Throwable jjte000) {
       if (jjtc000) {
         jjtree.clearNodeScope(jjtn000);
@@ -1037,50 +912,29 @@ public class WandParser/*@bgen(jjtree)*/implements WandParserTreeConstants, Wand
   }
 
   static final public void Statement() throws ParseException {
-                    /*@bgen(jjtree) Statement */
-  ASTStatement jjtn000 = new ASTStatement(JJTSTATEMENT);
-  boolean jjtc000 = true;
-  jjtree.openNodeScope(jjtn000);
-    try {
-      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-      case OPENBLOCK:
-        Block();
-        break;
-      case FPLIT:
-      case INTLIT:
-      case LPAREN:
-      case OPINC:
-      case OPDEC:
-      case OPADD:
-      case OPSUB:
-      case ID:
-      case 51:
-      case 52:
-        ExpressionStatement();
-        break;
-      default:
-        jj_la1[17] = jj_gen;
-        jj_consume_token(-1);
-        throw new ParseException();
-      }
-    } catch (Throwable jjte000) {
-      if (jjtc000) {
-        jjtree.clearNodeScope(jjtn000);
-        jjtc000 = false;
-      } else {
-        jjtree.popNode();
-      }
-      if (jjte000 instanceof RuntimeException) {
-        {if (true) throw (RuntimeException)jjte000;}
-      }
-      if (jjte000 instanceof ParseException) {
-        {if (true) throw (ParseException)jjte000;}
-      }
-      {if (true) throw (Error)jjte000;}
-    } finally {
-      if (jjtc000) {
-        jjtree.closeNodeScope(jjtn000, true);
-      }
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case OPENBLOCK:
+      Block();
+      break;
+    case FLOAT_LITERAL:
+    case INTEGER_LITERAL:
+    case 16:
+    case 17:
+    case 18:
+    case LPAREN:
+    case OPINC:
+    case OPDEC:
+    case OPADD:
+    case OPSUB:
+    case ID:
+    case 60:
+    case 61:
+      ExpressionStatement();
+      break;
+    default:
+      jj_la1[18] = jj_gen;
+      jj_consume_token(-1);
+      throw new ParseException();
     }
   }
 
@@ -1091,7 +945,7 @@ public class WandParser/*@bgen(jjtree)*/implements WandParserTreeConstants, Wand
   jjtree.openNodeScope(jjtn000);
     try {
       Expression();
-      jj_consume_token(53);
+      jj_consume_token(62);
     } catch (Throwable jjte000) {
       if (jjtc000) {
         jjtree.clearNodeScope(jjtn000);
@@ -1114,43 +968,19 @@ public class WandParser/*@bgen(jjtree)*/implements WandParserTreeConstants, Wand
   }
 
   static final public void VariableDeclarators() throws ParseException {
-                              /*@bgen(jjtree) VariableDeclarators */
-  ASTVariableDeclarators jjtn000 = new ASTVariableDeclarators(JJTVARIABLEDECLARATORS);
-  boolean jjtc000 = true;
-  jjtree.openNodeScope(jjtn000);
-    try {
+    VariableDeclarator();
+    label_5:
+    while (true) {
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case 63:
+        ;
+        break;
+      default:
+        jj_la1[19] = jj_gen;
+        break label_5;
+      }
+      jj_consume_token(63);
       VariableDeclarator();
-      label_3:
-      while (true) {
-        switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-        case 54:
-          ;
-          break;
-        default:
-          jj_la1[18] = jj_gen;
-          break label_3;
-        }
-        jj_consume_token(54);
-        VariableDeclarator();
-      }
-    } catch (Throwable jjte000) {
-      if (jjtc000) {
-        jjtree.clearNodeScope(jjtn000);
-        jjtc000 = false;
-      } else {
-        jjtree.popNode();
-      }
-      if (jjte000 instanceof RuntimeException) {
-        {if (true) throw (RuntimeException)jjte000;}
-      }
-      if (jjte000 instanceof ParseException) {
-        {if (true) throw (ParseException)jjte000;}
-      }
-      {if (true) throw (Error)jjte000;}
-    } finally {
-      if (jjtc000) {
-        jjtree.closeNodeScope(jjtn000, true);
-      }
     }
   }
 
@@ -1167,7 +997,7 @@ public class WandParser/*@bgen(jjtree)*/implements WandParserTreeConstants, Wand
         VariableInitializer();
         break;
       default:
-        jj_la1[19] = jj_gen;
+        jj_la1[20] = jj_gen;
         ;
       }
     } catch (Throwable jjte000) {
@@ -1192,40 +1022,19 @@ public class WandParser/*@bgen(jjtree)*/implements WandParserTreeConstants, Wand
   }
 
   static final public void VariableInitializer() throws ParseException {
-                              /*@bgen(jjtree) VariableInitializer */
-  ASTVariableInitializer jjtn000 = new ASTVariableInitializer(JJTVARIABLEINITIALIZER);
-  boolean jjtc000 = true;
-  jjtree.openNodeScope(jjtn000);
-    try {
-      Expression();
-    } catch (Throwable jjte000) {
-      if (jjtc000) {
-        jjtree.clearNodeScope(jjtn000);
-        jjtc000 = false;
-      } else {
-        jjtree.popNode();
-      }
-      if (jjte000 instanceof RuntimeException) {
-        {if (true) throw (RuntimeException)jjte000;}
-      }
-      if (jjte000 instanceof ParseException) {
-        {if (true) throw (ParseException)jjte000;}
-      }
-      {if (true) throw (Error)jjte000;}
-    } finally {
-      if (jjtc000) {
-        jjtree.closeNodeScope(jjtn000, true);
-      }
-    }
+    Expression();
   }
 
   static final public void Identifier() throws ParseException {
                      /*@bgen(jjtree) Identifier */
-  ASTIdentifier jjtn000 = new ASTIdentifier(JJTIDENTIFIER);
-  boolean jjtc000 = true;
-  jjtree.openNodeScope(jjtn000);
+    ASTIdentifier jjtn000 = new ASTIdentifier(JJTIDENTIFIER);
+    boolean jjtc000 = true;
+    jjtree.openNodeScope(jjtn000);Token t;
     try {
-      jj_consume_token(ID);
+      t = jj_consume_token(ID);
+             jjtree.closeNodeScope(jjtn000, true);
+             jjtc000 = false;
+             jjtn000.setIdentifier( t.image );
     } finally {
       if (jjtc000) {
         jjtree.closeNodeScope(jjtn000, true);
@@ -1240,63 +1049,88 @@ public class WandParser/*@bgen(jjtree)*/implements WandParserTreeConstants, Wand
     finally { jj_save(0, xla); }
   }
 
-  static private boolean jj_3R_4() {
-    if (jj_3R_5()) return true;
-    if (jj_3R_6()) return true;
-    return false;
-  }
-
-  static private boolean jj_3R_8() {
-    if (jj_3R_10()) return true;
-    return false;
+  static private boolean jj_2_2(int xla) {
+    jj_la = xla; jj_lastpos = jj_scanpos = token;
+    try { return !jj_3_2(); }
+    catch(LookaheadSuccess ls) { return true; }
+    finally { jj_save(1, xla); }
   }
 
   static private boolean jj_3R_9() {
-    if (jj_3R_11()) return true;
-    return false;
-  }
-
-  static private boolean jj_3R_10() {
-    if (jj_scan_token(20)) return true;
-    return false;
-  }
-
-  static private boolean jj_3_1() {
-    if (jj_3R_4()) return true;
-    return false;
-  }
-
-  static private boolean jj_3R_6() {
-    if (jj_3R_9()) return true;
+    if (jj_scan_token(29)) return true;
     return false;
   }
 
   static private boolean jj_3R_7() {
+    if (jj_3R_10()) return true;
+    if (jj_3R_11()) return true;
+    return false;
+  }
+
+  static private boolean jj_3R_8() {
     Token xsp;
     xsp = jj_scanpos;
-    if (jj_scan_token(5)) {
-    jj_scanpos = xsp;
-    if (jj_scan_token(6)) {
-    jj_scanpos = xsp;
     if (jj_scan_token(7)) {
     jj_scanpos = xsp;
-    if (jj_scan_token(19)) return true;
+    if (jj_scan_token(8)) {
+    jj_scanpos = xsp;
+    if (jj_scan_token(9)) {
+    jj_scanpos = xsp;
+    if (jj_scan_token(28)) return true;
     }
     }
     }
+    return false;
+  }
+
+  static private boolean jj_3R_13() {
+    if (jj_3R_14()) return true;
+    return false;
+  }
+
+  static private boolean jj_3_2() {
+    if (jj_3R_7()) return true;
     return false;
   }
 
   static private boolean jj_3R_11() {
+    if (jj_3R_13()) return true;
+    return false;
+  }
+
+  static private boolean jj_3R_12() {
+    if (jj_3R_8()) return true;
+    return false;
+  }
+
+  static private boolean jj_3R_14() {
     if (jj_scan_token(ID)) return true;
     return false;
   }
 
-  static private boolean jj_3R_5() {
-    if (jj_3R_7()) return true;
+  static private boolean jj_3R_6() {
+    if (jj_3R_8()) return true;
+    Token xsp;
+    if (jj_3R_9()) return true;
+    while (true) {
+      xsp = jj_scanpos;
+      if (jj_3R_9()) { jj_scanpos = xsp; break; }
+    }
+    return false;
+  }
+
+  static private boolean jj_3_1() {
+    if (jj_3R_6()) return true;
+    return false;
+  }
+
+  static private boolean jj_3R_10() {
     Token xsp;
     xsp = jj_scanpos;
-    if (jj_3R_8()) jj_scanpos = xsp;
+    if (jj_3_1()) {
+    jj_scanpos = xsp;
+    if (jj_3R_12()) return true;
+    }
     return false;
   }
 
@@ -1312,7 +1146,7 @@ public class WandParser/*@bgen(jjtree)*/implements WandParserTreeConstants, Wand
   static private Token jj_scanpos, jj_lastpos;
   static private int jj_la;
   static private int jj_gen;
-  static final private int[] jj_la1 = new int[20];
+  static final private int[] jj_la1 = new int[21];
   static private int[] jj_la1_0;
   static private int[] jj_la1_1;
   static {
@@ -1320,12 +1154,12 @@ public class WandParser/*@bgen(jjtree)*/implements WandParserTreeConstants, Wand
       jj_la1_init_1();
    }
    private static void jj_la1_init_0() {
-      jj_la1_0 = new int[] {0x800e0,0x100000,0x800e0,0x100000,0x400000,0x300,0x80000,0x30000,0x3c700,0xc000,0x700,0xff840000,0x30000,0x3c000,0xc000,0xbd7e0,0xbd700,0xbd700,0x0,0x40000,};
+      jj_la1_0 = new int[] {0x10000380,0x10000380,0x10000380,0x20000000,0x80000000,0x70c00,0x10000000,0x6000000,0x78f0c00,0x1800000,0xf0c00,0x8000000,0x6000000,0x7800000,0x1800000,0x60000,0x17af0f80,0x17af0c00,0x17af0c00,0x0,0x8000000,};
    }
    private static void jj_la1_init_1() {
-      jj_la1_1 = new int[] {0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x7fffc,0x180000,0x0,0x0,0x3,0x7fffc,0x180000,0x0,0x180000,0x180000,0x180000,0x400000,0x0,};
+      jj_la1_1 = new int[] {0x0,0x0,0x0,0x0,0x0,0x0,0x0,0xffff800,0x30000000,0x0,0x0,0x7ff,0xffff800,0x30000000,0x0,0x0,0x30000000,0x30000000,0x30000000,0x80000000,0x0,};
    }
-  static final private JJCalls[] jj_2_rtns = new JJCalls[1];
+  static final private JJCalls[] jj_2_rtns = new JJCalls[2];
   static private boolean jj_rescan = false;
   static private int jj_gc = 0;
 
@@ -1347,7 +1181,7 @@ public class WandParser/*@bgen(jjtree)*/implements WandParserTreeConstants, Wand
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 20; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 21; i++) jj_la1[i] = -1;
     for (int i = 0; i < jj_2_rtns.length; i++) jj_2_rtns[i] = new JJCalls();
   }
 
@@ -1363,7 +1197,7 @@ public class WandParser/*@bgen(jjtree)*/implements WandParserTreeConstants, Wand
     jj_ntk = -1;
     jjtree.reset();
     jj_gen = 0;
-    for (int i = 0; i < 20; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 21; i++) jj_la1[i] = -1;
     for (int i = 0; i < jj_2_rtns.length; i++) jj_2_rtns[i] = new JJCalls();
   }
 
@@ -1381,7 +1215,7 @@ public class WandParser/*@bgen(jjtree)*/implements WandParserTreeConstants, Wand
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 20; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 21; i++) jj_la1[i] = -1;
     for (int i = 0; i < jj_2_rtns.length; i++) jj_2_rtns[i] = new JJCalls();
   }
 
@@ -1393,7 +1227,7 @@ public class WandParser/*@bgen(jjtree)*/implements WandParserTreeConstants, Wand
     jj_ntk = -1;
     jjtree.reset();
     jj_gen = 0;
-    for (int i = 0; i < 20; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 21; i++) jj_la1[i] = -1;
     for (int i = 0; i < jj_2_rtns.length; i++) jj_2_rtns[i] = new JJCalls();
   }
 
@@ -1410,7 +1244,7 @@ public class WandParser/*@bgen(jjtree)*/implements WandParserTreeConstants, Wand
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 20; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 21; i++) jj_la1[i] = -1;
     for (int i = 0; i < jj_2_rtns.length; i++) jj_2_rtns[i] = new JJCalls();
   }
 
@@ -1421,7 +1255,7 @@ public class WandParser/*@bgen(jjtree)*/implements WandParserTreeConstants, Wand
     jj_ntk = -1;
     jjtree.reset();
     jj_gen = 0;
-    for (int i = 0; i < 20; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 21; i++) jj_la1[i] = -1;
     for (int i = 0; i < jj_2_rtns.length; i++) jj_2_rtns[i] = new JJCalls();
   }
 
@@ -1533,12 +1367,12 @@ public class WandParser/*@bgen(jjtree)*/implements WandParserTreeConstants, Wand
   /** Generate ParseException. */
   static public ParseException generateParseException() {
     jj_expentries.clear();
-    boolean[] la1tokens = new boolean[55];
+    boolean[] la1tokens = new boolean[64];
     if (jj_kind >= 0) {
       la1tokens[jj_kind] = true;
       jj_kind = -1;
     }
-    for (int i = 0; i < 20; i++) {
+    for (int i = 0; i < 21; i++) {
       if (jj_la1[i] == jj_gen) {
         for (int j = 0; j < 32; j++) {
           if ((jj_la1_0[i] & (1<<j)) != 0) {
@@ -1550,7 +1384,7 @@ public class WandParser/*@bgen(jjtree)*/implements WandParserTreeConstants, Wand
         }
       }
     }
-    for (int i = 0; i < 55; i++) {
+    for (int i = 0; i < 64; i++) {
       if (la1tokens[i]) {
         jj_expentry = new int[1];
         jj_expentry[0] = i;
@@ -1577,7 +1411,7 @@ public class WandParser/*@bgen(jjtree)*/implements WandParserTreeConstants, Wand
 
   static private void jj_rescan_token() {
     jj_rescan = true;
-    for (int i = 0; i < 1; i++) {
+    for (int i = 0; i < 2; i++) {
     try {
       JJCalls p = jj_2_rtns[i];
       do {
@@ -1585,6 +1419,7 @@ public class WandParser/*@bgen(jjtree)*/implements WandParserTreeConstants, Wand
           jj_la = p.arg; jj_lastpos = jj_scanpos = p.first;
           switch (i) {
             case 0: jj_3_1(); break;
+            case 1: jj_3_2(); break;
           }
         }
         p = p.next;

@@ -3,7 +3,7 @@
 package wand.parser;
 
 public
-class ASTFloatingPointLiteral extends SimpleNode {
+class ASTFloatingPointLiteral extends ASTLiteral {
   public ASTFloatingPointLiteral(int id) {
     super(id);
   }

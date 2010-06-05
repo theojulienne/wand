@@ -4,13 +4,22 @@ package wand.parser;
 
 public
 class ASTAssignOperator extends SimpleNode {
-  public ASTAssignOperator(int id) {
-    super(id);
-  }
-
-  public ASTAssignOperator(WandParser p, int id) {
-    super(p, id);
-  }
-
+    private int tokenType;
+    
+    public ASTAssignOperator(int id) {
+        super(id);
+    }
+    
+    public ASTAssignOperator(WandParser p, int id) {
+        super(p, id);
+    }
+    
+    public int getTokenType( ) {
+        return this.tokenType;
+    }
+    
+    public void setTokenType( int type ) {
+        this.tokenType = type;
+    }
 }
 /* JavaCC - OriginalChecksum=cf0e61c93fe1650746147004a492d584 (do not edit this line) */

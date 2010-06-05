@@ -11,35 +11,43 @@ public interface WandParserConstants {
   /** End of File. */
   int EOF = 0;
   /** RegularExpression Id. */
-  int VOID = 5;
+  int VOID = 7;
   /** RegularExpression Id. */
-  int INT = 6;
+  int INT = 8;
   /** RegularExpression Id. */
-  int FLOAT = 7;
+  int FLOAT = 9;
   /** RegularExpression Id. */
-  int FPLIT = 8;
+  int FLOAT_LITERAL = 10;
   /** RegularExpression Id. */
-  int INTLIT = 9;
+  int INTEGER_LITERAL = 11;
   /** RegularExpression Id. */
-  int LPAREN = 10;
+  int DECIMAL_LITERAL = 12;
   /** RegularExpression Id. */
-  int RPAREN = 11;
+  int HEX_LITERAL = 13;
   /** RegularExpression Id. */
-  int OPENBLOCK = 12;
+  int BINARY_LITERAL = 14;
   /** RegularExpression Id. */
-  int CLOSEBLOCK = 13;
+  int OCTAL_LITERAL = 15;
   /** RegularExpression Id. */
-  int OPINC = 14;
+  int LPAREN = 19;
   /** RegularExpression Id. */
-  int OPDEC = 15;
+  int RPAREN = 20;
   /** RegularExpression Id. */
-  int OPADD = 16;
+  int OPENBLOCK = 21;
   /** RegularExpression Id. */
-  int OPSUB = 17;
+  int CLOSEBLOCK = 22;
   /** RegularExpression Id. */
-  int OPASSIGN = 18;
+  int OPINC = 23;
   /** RegularExpression Id. */
-  int ID = 19;
+  int OPDEC = 24;
+  /** RegularExpression Id. */
+  int OPADD = 25;
+  /** RegularExpression Id. */
+  int OPSUB = 26;
+  /** RegularExpression Id. */
+  int OPASSIGN = 27;
+  /** RegularExpression Id. */
+  int ID = 28;
 
   /** Lexical state. */
   int DEFAULT = 0;
@@ -51,11 +59,20 @@ public interface WandParserConstants {
     "\"\\t\"",
     "\"\\n\"",
     "\"\\r\"",
+    "<token of kind 5>",
+    "<token of kind 6>",
     "\"void\"",
     "\"int\"",
     "\"float\"",
-    "<FPLIT>",
-    "<INTLIT>",
+    "<FLOAT_LITERAL>",
+    "<INTEGER_LITERAL>",
+    "<DECIMAL_LITERAL>",
+    "<HEX_LITERAL>",
+    "<BINARY_LITERAL>",
+    "<OCTAL_LITERAL>",
+    "\"null\"",
+    "\"true\"",
+    "\"false\"",
     "\"(\"",
     "\")\"",
     "\"{\"",

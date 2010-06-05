@@ -3,14 +3,13 @@
 package wand.parser;
 
 public
-class ASTExpressionStatement extends SimpleNode {
-  public ASTExpressionStatement(int id) {
-    super(id);
-  }
-
-  public ASTExpressionStatement(WandParser p, int id) {
-    super(p, id);
-  }
-
+class ASTExpressionStatement extends ASTStatement {
+    public ASTExpressionStatement(int id) {
+        super(id);
+    }
+    
+    public ASTExpressionStatement(WandParser p, int id) {
+        super(p, id);
+    }
 }
 /* JavaCC - OriginalChecksum=90cc0cc6f659560900d15e68c95fdea4 (do not edit this line) */

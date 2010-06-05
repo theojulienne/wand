@@ -5,77 +5,57 @@ public interface WandParserTreeConstants
 {
   public int JJTPROGRAM = 0;
   public int JJTDECLARATIONS = 1;
-  public int JJTDECLARATION = 2;
+  public int JJTVOID = 2;
   public int JJTFUNCTIONDECLARATION = 3;
-  public int JJTTYPE = 4;
-  public int JJTBUILTINTYPE = 5;
-  public int JJTARRAYTYPE = 6;
-  public int JJTQUALIFIEDIDENTIFIER = 7;
-  public int JJTLITERAL = 8;
-  public int JJTEXPRESSION = 9;
-  public int JJTASSIGNEXPRESSION = 10;
-  public int JJTINFIXEXPRESSION = 11;
-  public int JJTPREFIXEXPRESSION = 12;
-  public int JJTPOSTFIXEXPRESSION = 13;
-  public int JJTPRIMARY = 14;
-  public int JJTASSIGNOPERATOR = 15;
-  public int JJTINFIXOPERATOR = 16;
-  public int JJTPREFIXOPERATOR = 17;
-  public int JJTPOSTFIXOPERATOR = 18;
-  public int JJTINTEGERLITERAL = 19;
-  public int JJTFLOATINGPOINTLITERAL = 20;
-  public int JJTCHARACTERLITERAL = 21;
-  public int JJTSTRINGLITERAL = 22;
-  public int JJTBOOLEANLITERAL = 23;
-  public int JJTNULLLITERAL = 24;
-  public int JJTBLOCK = 25;
-  public int JJTBLOCKSTATEMENTS = 26;
-  public int JJTBLOCKSTATEMENT = 27;
-  public int JJTLOCALVARIABLEDECLARATIONSTATEMENT = 28;
-  public int JJTSTATEMENT = 29;
-  public int JJTEXPRESSIONSTATEMENT = 30;
-  public int JJTVARIABLEDECLARATORS = 31;
-  public int JJTVARIABLEDECLARATOR = 32;
-  public int JJTVARIABLEINITIALIZER = 33;
-  public int JJTIDENTIFIER = 34;
+  public int JJTBUILTINTYPE = 4;
+  public int JJTARRAYTYPE = 5;
+  public int JJTQUALIFIEDIDENTIFIER = 6;
+  public int JJTEXPRESSION = 7;
+  public int JJTASSIGNEXPRESSION = 8;
+  public int JJTINFIXEXPRESSION = 9;
+  public int JJTPREFIXEXPRESSION = 10;
+  public int JJTPOSTFIXEXPRESSION = 11;
+  public int JJTASSIGNOPERATOR = 12;
+  public int JJTINFIXOPERATOR = 13;
+  public int JJTPREFIXOPERATOR = 14;
+  public int JJTPOSTFIXOPERATOR = 15;
+  public int JJTINTEGERLITERAL = 16;
+  public int JJTFLOATINGPOINTLITERAL = 17;
+  public int JJTBOOLEANLITERAL = 18;
+  public int JJTNULLLITERAL = 19;
+  public int JJTBLOCK = 20;
+  public int JJTLOCALVARIABLEDECLARATIONSTATEMENT = 21;
+  public int JJTEXPRESSIONSTATEMENT = 22;
+  public int JJTVARIABLEDECLARATOR = 23;
+  public int JJTIDENTIFIER = 24;
 
 
   public String[] jjtNodeName = {
     "Program",
     "Declarations",
-    "Declaration",
+    "void",
     "FunctionDeclaration",
-    "Type",
     "BuiltinType",
     "ArrayType",
     "QualifiedIdentifier",
-    "Literal",
     "Expression",
     "AssignExpression",
     "InfixExpression",
     "PrefixExpression",
     "PostfixExpression",
-    "Primary",
     "AssignOperator",
     "InfixOperator",
     "PrefixOperator",
     "PostfixOperator",
     "IntegerLiteral",
     "FloatingPointLiteral",
-    "CharacterLiteral",
-    "StringLiteral",
     "BooleanLiteral",
     "NullLiteral",
     "Block",
-    "BlockStatements",
-    "BlockStatement",
     "LocalVariableDeclarationStatement",
-    "Statement",
     "ExpressionStatement",
-    "VariableDeclarators",
     "VariableDeclarator",
-    "VariableInitializer",
     "Identifier",
   };
 }
-/* JavaCC - OriginalChecksum=dbb0b47f9d37b101d62248c25dc40def (do not edit this line) */
+/* JavaCC - OriginalChecksum=fdf1586547097a5d953577e21d1172ed (do not edit this line) */

@@ -1,5 +1,5 @@
 int foo( ) {
-	int bar = 123.0;
+	int bar = 0b101010;
 	bar = 456;
 }
 

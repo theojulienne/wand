@@ -3,7 +3,7 @@
 package wand.parser;
 
 public
-class ASTCharacterLiteral extends SimpleNode {
+class ASTCharacterLiteral extends ASTLiteral {
   public ASTCharacterLiteral(int id) {
     super(id);
   }

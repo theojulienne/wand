@@ -3,7 +3,7 @@
 package wand.parser;
 
 public
-class ASTBuiltinType extends SimpleNode {
+class ASTBuiltinType extends ASTType {
   public ASTBuiltinType(int id) {
     super(id);
   }

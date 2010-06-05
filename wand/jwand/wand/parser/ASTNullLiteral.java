@@ -3,7 +3,7 @@
 package wand.parser;
 
 public
-class ASTNullLiteral extends SimpleNode {
+class ASTNullLiteral extends ASTLiteral {
   public ASTNullLiteral(int id) {
     super(id);
   }

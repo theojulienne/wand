@@ -2,15 +2,21 @@
 /* JavaCCOptions:MULTI=true,NODE_USES_PARSER=false,VISITOR=false,TRACK_TOKENS=false,NODE_PREFIX=AST,NODE_EXTENDS=wand.core.WandNode,NODE_FACTORY=,SUPPORT_CLASS_VISIBILITY_PUBLIC=true */
 package wand.parser;
 
+import wand.generators.*;
+
 public
 class ASTStatement extends SimpleNode {
-  public ASTStatement(int id) {
-    super(id);
-  }
+    public ASTStatement(int id) {
+        super(id);
+    }
 
-  public ASTStatement(WandParser p, int id) {
-    super(p, id);
-  }
+    public ASTStatement(WandParser p, int id) {
+        super(p, id);
+    }
+  
+    public Generator getGenerator( ) {
+        return GeneratorFactory.getGeneratorFactory( ).getStatementGenerator( );
+    }
 
 }
 /* JavaCC - OriginalChecksum=45ab3b79ab5eb65647d6a263f5eca55c (do not edit this line) */

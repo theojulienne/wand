@@ -45,7 +45,15 @@ PARSER_END(WandParser)
 /* *** Token specification *** */
 
 /* Skip whitespace */
-SKIP : { " " | "\t" | "\n" | "\r" }
+SKIP :
+{
+  " "
+| "\t"
+| "\n"
+| "\r"
+| <"//" (~["\n","\r"])* ("\n"|"\r"|"\r\n")>
+| <"/*" (~["*"])* "*" (~["/"] (~["*"])* "*")* "/">
+}
 
 /* Reserved words */
 TOKEN: {
@@ -56,8 +64,22 @@ TOKEN: {
 
 /* Literals */
 TOKEN: {
-  < FPLIT: (["0"-"9"])+ "." (["0"-"9"])+ >    // Floating point literal
-| < INTLIT: (["0"-"9"])+ >    // Integer literal
+  < FLOAT_LITERAL: (["0"-"9"])+ "." (["0"-"9"])+ >    // Floating point literal
+| < INTEGER_LITERAL:
+      <DECIMAL_LITERAL> (["l","L"])?
+    | <HEX_LITERAL> (["l","L"])?
+    | <OCTAL_LITERAL> (["l","L"])?
+    | <BINARY_LITERAL> (["l","L"])?
+  >
+
+| < #DECIMAL_LITERAL: ["1"-"9"] (["0"-"9"])* >
+| < #HEX_LITERAL: "0" ["x","X"] (["0"-"9","a"-"f","A"-"F"])+ >
+| < #BINARY_LITERAL: "0" ["b","B"] (["0"-"1"])+ >
+| < #OCTAL_LITERAL: "0" (["0"-"7"])* >
+
+| "null"
+| "true"
+| "false"
 }
 
 /* Operators */
@@ -90,12 +112,7 @@ ASTProgram Program() : {
     ASTDeclarations declarations;
 }
 {
-    (
-        declarations=Declarations()
-        {
-            jjtThis.setDeclarations( declarations );
-        }
-    )
+    Declarations()
     
     { return jjtThis; }
 }
@@ -103,35 +120,23 @@ ASTProgram Program() : {
 /* Other nonterminals and their productions */
 
 // Declarations -> Declaration [Declarations]
-ASTDeclarations Declarations() : {
-    ASTDeclarations rest;
+void Declarations() : {
     ASTDeclaration declaration;
 }
 {
-    (
-	    declaration=Declaration() [ rest=Declarations() { jjtThis = rest; } ]
-	)
-	
-	{
-	    jjtThis.addDeclaration( declaration );
-	    return jjtThis;
-	}
+    ( Declaration() )*
 }
 
 
 
 // Declaration -> FunctionDeclaration
-ASTDeclaration Declaration() : {}
+void Declaration() #void : {}
 {
-	(
-	    jjtThis=FunctionDeclaration()
-	)
-	
-	{ return jjtThis; }
+	FunctionDeclaration()
 }
 
 // FunctionDeclaration -> "void" Identifier "(" ")" "{" FunctionBody "}"
-ASTFunctionDeclaration FunctionDeclaration() : {
+void FunctionDeclaration() : {
 	Token functionName;
 }
 {
@@ -139,8 +144,6 @@ ASTFunctionDeclaration FunctionDeclaration() : {
 	    Type() functionName=<ID> <LPAREN> <RPAREN> Block()
 	    { jjtThis.setFunctionName( functionName.image ); }
 	)
-	
-	{ return jjtThis; }
 }
 
 // FunctionBody -> FunctionDeclaration
@@ -150,19 +153,30 @@ ASTFunctionDeclaration FunctionDeclaration() : {
 }*/
 
 // Type ->
-void Type() : {}
+void Type() #void : {}
 {
-	BuiltinType() [ArrayType()]
+    LOOKAHEAD(2)
+    ArrayType() |
+	BuiltinType()
 }
 
-void BuiltinType() : {}
+void BuiltinType() : {
+    Token t;
+}
 {
-	"void" | "int" | "float" | <ID>
+	(
+	    t="void" | 
+	    t="int" | 
+	    t="float" | 
+	    t=<ID>
+	)
+	
+	{ jjtThis.setTypeName( t.image ); }
 }
 
 void ArrayType() : {}
 {
-	"[" "]" [ ArrayType() ]
+	BuiltinType() ("[" "]")+
 }
 
 
@@ -176,15 +190,15 @@ void QualifiedIdentifier() : {}
     )
 }
 
-void Literal() : {}
+void Literal() #void : {}
 {
     (
         IntegerLiteral() |
-        FloatingPointLiteral()/* |
-        CharacterLiteral() |
-        StringLiteral() |
+        FloatingPointLiteral() |
+        /*CharacterLiteral() |
+        StringLiteral() |*/
         BooleanLiteral() |
-        NullLiteral()*/
+        NullLiteral()
     )
 }
 
@@ -193,32 +207,32 @@ void Expression() : {}
     AssignExpression()
 }
 
-void AssignExpression() : {}
+void AssignExpression() #AssignExpression(>1) : {}
 {
     // was: InfixExpression() [AssignOperator() InfixExpression()]
     // but this allowed syntax "3 += 1" which would be invalid and need
     // to be picked up elsewhere
-    [<ID> AssignOperator()] InfixExpression()
+    [Identifier() AssignOperator()] InfixExpression()
 }
 
-void InfixExpression() : {}
+void InfixExpression() #InfixExpression(>1) : {}
 {
     PrefixExpression() [InfixOperator() PrefixExpression()]
 }
 
-void PrefixExpression() : {}
+void PrefixExpression() #PrefixExpression(>1) : {}
 {
     PrefixOperator() PrefixExpression() |
     PostfixExpression()
 }
 
-void PostfixExpression() : {}
+void PostfixExpression() #PostfixExpression(>1) : {}
 {
     Primary() (PostfixOperator())*
     
 }
 
-void Primary() : {}
+void Primary() #void : {}
 {
     <LPAREN> Expression() <RPAREN> |
     Literal()
@@ -226,20 +240,26 @@ void Primary() : {}
 
 
 
-void AssignOperator() : {}
+void AssignOperator() : {
+    Token t;
+}
 {
-    "=" |
-    "+=" |
-    "-=" |
-    "*=" |
-    "/=" |
-    "&=" |
-    "|=" |
-    "^=" |
-    "%=" |
-    "<<=" |
-    ">>=" |
-    ">>>="
+    (
+        t="=" |
+        t="+=" |
+        t="-=" |
+        t="*=" |
+        t="/=" |
+        t="&=" |
+        t="|=" |
+        t="^=" |
+        t="%=" |
+        t="<<=" |
+        t=">>=" |
+        t=">>>="
+    )
+    
+    { jjtThis.setTokenType( t.kind ); }
 }
 
 void InfixOperator() : {}
@@ -284,14 +304,14 @@ void PostfixOperator() : {}
 
 void IntegerLiteral() : {}
 {
-    <INTLIT>
+    <INTEGER_LITERAL>
 }
 
 void FloatingPointLiteral() : {}
 {
-    <FPLIT>
+    <FLOAT_LITERAL>
 }
-
+/*
 void CharacterLiteral() : {}
 {
     <FPLIT>
@@ -301,15 +321,15 @@ void StringLiteral() : {}
 {
     <FPLIT>
 }
-
+*/
 void BooleanLiteral() : {}
 {
-    <FPLIT>
+    "true" | "false"
 }
 
 void NullLiteral() : {}
 {
-    <FPLIT>
+    "null"
 }
 
 
@@ -319,12 +339,12 @@ void Block() : {}
     "{" BlockStatements() "}"
 }
 
-void BlockStatements() : {}
+void BlockStatements() #void : {}
 {
     (BlockStatement())*
 }
 
-void BlockStatement() : {}
+void BlockStatement() #void : {}
 {
     LOOKAHEAD(2)
     LocalVariableDeclarationStatement() |
@@ -336,7 +356,7 @@ void LocalVariableDeclarationStatement() : {}
     Type() VariableDeclarators() ";"
 }
 
-void Statement() : {}
+void Statement() #void : {}
 {
     Block() |
     ExpressionStatement()
@@ -347,7 +367,7 @@ void ExpressionStatement() : {}
     Expression() ";"
 }
 
-void VariableDeclarators() : {}
+void VariableDeclarators() #void : {}
 {
     VariableDeclarator() ("," VariableDeclarator())*
 }
@@ -357,7 +377,7 @@ void VariableDeclarator() : {}
     Identifier() ["=" VariableInitializer()]
 }
 
-void VariableInitializer() : {}
+void VariableInitializer() #void : {}
 {
     Expression()
     // | ArrayInitializer()
@@ -365,7 +385,9 @@ void VariableInitializer() : {}
 
 
 
-void Identifier() : {}
+void Identifier() : {
+    Token t;
+}
 {
-    <ID>
+    t=<ID> { jjtThis.setIdentifier( t.image ); }
 }
