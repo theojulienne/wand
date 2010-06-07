@@ -1,7 +1,0 @@
-rename test
---This line, and those below, will be ignored--
-
-D    tests/core-pass/functions/simple-return
-A    tests/core-pass/functions/simple-return-c
-A    tests/core-pass/functions/simple-return-c/main.c
-A    tests/core-pass/functions/simple-return-c/test.wand
