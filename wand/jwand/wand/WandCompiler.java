@@ -27,20 +27,30 @@ public class WandCompiler {
         
         String sourceFile = otherArgs[0];
         String outputFile = (String)parser.getOptionValue( outputFilename );
+        
+        assert sourceFile.endsWith( ".wand" ): "Could not guess filename without a .wand extension, " +
+                                               "please provide a .wand file or use -o <filename> to " +
+                                               "specify the output filename";
+        String baseFilename = sourceFile.substring( 0, sourceFile.length()-5 );
+        
         if ( outputFile == null ) {
-            assert sourceFile.endsWith( ".wand" ): "Could not guess filename without a .wand extension, " +
-                                                   "please provide a .wand file or use -o <filename> to " +
-                                                   "specify the output filename";
-            
-            outputFile = sourceFile.substring( 0, sourceFile.length()-5 ) + ".c";
+            outputFile = baseFilename + ".c";
             
             // make sure we don't overwrite the input file
         }
         
         assert !sourceFile.equals(outputFile): "Source and destination file are the same file!";
+        assert !sourceFile.equals(baseFilename): "Source and destination file are the same file!";
         
         //System.out.println( sourceFile + " -> " + outputFile );
         compileProgram( sourceFile, outputFile );
+        
+        Boolean shouldCompileOnly = (Boolean)parser.getOptionValue( compileOnly );
+        
+        if ( shouldCompileOnly == null || !shouldCompileOnly ) {
+            System.out.println( "Compiling and linking with gcc.." );
+            gccCompileProgram( outputFile, baseFilename );
+        }
 	}
 	
 	private static void compileProgram( String sourceFile, String outputFile ) {
@@ -82,6 +92,30 @@ public class WandCompiler {
 		    System.out.println( "Error writing file: " + e.getMessage( ) );
 	        System.exit( 1 );
 		}
+	}
+	
+	private static void gccCompileProgram( String sourceFile, String outputBinary ) {
+	    String s;
+	    
+	    try {
+    	    Process p = Runtime.getRuntime().exec( "gcc " + sourceFile + " -o " + outputBinary );
+    	    p.waitFor( );
+	    
+    	    BufferedReader stdInput = new BufferedReader(new InputStreamReader(p.getInputStream()));
+    	    BufferedReader stdError = new BufferedReader(new InputStreamReader(p.getErrorStream()));
+            while ((s = stdInput.readLine()) != null) {
+                System.out.println(s);
+            }
+            while ((s = stdError.readLine()) != null) {
+                System.out.println(s);
+            }
+        } catch ( IOException e ) {
+            System.out.println( "Error compiling with GCC: " + e.getMessage( ) );
+	        System.exit( 1 );
+        } catch ( InterruptedException e ) {
+            System.out.println( "Error compiling with GCC: " + e.getMessage( ) );
+	        System.exit( 1 );
+        }
 	}
 	
 	

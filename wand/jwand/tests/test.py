@@ -1,15 +1,105 @@
-import os
+import os, subprocess
 
 from terminal import TerminalController
 term = TerminalController()
 
+WAND_COMPILER = '../bin/wandc'
+
 PASS_STATS = {}
+
+def wand_compile( src_file ):
+	cmd = [WAND_COMPILER, '-c', src_file]
+	
+	proc = subprocess.Popen( cmd, 
+		stdin=subprocess.PIPE,
+		stdout=subprocess.PIPE,
+		stderr=subprocess.STDOUT )
+	output = proc.communicate()[0]
+	
+	assert proc.returncode is not None
+	
+	exception = False
+	
+	if proc.returncode != 0:
+		print output
+		
+		if 'Exception in thread' in output:
+			exception = True
+	
+	return (proc.returncode == 0), exception
+
+def run_executable( command ):
+	proc = subprocess.Popen( command, 
+		stdin=subprocess.PIPE,
+		stdout=subprocess.PIPE,
+		stderr=subprocess.STDOUT )
+	output = proc.communicate()[0]
+	
+	assert proc.returncode is not None
+	
+	if proc.returncode != 0:
+		print command, 'returned', proc.returncode
+		print output
+	
+	return (proc.returncode == 0)
+
+def gcc_files( sources, binary ):
+	cmd = ['gcc'] + sources + ['-o', binary]
+	return run_executable( cmd )
+
+def cleanup( created_files ):
+	for f in created_files:
+		try:
+			os.unlink( f )
+		except:
+			pass
 
 def run_test( test_type, path, files ):
 	# test is in format code-result eg "core-pass"
 	version_code, expected_result = test_type.split( '-' )
 	
-	return False # not implemented
+	wand_files = list( path+'/'+f for f in files if f.endswith('.wand') )
+	c_files = list( f for f in files if f.endswith('.c') )
+	
+	gen_c_files = list( f.replace('.wand','.c') for f in wand_files )
+	
+	TARGET_FILENAME = path + '/test'
+	created_files = gen_c_files + [ TARGET_FILENAME ]
+	
+	all_compiled = True
+	exception_thrown = False
+	
+	for wand_file in wand_files:
+		exit_success, exception_thrown_child = wand_compile( wand_file )
+		all_compiled = all_compiled and exit_success
+		exception_thrown = exception_thrown or exception_thrown_child
+	
+	expect_graceful = test_type.endswith( '-graceful' )
+	
+	if expect_graceful:
+		# FIXME: this needs to check the return code was not a 
+		# crash (graceful compile error only)
+		cleanup( created_files )
+		return (not all_compiled) and (not exception_thrown)
+	
+	# now we know we're expecting a real pass,
+	# we can make sure wandc compiled successfully
+	if not all_compiled:
+		cleanup( created_files )
+		return False
+	
+	# now we have a .c file, compile it (and other files)
+	# with gcc
+	if not gcc_files( gen_c_files + c_files, TARGET_FILENAME ):
+		cleanup( created_files )
+		return False
+	
+	result = run_executable( TARGET_FILENAME )
+	cleanup( created_files )
+	
+	return result
+	
+	
 
 def run_tests( ):
 	for root, dirs, files in os.walk( '.' ):

@@ -11,5 +11,5 @@ int foo( ) {
 }
 
 void main( ) {
-	foo( );
+	//foo( );
 }

@@ -7,3 +7,7 @@ int foo( int n ) {
 		bar = 789;
 	}
 }
+
+void main( ) {
+	
+}
