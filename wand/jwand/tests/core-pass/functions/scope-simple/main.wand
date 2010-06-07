@@ -1,0 +1,15 @@
+int foo( ) {
+	int bar = 42;
+	{
+		int baz = 123;
+
+		bar = 789; // OK
+		baz = 456; // OK
+	}
+	
+	bar = 123; // OK
+}
+
+void main( string[] args ) {
+	foo( );
+}

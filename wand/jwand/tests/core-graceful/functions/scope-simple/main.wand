@@ -1,0 +1,16 @@
+int foo( ) {
+	int bar = 42;
+	{
+		int baz = 123;
+
+		bar = 789; // OK
+		baz = 456; // OK
+	}
+	
+	bar = 123; // OK
+	baz = 123; // ERROR, out of scope
+}
+
+void main( string[] args ) {
+	
+}
