@@ -1,0 +1,6 @@
+#!/bin/sh
+
+abspath=$(cd ${0%/*} && echo $PWD/${0##*/})
+absdir=$(dirname $abspath)
+
+java -classpath $absdir/wand.jar -ea wand.WandCompiler $*

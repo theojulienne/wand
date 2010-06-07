@@ -10,8 +10,8 @@ public class CCodeGenerator extends WandVisitor {
     
     private ASTType currentType;
     
-    public void setOutputStream( PrintStream out ) {
-        this.out = out;
+    public void setOutputStream( OutputStream out ) {
+        this.out = new PrintStream( out );
     }
     
     public void generate( ASTProgram program ) {
