@@ -1,32 +1,3 @@
-/*
-
-Task: Make this parser implement a basic Wand language instead
-
-Program -> Declarations
-
-Declarations -> Declaration [Declarations]
-
-Declaration -> FunctionDeclaration
-
-FunctionDeclaration -> "void" Identifier "(" ")" "{" FunctionBody "}"
-
-FunctionBody -> FunctionDeclaration
-
-
-*/
-
-
-
-/* This example shows how to specify a simple parser for a toy calculator
-   language with floats, multiplication, and let-expressions.
-   Here is an example program in this language:
-   
-      let radius = 5.0 in
-        let pi = 3.14 in
-          2.0 * pi * radius 
-
-*/
-
 options {
     MULTI=true;
 	NODE_EXTENDS="wand.core.WandNode";
