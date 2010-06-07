@@ -31,6 +31,7 @@ options {
     MULTI=true;
 	NODE_EXTENDS="wand.core.WandNode";
 	NODE_PACKAGE="wand.parser";
+	VISITOR=true;
 }
 
 
@@ -89,13 +90,24 @@ TOKEN: {
 | < OPENBLOCK: "{" >
 | < CLOSEBLOCK: "}" >
 
-| < OPINC: "++" >
-| < OPDEC: "--" >
+| < OP_INC: "++" >
+| < OP_DEC: "--" >
 
-| < OPADD: "+" >
-| < OPSUB: "-" >
+| < OP_ADD: "+" >
+| < OP_SUB: "-" >
 
-| < OPASSIGN: "=" >
+| < OP_MUL: "*" >
+| < OP_DIV: "/" >
+| < OP_MOD: "%" >
+
+| < OP_ASSIGN: "=" >
+
+| < OP_ADD_ASSIGN: "+=" >
+| < OP_SUB_ASSIGN: "-=" >
+
+| < OP_MUL_ASSIGN: "*=" >
+| < OP_DIV_ASSIGN: "/=" >
+| < OP_MOD_ASSIGN: "%=" >
 
 }
 
@@ -202,7 +214,7 @@ void Literal() #void : {}
     )
 }
 
-void Expression() : {}
+void Expression() #void : {}
 {
     AssignExpression()
 }
@@ -217,7 +229,12 @@ void AssignExpression() #AssignExpression(>1) : {}
 
 void InfixExpression() #InfixExpression(>1) : {}
 {
-    PrefixExpression() [InfixOperator() PrefixExpression()]
+    MulInfixExpression() [InfixOperator() InfixExpression()]
+}
+
+void MulInfixExpression() #InfixExpression(>1) : {}
+{
+    PrefixExpression() [MulInfixOperator() MulInfixExpression()]
 }
 
 void PrefixExpression() #PrefixExpression(>1) : {}
@@ -262,27 +279,43 @@ void AssignOperator() : {
     { jjtThis.setTokenType( t.kind ); }
 }
 
-void InfixOperator() : {}
+void InfixOperator() : {
+    Token t;
+}
 {
-    "||" |
-    "&&" |
-    "|" |
-    "^" |
-    "&" |
-    "==" |
-    "!=" |
-    "<" |
-    ">" |
-    "<=" |
-    ">=" |
-    "<<" |
-    ">>" |
-    ">>>" |
-    "+" |
-    "-" |
-    "*" |
-    "/" |
-    "%"
+    (
+        t="||" |
+        t="&&" |
+        t="|" |
+        t="^" |
+        t="&" |
+        t="==" |
+        t="!=" |
+        t="<" |
+        t=">" |
+        t="<=" |
+        t=">=" |
+        t="<<" |
+        t=">>" |
+        t=">>>" |
+        t="+" |
+        t="-"
+    )
+    
+    { jjtThis.setTokenType( t.kind ); }
+}
+
+void MulInfixOperator() #InfixOperator : {
+    Token t;
+}
+{
+    (
+        t="*" |
+        t="/" |
+        t="%"
+    )
+    
+    { jjtThis.setTokenType( t.kind ); }
 }
 
 void PrefixOperator() : {}
@@ -302,9 +335,12 @@ void PostfixOperator() : {}
 
 
 
-void IntegerLiteral() : {}
+void IntegerLiteral() : {
+    Token t;
+}
 {
-    <INTEGER_LITERAL>
+    t=<INTEGER_LITERAL>
+    { jjtThis.fromString( t.image ); }
 }
 
 void FloatingPointLiteral() : {}

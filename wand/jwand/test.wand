@@ -1,6 +1,11 @@
 int foo( ) {
-	int bar = 0b101010;
+	int bar = 0b101010 + 2 * 10;
+	int bar2 = 0b101010 * 2 + 10;
 	bar = 456;
+	{
+		int foo = 123;
+		bar = 789;
+	}
 }
 
 int[][] baz( ) {

@@ -17,4 +17,25 @@ public abstract class WandNode implements Node {
         
         generator.generateNode( this, out );
     }
+    
+    public void accept( WandVisitor visitor, Object data ) {
+        jjtAccept( visitor, data );
+    }
+    
+    public void replaceChild( WandNode oldChild, WandNode newChild ) {
+        int numChildren = jjtGetNumChildren( );
+        
+        for ( int i = 0; i < numChildren; i++ ) {
+            if ( jjtGetChild( i ) == oldChild ) {
+                jjtAddChild( newChild, i );
+                return;
+            }
+        }
+        
+        assert false: "Child not found in node.";
+    }
+    
+    public WandNode getParent( ) {
+        return (WandNode)jjtGetParent( );
+    }
 }

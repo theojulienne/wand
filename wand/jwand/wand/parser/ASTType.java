@@ -27,6 +27,10 @@ class ASTType extends SimpleNode {
     public void setTypeName( String typeName ) {
         this.typeName = typeName;
     }
+    
+    public String toString( ) {
+        return "<ASTType: " + getTypeName() + ">";
+    }
 
 }
 /* JavaCC - OriginalChecksum=4229a2d77631ca19e66d4848b4032133 (do not edit this line) */

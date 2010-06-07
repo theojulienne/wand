@@ -10,24 +10,23 @@ public interface WandParserTreeConstants
   public int JJTBUILTINTYPE = 4;
   public int JJTARRAYTYPE = 5;
   public int JJTQUALIFIEDIDENTIFIER = 6;
-  public int JJTEXPRESSION = 7;
-  public int JJTASSIGNEXPRESSION = 8;
-  public int JJTINFIXEXPRESSION = 9;
-  public int JJTPREFIXEXPRESSION = 10;
-  public int JJTPOSTFIXEXPRESSION = 11;
-  public int JJTASSIGNOPERATOR = 12;
-  public int JJTINFIXOPERATOR = 13;
-  public int JJTPREFIXOPERATOR = 14;
-  public int JJTPOSTFIXOPERATOR = 15;
-  public int JJTINTEGERLITERAL = 16;
-  public int JJTFLOATINGPOINTLITERAL = 17;
-  public int JJTBOOLEANLITERAL = 18;
-  public int JJTNULLLITERAL = 19;
-  public int JJTBLOCK = 20;
-  public int JJTLOCALVARIABLEDECLARATIONSTATEMENT = 21;
-  public int JJTEXPRESSIONSTATEMENT = 22;
-  public int JJTVARIABLEDECLARATOR = 23;
-  public int JJTIDENTIFIER = 24;
+  public int JJTASSIGNEXPRESSION = 7;
+  public int JJTINFIXEXPRESSION = 8;
+  public int JJTPREFIXEXPRESSION = 9;
+  public int JJTPOSTFIXEXPRESSION = 10;
+  public int JJTASSIGNOPERATOR = 11;
+  public int JJTINFIXOPERATOR = 12;
+  public int JJTPREFIXOPERATOR = 13;
+  public int JJTPOSTFIXOPERATOR = 14;
+  public int JJTINTEGERLITERAL = 15;
+  public int JJTFLOATINGPOINTLITERAL = 16;
+  public int JJTBOOLEANLITERAL = 17;
+  public int JJTNULLLITERAL = 18;
+  public int JJTBLOCK = 19;
+  public int JJTLOCALVARIABLEDECLARATIONSTATEMENT = 20;
+  public int JJTEXPRESSIONSTATEMENT = 21;
+  public int JJTVARIABLEDECLARATOR = 22;
+  public int JJTIDENTIFIER = 23;
 
 
   public String[] jjtNodeName = {
@@ -38,7 +37,6 @@ public interface WandParserTreeConstants
     "BuiltinType",
     "ArrayType",
     "QualifiedIdentifier",
-    "Expression",
     "AssignExpression",
     "InfixExpression",
     "PrefixExpression",
@@ -58,4 +56,4 @@ public interface WandParserTreeConstants
     "Identifier",
   };
 }
-/* JavaCC - OriginalChecksum=fdf1586547097a5d953577e21d1172ed (do not edit this line) */
+/* JavaCC - OriginalChecksum=fd37c51cc806cf3d8f233648c4ab6f9d (do not edit this line) */

@@ -1,6 +1,6 @@
 wandc:
 	make -C wand/parser
-	javac wand/backends/c/*.java wand/generators/*.java wand/*.java wand/parser/*.java
+	javac wand/backends/c/*.java wand/generators/*.java wand/*.java wand/parser/*.java wand/util/*.java wand/visitors/*.java
 
 html:
 	make -C docs html

@@ -37,17 +37,33 @@ public interface WandParserConstants {
   /** RegularExpression Id. */
   int CLOSEBLOCK = 22;
   /** RegularExpression Id. */
-  int OPINC = 23;
+  int OP_INC = 23;
   /** RegularExpression Id. */
-  int OPDEC = 24;
+  int OP_DEC = 24;
   /** RegularExpression Id. */
-  int OPADD = 25;
+  int OP_ADD = 25;
   /** RegularExpression Id. */
-  int OPSUB = 26;
+  int OP_SUB = 26;
   /** RegularExpression Id. */
-  int OPASSIGN = 27;
+  int OP_MUL = 27;
   /** RegularExpression Id. */
-  int ID = 28;
+  int OP_DIV = 28;
+  /** RegularExpression Id. */
+  int OP_MOD = 29;
+  /** RegularExpression Id. */
+  int OP_ASSIGN = 30;
+  /** RegularExpression Id. */
+  int OP_ADD_ASSIGN = 31;
+  /** RegularExpression Id. */
+  int OP_SUB_ASSIGN = 32;
+  /** RegularExpression Id. */
+  int OP_MUL_ASSIGN = 33;
+  /** RegularExpression Id. */
+  int OP_DIV_ASSIGN = 34;
+  /** RegularExpression Id. */
+  int OP_MOD_ASSIGN = 35;
+  /** RegularExpression Id. */
+  int ID = 36;
 
   /** Lexical state. */
   int DEFAULT = 0;
@@ -81,19 +97,22 @@ public interface WandParserConstants {
     "\"--\"",
     "\"+\"",
     "\"-\"",
+    "\"*\"",
+    "\"/\"",
+    "\"%\"",
     "\"=\"",
-    "<ID>",
-    "\"[\"",
-    "\"]\"",
-    "\".\"",
     "\"+=\"",
     "\"-=\"",
     "\"*=\"",
     "\"/=\"",
+    "\"%=\"",
+    "<ID>",
+    "\"[\"",
+    "\"]\"",
+    "\".\"",
     "\"&=\"",
     "\"|=\"",
     "\"^=\"",
-    "\"%=\"",
     "\"<<=\"",
     "\">>=\"",
     "\">>>=\"",
@@ -111,9 +130,6 @@ public interface WandParserConstants {
     "\"<<\"",
     "\">>\"",
     "\">>>\"",
-    "\"*\"",
-    "\"/\"",
-    "\"%\"",
     "\"!\"",
     "\"~\"",
     "\";\"",
