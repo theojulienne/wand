@@ -10,6 +10,6 @@ int foo( ) {
 	bar = 123; // OK
 }
 
-void main( string[] args ) {
+void main( ) {
 	foo( );
 }

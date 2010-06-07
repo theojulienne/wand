@@ -1,7 +1,7 @@
-int foo( ) {
+int foo( int n ) {
 	int bar = 0b101010 + 2 * 10;
-	int bar2 = 0b101010 * 2 + 10;
-	bar = 456;
+	int bar2 = 0b101010 * n + 10;
+	bar = 3;
 	{
 		int foo = 123;
 		bar = 789;

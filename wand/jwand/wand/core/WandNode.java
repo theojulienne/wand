@@ -3,9 +3,11 @@ package wand.core;
 import wand.parser.Node;
 import wand.generators.Generator;
 import wand.generators.ChildGenerator;
-import java.io.PrintStream;
 
-public abstract class WandNode implements Node {
+import java.io.PrintStream;
+import java.util.Iterator;
+
+public abstract class WandNode implements Node, Iterable<WandNode> {
     public Generator getGenerator( ) {
         return new ChildGenerator( );
     }
@@ -37,5 +39,25 @@ public abstract class WandNode implements Node {
     
     public WandNode getParent( ) {
         return (WandNode)jjtGetParent( );
+    }
+    
+    public Iterator<WandNode> iterator() {
+        return new Iterator<WandNode>() {
+            private int currentIndex = 0;
+            
+            public boolean hasNext() {
+                return currentIndex < jjtGetNumChildren();
+            }
+            
+            public WandNode next() {
+                WandNode ret = (WandNode)jjtGetChild( currentIndex );
+                currentIndex++;
+                return ret;
+            }
+            
+            public void remove() {
+                throw new UnsupportedOperationException( );
+            }
+        };
     }
 }

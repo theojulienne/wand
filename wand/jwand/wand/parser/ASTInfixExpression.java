@@ -2,6 +2,8 @@
 /* JavaCCOptions:MULTI=true,NODE_USES_PARSER=false,VISITOR=true,TRACK_TOKENS=false,NODE_PREFIX=AST,NODE_EXTENDS=wand.core.WandNode,NODE_FACTORY=,SUPPORT_CLASS_VISIBILITY_PUBLIC=true */
 package wand.parser;
 
+import wand.core.*;
+
 public
 class ASTInfixExpression extends ASTExpression {
     public ASTInfixExpression(int id) {
@@ -12,12 +14,12 @@ class ASTInfixExpression extends ASTExpression {
         super(p, id);
     }
     
-    public ASTExpression getLHS( ) {
-        return (ASTExpression) jjtGetChild( 0 );
+    public WandNode getLHS( ) {
+        return (WandNode) jjtGetChild( 0 );
     }
     
-    public ASTExpression getRHS( ) {
-        return (ASTExpression) jjtGetChild( 2 );
+    public WandNode getRHS( ) {
+        return (WandNode) jjtGetChild( 2 );
     }
     
     public ASTInfixOperator getOperator( ) {

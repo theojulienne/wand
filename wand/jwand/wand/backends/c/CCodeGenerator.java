@@ -8,6 +8,8 @@ import wand.parser.*;
 public class CCodeGenerator extends WandVisitor {
     private PrintStream out;
     
+    private ASTType currentType;
+    
     public void setOutputStream( PrintStream out ) {
         this.out = out;
     }
@@ -24,26 +26,98 @@ public class CCodeGenerator extends WandVisitor {
         return data;
     }
     
-    public Object visit(ASTLocalVariableDeclarationStatement node, Object data) {
-        writeNewline( "// declare type: " + node.getType() );
-        writeNewline( "// declare names: " );
+    public Object visit(ASTFunctionDeclaration node, Object data) {
+        String functionName = node.getFunctionName( );
         
-        int numVars = node.getNumVariables( );
-        for ( int i = 0; i < numVars; i++ ) {
-            WandNode child = node.getVariable( i );
+        ASTType returnType = (ASTType)node.getReturnType( );
+        ASTFunctionParameters parameters = (ASTFunctionParameters)node.getFunctionParameters( );
+        ASTBlock body = (ASTBlock)node.getFunctionBody( );
+        
+        writeNewline( "// begin function " + functionName );
+        
+        returnType.accept( this, data );
+        writeString( " " );
+        writeString( functionName );
+        writeString( "( " );
+        parameters.accept( this, data );
+        writeString( " ) " );
+        
+        body.accept( this, data );
+        writeNewline( "// end function " + functionName );
+        
+        return data;
+    }
+    
+    public Object visit(ASTFunctionParameters node, Object data) {
+        boolean first = true;
+        
+        for ( WandNode child: node ) {
+            if ( !first ) {
+                writeString( ", " );
+            }
             
-            writeNewline( "//     " + child );
             child.accept( this, data );
+            
+            first = false;
         }
         
         return data;
     }
     
+    public Object visit(ASTFunctionParameter node, Object data) {
+        WandNode type = node.getType( );
+        WandNode identifier = node.getIdentifier( );
+        
+        type.accept( this, data );
+        writeString( " " );
+        identifier.accept( this, data );
+        
+        return data;
+    }
+    
+    public Object visit(ASTBuiltinType node, Object data) {
+        writeString( node.getTypeName( ) );
+        
+        return data;
+    }
+    
+    public Object visit(ASTArrayType node, Object data) {
+        // FIXME: this is really wrong :P
+        writeString( node.getTypeName( ) );
+        
+        return data;
+    }
+    
+    public Object visit(ASTLocalVariableDeclarationStatement node, Object data) {
+        //writeNewline( "// declare type: " + node.getType() );
+        //writeNewline( "// declare names: " );
+        
+        currentType = node.getType( );
+        
+        int numVars = node.getNumVariables( );
+        for ( int i = 0; i < numVars; i++ ) {
+            WandNode child = node.getVariable( i );
+            
+            //writeNewline( "//     " + child );
+            child.accept( this, data );
+        }
+        
+        currentType = null;
+        
+        return data;
+    }
+    
     public Object visit(ASTVariableDeclarator node, Object data) {
+        // type
+        currentType.accept( this, data );
+        
+        writeString( " " );
+        
+        // variable name
         WandVariable identifier = (WandVariable)node.getIdentifier( );
-        //writeString( "" + identifier.getIdentifier( ) + "" );
         this.visit( identifier, data );
         
+        // initializer
         WandNode initializer = node.getInitializer( );
         if ( initializer != null ) {
             writeString( " = " );
@@ -56,8 +130,8 @@ public class CCodeGenerator extends WandVisitor {
     }
     
     public Object visit(ASTInfixExpression node, Object data) {
-        ASTExpression lhs = (ASTExpression)node.getLHS( );
-        ASTExpression rhs = (ASTExpression)node.getRHS( );
+        WandNode lhs = (WandNode)node.getLHS( );
+        WandNode rhs = (WandNode)node.getRHS( );
         ASTInfixOperator op = (ASTInfixOperator)node.getOperator( );
         
         writeString( "( " );

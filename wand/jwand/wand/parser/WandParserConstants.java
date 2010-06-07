@@ -107,6 +107,7 @@ public interface WandParserConstants {
     "\"/=\"",
     "\"%=\"",
     "<ID>",
+    "\",\"",
     "\"[\"",
     "\"]\"",
     "\".\"",
@@ -133,7 +134,6 @@ public interface WandParserConstants {
     "\"!\"",
     "\"~\"",
     "\";\"",
-    "\",\"",
   };
 
 }

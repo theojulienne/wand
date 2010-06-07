@@ -7,26 +7,28 @@ public interface WandParserTreeConstants
   public int JJTDECLARATIONS = 1;
   public int JJTVOID = 2;
   public int JJTFUNCTIONDECLARATION = 3;
-  public int JJTBUILTINTYPE = 4;
-  public int JJTARRAYTYPE = 5;
-  public int JJTQUALIFIEDIDENTIFIER = 6;
-  public int JJTASSIGNEXPRESSION = 7;
-  public int JJTINFIXEXPRESSION = 8;
-  public int JJTPREFIXEXPRESSION = 9;
-  public int JJTPOSTFIXEXPRESSION = 10;
-  public int JJTASSIGNOPERATOR = 11;
-  public int JJTINFIXOPERATOR = 12;
-  public int JJTPREFIXOPERATOR = 13;
-  public int JJTPOSTFIXOPERATOR = 14;
-  public int JJTINTEGERLITERAL = 15;
-  public int JJTFLOATINGPOINTLITERAL = 16;
-  public int JJTBOOLEANLITERAL = 17;
-  public int JJTNULLLITERAL = 18;
-  public int JJTBLOCK = 19;
-  public int JJTLOCALVARIABLEDECLARATIONSTATEMENT = 20;
-  public int JJTEXPRESSIONSTATEMENT = 21;
-  public int JJTVARIABLEDECLARATOR = 22;
-  public int JJTIDENTIFIER = 23;
+  public int JJTFUNCTIONPARAMETERS = 4;
+  public int JJTFUNCTIONPARAMETER = 5;
+  public int JJTBUILTINTYPE = 6;
+  public int JJTARRAYTYPE = 7;
+  public int JJTQUALIFIEDIDENTIFIER = 8;
+  public int JJTASSIGNEXPRESSION = 9;
+  public int JJTINFIXEXPRESSION = 10;
+  public int JJTPREFIXEXPRESSION = 11;
+  public int JJTPOSTFIXEXPRESSION = 12;
+  public int JJTASSIGNOPERATOR = 13;
+  public int JJTINFIXOPERATOR = 14;
+  public int JJTPREFIXOPERATOR = 15;
+  public int JJTPOSTFIXOPERATOR = 16;
+  public int JJTINTEGERLITERAL = 17;
+  public int JJTFLOATINGPOINTLITERAL = 18;
+  public int JJTBOOLEANLITERAL = 19;
+  public int JJTNULLLITERAL = 20;
+  public int JJTBLOCK = 21;
+  public int JJTLOCALVARIABLEDECLARATIONSTATEMENT = 22;
+  public int JJTEXPRESSIONSTATEMENT = 23;
+  public int JJTVARIABLEDECLARATOR = 24;
+  public int JJTIDENTIFIER = 25;
 
 
   public String[] jjtNodeName = {
@@ -34,6 +36,8 @@ public interface WandParserTreeConstants
     "Declarations",
     "void",
     "FunctionDeclaration",
+    "FunctionParameters",
+    "FunctionParameter",
     "BuiltinType",
     "ArrayType",
     "QualifiedIdentifier",
@@ -56,4 +60,4 @@ public interface WandParserTreeConstants
     "Identifier",
   };
 }
-/* JavaCC - OriginalChecksum=fd37c51cc806cf3d8f233648c4ab6f9d (do not edit this line) */
+/* JavaCC - OriginalChecksum=fd2684df1f6c5f1502021ae5a37fbd72 (do not edit this line) */

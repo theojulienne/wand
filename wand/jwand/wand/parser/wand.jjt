@@ -153,9 +153,19 @@ void FunctionDeclaration() : {
 }
 {
 	(
-	    Type() functionName=<ID> <LPAREN> <RPAREN> Block()
+	    Type() functionName=<ID> FunctionParameters() Block()
 	    { jjtThis.setFunctionName( functionName.image ); }
 	)
+}
+
+void FunctionParameters() : {}
+{
+    <LPAREN> [FunctionParameter() ("," FunctionParameter())*] <RPAREN>
+}
+
+void FunctionParameter() : {}
+{
+    Type() Identifier() ["=" VariableInitializer()]
 }
 
 // FunctionBody -> FunctionDeclaration
@@ -224,7 +234,9 @@ void AssignExpression() #AssignExpression(>1) : {}
     // was: InfixExpression() [AssignOperator() InfixExpression()]
     // but this allowed syntax "3 += 1" which would be invalid and need
     // to be picked up elsewhere
-    [Identifier() AssignOperator()] InfixExpression()
+    LOOKAHEAD(2)
+    Identifier() AssignOperator() InfixExpression() |
+    InfixExpression()
 }
 
 void InfixExpression() #InfixExpression(>1) : {}
@@ -252,7 +264,8 @@ void PostfixExpression() #PostfixExpression(>1) : {}
 void Primary() #void : {}
 {
     <LPAREN> Expression() <RPAREN> |
-    Literal()
+    Literal() |
+    Identifier()
 }
 
 

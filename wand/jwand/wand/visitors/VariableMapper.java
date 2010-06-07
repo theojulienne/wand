@@ -30,10 +30,35 @@ public class VariableMapper extends WandVisitor {
     }
     
     public Object visit( ASTLocalVariableDeclarationStatement node, Object data ) {
+        visitChildren( node, data );
+        return data;
+    }
+    
+    public Object visit( ASTVariableDeclarator node, Object data ) {
+        int currChild = 0;
+        for ( WandNode child: node ) {
+            // first child is a declaration ASTIdentifier
+            inDeclaration = (currChild == 0);
+            child.accept( this, data );
+            inDeclaration = false;
+            
+            currChild++;
+        }
+        
+        return data;
+    }
+    
+    public Object visit( ASTFunctionParameters node, Object data ) {
         inDeclaration = true;
-        System.out.println( "variable declaration" );
         visitChildren( node, data );
         inDeclaration = false;
+        return data;
+    }
+    
+    public Object visit( ASTFunctionDeclaration node, Object data ) {
+        pushScope( );
+        visitChildren( node, data );
+        popScope( );
         return data;
     }
     
@@ -44,16 +69,20 @@ public class VariableMapper extends WandVisitor {
         
         if ( inDeclaration ) {
             // declaring this variable
-            System.out.println( "declaring " + name );
+            //System.out.println( "declaring " + name );
             
             variable = new WandVariable( name );
+            
+            if ( currentScope.definedLocally( name ) ) {
+                assert false: "Duplicate definition of variable " + name + " in current scope";
+            }
             
             currentScope.add( name, variable );
         } else {
             // using this variable
             variable = currentScope.lookup( name );
             
-            System.out.println( "using " + name );
+            //System.out.println( "using " + name );
             
             // FIXME: this will become a compile error!
             assert variable != null: "Variable " + name + " undeclared in the current scope";

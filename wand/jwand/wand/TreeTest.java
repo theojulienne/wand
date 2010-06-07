@@ -28,7 +28,7 @@ public class TreeTest {
 		    System.exit( 1 );
 		}
 		
-		System.out.println( program );
+		//System.out.println( program );
 		
 		//program.generateToStream( System.out );
 		

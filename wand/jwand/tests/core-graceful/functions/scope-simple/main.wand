@@ -11,6 +11,6 @@ int foo( ) {
 	baz = 123; // ERROR, out of scope
 }
 
-void main( string[] args ) {
+void main( ) {
 	
 }

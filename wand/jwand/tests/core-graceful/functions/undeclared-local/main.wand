@@ -1,0 +1,7 @@
+int foo( ) {
+	n = 42;
+}
+
+void main( ) {
+	
+}

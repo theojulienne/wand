@@ -32,8 +32,12 @@ class ASTFunctionDeclaration extends ASTDeclaration {
         return (ASTType) jjtGetChild( 0 );
     }
     
+    public ASTFunctionParameters getFunctionParameters( ) {
+        return (ASTFunctionParameters) jjtGetChild( 1 );
+    }
+    
     public ASTBlock getFunctionBody( ) {
-        return (ASTBlock) jjtGetChild( 1 );
+        return (ASTBlock) jjtGetChild( 2 );
     }
     
     /** Accept the visitor. **/

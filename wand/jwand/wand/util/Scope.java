@@ -47,11 +47,15 @@ public class Scope {
         }
         
         symbolTable.put( name, node );
-        System.out.println( "mapping " + name + " to " + node );
+        //System.out.println( "mapping " + name + " to " + node );
     }
     
     public void remove( String name ) {
         symbolTable.remove( name );
+    }
+    
+    public boolean definedLocally( String name ) {
+        return symbolTable != null && symbolTable.containsKey( name );
     }
     
 }

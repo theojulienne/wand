@@ -15,6 +15,8 @@ public abstract class WandVisitor implements WandParserVisitor {
     public Object visit(ASTProgram node, Object data) { return visitChildren(node, data); }
     public Object visit(ASTDeclarations node, Object data) { return visitChildren(node, data); }
     public Object visit(ASTFunctionDeclaration node, Object data) { return visitChildren(node, data); }
+    public Object visit(ASTFunctionParameters node, Object data) { return visitChildren(node, data); }
+    public Object visit(ASTFunctionParameter node, Object data) { return visitChildren(node, data); }
     public Object visit(ASTBuiltinType node, Object data) { return visitChildren(node, data); }
     public Object visit(ASTArrayType node, Object data) { return visitChildren(node, data); }
     public Object visit(ASTQualifiedIdentifier node, Object data) { return visitChildren(node, data); }
