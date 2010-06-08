@@ -6,6 +6,9 @@ public interface WandParserVisitor
   public Object visit(SimpleNode node, Object data);
   public Object visit(ASTProgram node, Object data);
   public Object visit(ASTDeclarations node, Object data);
+  public Object visit(ASTDecoratedFunctionDeclaration node, Object data);
+  public Object visit(ASTModifiers node, Object data);
+  public Object visit(ASTModifier node, Object data);
   public Object visit(ASTFunctionDeclaration node, Object data);
   public Object visit(ASTFunctionParameters node, Object data);
   public Object visit(ASTFunctionParameter node, Object data);
@@ -30,4 +33,4 @@ public interface WandParserVisitor
   public Object visit(ASTVariableDeclarator node, Object data);
   public Object visit(ASTIdentifier node, Object data);
 }
-/* JavaCC - OriginalChecksum=cb97847871c9a728c54ad5f39a93129a (do not edit this line) */
+/* JavaCC - OriginalChecksum=901a40027ca066385cb1d10852220a05 (do not edit this line) */

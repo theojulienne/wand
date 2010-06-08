@@ -6,35 +6,41 @@ public interface WandParserTreeConstants
   public int JJTPROGRAM = 0;
   public int JJTDECLARATIONS = 1;
   public int JJTVOID = 2;
-  public int JJTFUNCTIONDECLARATION = 3;
-  public int JJTFUNCTIONPARAMETERS = 4;
-  public int JJTFUNCTIONPARAMETER = 5;
-  public int JJTBUILTINTYPE = 6;
-  public int JJTARRAYTYPE = 7;
-  public int JJTQUALIFIEDIDENTIFIER = 8;
-  public int JJTASSIGNEXPRESSION = 9;
-  public int JJTINFIXEXPRESSION = 10;
-  public int JJTPREFIXEXPRESSION = 11;
-  public int JJTPOSTFIXEXPRESSION = 12;
-  public int JJTASSIGNOPERATOR = 13;
-  public int JJTINFIXOPERATOR = 14;
-  public int JJTPREFIXOPERATOR = 15;
-  public int JJTPOSTFIXOPERATOR = 16;
-  public int JJTINTEGERLITERAL = 17;
-  public int JJTFLOATINGPOINTLITERAL = 18;
-  public int JJTBOOLEANLITERAL = 19;
-  public int JJTNULLLITERAL = 20;
-  public int JJTBLOCK = 21;
-  public int JJTLOCALVARIABLEDECLARATIONSTATEMENT = 22;
-  public int JJTEXPRESSIONSTATEMENT = 23;
-  public int JJTVARIABLEDECLARATOR = 24;
-  public int JJTIDENTIFIER = 25;
+  public int JJTDECORATEDFUNCTIONDECLARATION = 3;
+  public int JJTMODIFIERS = 4;
+  public int JJTMODIFIER = 5;
+  public int JJTFUNCTIONDECLARATION = 6;
+  public int JJTFUNCTIONPARAMETERS = 7;
+  public int JJTFUNCTIONPARAMETER = 8;
+  public int JJTBUILTINTYPE = 9;
+  public int JJTARRAYTYPE = 10;
+  public int JJTQUALIFIEDIDENTIFIER = 11;
+  public int JJTASSIGNEXPRESSION = 12;
+  public int JJTINFIXEXPRESSION = 13;
+  public int JJTPREFIXEXPRESSION = 14;
+  public int JJTPOSTFIXEXPRESSION = 15;
+  public int JJTASSIGNOPERATOR = 16;
+  public int JJTINFIXOPERATOR = 17;
+  public int JJTPREFIXOPERATOR = 18;
+  public int JJTPOSTFIXOPERATOR = 19;
+  public int JJTINTEGERLITERAL = 20;
+  public int JJTFLOATINGPOINTLITERAL = 21;
+  public int JJTBOOLEANLITERAL = 22;
+  public int JJTNULLLITERAL = 23;
+  public int JJTBLOCK = 24;
+  public int JJTLOCALVARIABLEDECLARATIONSTATEMENT = 25;
+  public int JJTEXPRESSIONSTATEMENT = 26;
+  public int JJTVARIABLEDECLARATOR = 27;
+  public int JJTIDENTIFIER = 28;
 
 
   public String[] jjtNodeName = {
     "Program",
     "Declarations",
     "void",
+    "DecoratedFunctionDeclaration",
+    "Modifiers",
+    "Modifier",
     "FunctionDeclaration",
     "FunctionParameters",
     "FunctionParameter",
@@ -60,4 +66,4 @@ public interface WandParserTreeConstants
     "Identifier",
   };
 }
-/* JavaCC - OriginalChecksum=fd2684df1f6c5f1502021ae5a37fbd72 (do not edit this line) */
+/* JavaCC - OriginalChecksum=e92e412b4cc31986721fafb4c531ee62 (do not edit this line) */

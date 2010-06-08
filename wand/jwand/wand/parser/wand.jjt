@@ -80,6 +80,16 @@ TOKEN: {
 | < OP_DIV_ASSIGN: "/=" >
 | < OP_MOD_ASSIGN: "%=" >
 
+| < MODIFIER_PUBLIC: "public" >
+| < MODIFIER_PRIVATE: "private" >
+| < MODIFIER_PROTECTED: "protected" >
+| < MODIFIER_STATIC: "static" >
+| < MODIFIER_ABSTRACT: "abstract" >
+| < MODIFIER_FINAL: "final" >
+| < MODIFIER_COMPAT: "compat" >
+
+| < MODIFIER_ARG: ":" >
+
 }
 
 /* Identifiers */
@@ -115,7 +125,28 @@ void Declarations() : {
 // Declaration -> FunctionDeclaration
 void Declaration() #void : {}
 {
-	FunctionDeclaration()
+	DecoratedFunctionDeclaration()
+}
+
+void DecoratedFunctionDeclaration() : {}
+{
+    Modifiers() FunctionDeclaration()
+}
+
+void Modifiers() : {}
+{
+    (Modifier())*
+}
+
+void Modifier() : {}
+{
+    "public" |
+    "private" |
+    "protected" |
+    "static" |
+    "abstract" |
+    "final" |
+    "compat" ":" <ID>
 }
 
 // FunctionDeclaration -> "void" Identifier "(" ")" "{" FunctionBody "}"

@@ -6,6 +6,7 @@ import wand.generators.*;
 
 public
 class ASTFunctionDeclaration extends ASTDeclaration {
+    private ASTModifiers modifiers = null;
     private String functionName = null;
     
     public ASTFunctionDeclaration(int id) {
@@ -38,6 +39,14 @@ class ASTFunctionDeclaration extends ASTDeclaration {
     
     public ASTBlock getFunctionBody( ) {
         return (ASTBlock) jjtGetChild( 2 );
+    }
+    
+    public void setFunctionModifiers( ASTModifiers modifiers ) {
+        this.modifiers = modifiers;
+    }
+    
+    public ASTModifiers getFunctionModifiers( ) {
+        return modifiers;
     }
     
     /** Accept the visitor. **/

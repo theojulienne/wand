@@ -81,6 +81,9 @@ public class WandCompiler {
 		wand.visitors.VariableMapper vmap = new wand.visitors.VariableMapper( );
 		vmap.visitFrom( program, null );
 		
+		wand.visitors.FunctionModifiers fmod = new wand.visitors.FunctionModifiers( );
+		fmod.visitFrom( program, null );
+		
 		wand.backends.c.CCodeGenerator codegen = new wand.backends.c.CCodeGenerator( );
 		codegen.setOutputStream( output );
 		codegen.generate( program );

@@ -63,7 +63,23 @@ public interface WandParserConstants {
   /** RegularExpression Id. */
   int OP_MOD_ASSIGN = 35;
   /** RegularExpression Id. */
-  int ID = 36;
+  int MODIFIER_PUBLIC = 36;
+  /** RegularExpression Id. */
+  int MODIFIER_PRIVATE = 37;
+  /** RegularExpression Id. */
+  int MODIFIER_PROTECTED = 38;
+  /** RegularExpression Id. */
+  int MODIFIER_STATIC = 39;
+  /** RegularExpression Id. */
+  int MODIFIER_ABSTRACT = 40;
+  /** RegularExpression Id. */
+  int MODIFIER_FINAL = 41;
+  /** RegularExpression Id. */
+  int MODIFIER_COMPAT = 42;
+  /** RegularExpression Id. */
+  int MODIFIER_ARG = 43;
+  /** RegularExpression Id. */
+  int ID = 44;
 
   /** Lexical state. */
   int DEFAULT = 0;
@@ -106,6 +122,14 @@ public interface WandParserConstants {
     "\"*=\"",
     "\"/=\"",
     "\"%=\"",
+    "\"public\"",
+    "\"private\"",
+    "\"protected\"",
+    "\"static\"",
+    "\"abstract\"",
+    "\"final\"",
+    "\"compat\"",
+    "\":\"",
     "<ID>",
     "\",\"",
     "\"[\"",
