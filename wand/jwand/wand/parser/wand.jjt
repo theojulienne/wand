@@ -90,6 +90,15 @@ TOKEN: {
 
 | < MODIFIER_ARG: ":" >
 
+| < STMT_RETURN: "return" >
+
+| < STMT_IF: "if" >
+| < STMT_ELSE: "else" >
+| < STMT_DO: "do" >
+| < STMT_WHILE: "while" >
+| < STMT_FOR: "for" >
+| < STMT_FOREACH: "foreach" >
+
 }
 
 /* Identifiers */
@@ -410,7 +419,13 @@ void LocalVariableDeclarationStatement() : {}
 void Statement() #void : {}
 {
     Block() |
-    ExpressionStatement()
+    ExpressionStatement() |
+    ReturnStatement()
+}
+
+void ReturnStatement() : {}
+{
+    "return" Expression() ";"
 }
 
 void ExpressionStatement() : {}

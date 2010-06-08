@@ -179,6 +179,14 @@ public class CCodeGenerator extends WandVisitor {
         return data;
     }
     
+    public Object visit(ASTReturnStatement node, Object data) {
+        writeString( "return (" );
+        visitChildren(node, data);
+        writeString( ");" );
+        
+        return data;
+    }
+    
     public Object visit(ASTInfixOperator node, Object data) {
         int operatorType = node.getOperatorType( );
         

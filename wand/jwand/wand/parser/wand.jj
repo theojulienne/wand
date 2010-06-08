@@ -94,6 +94,15 @@ TOKEN: {
 
 | < MODIFIER_ARG: ":" >
 
+| < STMT_RETURN: "return" >
+
+| < STMT_IF: "if" >
+| < STMT_ELSE: "else" >
+| < STMT_DO: "do" >
+| < STMT_WHILE: "while" >
+| < STMT_FOR: "for" >
+| < STMT_FOREACH: "foreach" >
+
 }
 
 /* Identifiers */
@@ -997,7 +1006,39 @@ void LocalVariableDeclarationStatement() : {/*@bgen(jjtree) LocalVariableDeclara
 void Statement()       : {}
 {
     Block() |
-    ExpressionStatement()
+    ExpressionStatement() |
+    ReturnStatement()
+}
+
+void ReturnStatement() : {/*@bgen(jjtree) ReturnStatement */
+  ASTReturnStatement jjtn000 = new ASTReturnStatement(JJTRETURNSTATEMENT);
+  boolean jjtc000 = true;
+  jjtree.openNodeScope(jjtn000);
+/*@egen*/}
+{/*@bgen(jjtree) ReturnStatement */
+    try {
+/*@egen*/
+    "return" Expression() ";"/*@bgen(jjtree)*/
+    } catch (Throwable jjte000) {
+      if (jjtc000) {
+        jjtree.clearNodeScope(jjtn000);
+        jjtc000 = false;
+      } else {
+        jjtree.popNode();
+      }
+      if (jjte000 instanceof RuntimeException) {
+        throw (RuntimeException)jjte000;
+      }
+      if (jjte000 instanceof ParseException) {
+        throw (ParseException)jjte000;
+      }
+      throw (Error)jjte000;
+    } finally {
+      if (jjtc000) {
+        jjtree.closeNodeScope(jjtn000, true);
+      }
+    }
+/*@egen*/
 }
 
 void ExpressionStatement() : {/*@bgen(jjtree) ExpressionStatement */

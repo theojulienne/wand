@@ -59,7 +59,7 @@ def run_test( test_type, path, files ):
 	version_code, expected_result = test_type.split( '-' )
 	
 	wand_files = list( path+'/'+f for f in files if f.endswith('.wand') )
-	c_files = list( f for f in files if f.endswith('.c') )
+	c_files = list( path+'/'+f for f in files if f.endswith('.c') )
 	
 	gen_c_files = list( f.replace('.wand','.c') for f in wand_files )
 	
