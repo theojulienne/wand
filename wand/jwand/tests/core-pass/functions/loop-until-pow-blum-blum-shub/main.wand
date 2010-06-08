@@ -1,0 +1,22 @@
+int blumBlumShub( int p, int q, int seed ) {
+	return (seed^^2) % (p*q);
+}
+
+int main() {
+	int p = 65521;
+	int q = 131071;
+	int seed = 3;
+	
+	int iteration = 0;
+	
+	int goalSeed = 317173;
+	
+	loop {
+		seed = blumBlumShub( p, q, seed );
+		iteration++;
+	} until ( seed == goalSeed );
+	
+	assert iteration == 99;
+
+	return 0;
+}

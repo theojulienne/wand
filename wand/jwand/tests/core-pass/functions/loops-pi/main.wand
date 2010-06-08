@@ -1,0 +1,50 @@
+double sqrt( double x ) {
+        double approx = 0;
+
+        while( (approx*approx) <= x ) {
+                approx+=0.1;
+        }
+
+        int totalIterations = 10;
+        int iteration = 0;
+        loop {
+                approx = ((x / approx) + approx)/2;
+                iteration++;
+        } until ( iteration == totalIterations );
+
+        return approx;
+}
+
+double pi( double accuracy ) {
+	// Gauss–Legendre
+	double a = 1;
+	double b = 1/sqrt(2);
+	double t = 1/4;
+	double p = 1;
+
+	double a1, b1;
+	
+    loop {
+            a1 = (a+b)/2;
+            b1 = sqrt(a*b);
+            t  = t - p*(a-a1)*(a-a1);
+            p  = 2*p;
+
+            if ( a-b < accuracy ) break;
+
+            a  = a1;
+            b  = b1;
+    }
+
+	return (a+b)*(a+b)/(4*t);
+}
+
+int main( ) {
+		double accuracy   = 0.00000000000001;
+		
+		double comparison = 3.14159265358979;
+
+		assert (pi( accuracy )-comparison) <= accuracy;
+		
+		return 0;
+}
