@@ -33,10 +33,15 @@ public interface WandParserVisitor
   public Object visit(ASTLocalVariableDeclarationStatement node, Object data);
   public Object visit(ASTBlockStatement node, Object data);
   public Object visit(ASTIfStatement node, Object data);
+  public Object visit(ASTWhileStatement node, Object data);
+  public Object visit(ASTDoWhileStatement node, Object data);
+  public Object visit(ASTLoopStatement node, Object data);
+  public Object visit(ASTBreakStatement node, Object data);
+  public Object visit(ASTContinueStatement node, Object data);
   public Object visit(ASTAssertStatement node, Object data);
   public Object visit(ASTReturnStatement node, Object data);
   public Object visit(ASTExpressionStatement node, Object data);
   public Object visit(ASTVariableDeclarator node, Object data);
   public Object visit(ASTIdentifier node, Object data);
 }
-/* JavaCC - OriginalChecksum=5e5a73b04714ca4afa9d1e1bd1e8d9be (do not edit this line) */
+/* JavaCC - OriginalChecksum=766854d995c4c3b30316ace9cbd875db (do not edit this line) */

@@ -111,8 +111,12 @@ TOKEN: {
 | < STMT_ELSE: "else" >
 | < STMT_DO: "do" >
 | < STMT_WHILE: "while" >
+| < STMT_LOOP: "loop" >
+| < STMT_UNTIL: "until" >
 | < STMT_FOR: "for" >
 | < STMT_FOREACH: "foreach" >
+| < STMT_BREAK: "break" >
+| < STMT_CONTINUE: "continue" >
 
 | < END_STMT: ";" >
 
@@ -655,7 +659,7 @@ void BlockStatement() : {}
 
 void IfStatement() : {}
 {
-    "if" "(" IfCondition() ")" ThenStatement() ["else" ElseStatement()]
+    "if" "(" IfCondition() ")" ThenStatement() [LOOKAHEAD(2) "else" ElseStatement()]
 }
 
 void IfCondition() #void : {}
@@ -686,7 +690,37 @@ void NonEmptyStatement() #void : {}
     ReturnStatement() |
     AssertStatement() |
     IfStatement() |
+    WhileStatement() |
+    DoWhileStatement() |
+    LoopStatement() |
+    BreakStatement() |
+    ContinueStatement() |
     LocalVariableDeclarationStatement()
+}
+
+void WhileStatement() : {}
+{
+    "while" "(" Expression() ")" ScopeStatement()
+}
+
+void DoWhileStatement() : {}
+{
+    "do" ScopeStatement() "while" "(" Expression() ")" ";"
+}
+
+void LoopStatement() : {}
+{
+    "loop" ScopeStatement() [LOOKAHEAD(2) "until" "(" Expression() ")" ";"]
+}
+
+void BreakStatement() : {}
+{
+    "break" ";"
+}
+
+void ContinueStatement() : {}
+{
+    "continue" ";"
 }
 
 void AssertStatement() : {}

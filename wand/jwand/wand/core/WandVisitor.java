@@ -43,6 +43,11 @@ public abstract class WandVisitor implements WandParserVisitor {
     public Object visit(ASTNullLiteral node, Object data) { return visitChildren(node, data); }
     public Object visit(ASTBlockStatement node, Object data) { return visitChildren(node, data); }
     public Object visit(ASTIfStatement node, Object data) { return visitChildren(node, data); }
+    public Object visit(ASTWhileStatement node, Object data) { return visitChildren(node, data); }
+    public Object visit(ASTDoWhileStatement node, Object data) { return visitChildren(node, data); }
+    public Object visit(ASTLoopStatement node, Object data) { return visitChildren(node, data); }
+    public Object visit(ASTBreakStatement node, Object data) { return visitChildren(node, data); }
+    public Object visit(ASTContinueStatement node, Object data) { return visitChildren(node, data); }
     public Object visit(ASTLocalVariableDeclarationStatement node, Object data) { return visitChildren(node, data); }
     public Object visit(ASTAssertStatement node, Object data) { return visitChildren(node, data); }
     public Object visit(ASTReturnStatement node, Object data) { return visitChildren(node, data); }

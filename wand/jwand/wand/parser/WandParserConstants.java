@@ -111,13 +111,21 @@ public interface WandParserConstants {
   /** RegularExpression Id. */
   int STMT_WHILE = 59;
   /** RegularExpression Id. */
-  int STMT_FOR = 60;
+  int STMT_LOOP = 60;
   /** RegularExpression Id. */
-  int STMT_FOREACH = 61;
+  int STMT_UNTIL = 61;
   /** RegularExpression Id. */
-  int END_STMT = 62;
+  int STMT_FOR = 62;
   /** RegularExpression Id. */
-  int ID = 63;
+  int STMT_FOREACH = 63;
+  /** RegularExpression Id. */
+  int STMT_BREAK = 64;
+  /** RegularExpression Id. */
+  int STMT_CONTINUE = 65;
+  /** RegularExpression Id. */
+  int END_STMT = 66;
+  /** RegularExpression Id. */
+  int ID = 67;
 
   /** Lexical state. */
   int DEFAULT = 0;
@@ -184,8 +192,12 @@ public interface WandParserConstants {
     "\"else\"",
     "\"do\"",
     "\"while\"",
+    "\"loop\"",
+    "\"until\"",
     "\"for\"",
     "\"foreach\"",
+    "\"break\"",
+    "\"continue\"",
     "\";\"",
     "<ID>",
     "\",\"",

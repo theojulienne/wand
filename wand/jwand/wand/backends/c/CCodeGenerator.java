@@ -230,6 +230,58 @@ public class CCodeGenerator extends WandVisitor {
         return data;
     }
     
+    public Object visit(ASTWhileStatement node, Object data) {
+        WandNode condition = node.getCondition( );
+        WandNode loopBody = node.getLoopBody( );
+        
+        writeString( "while (" );
+        condition.accept( this, data );
+        writeNewline( ") " );
+        loopBody.accept( this, data );
+        
+        return data;
+    }
+    
+    public Object visit(ASTDoWhileStatement node, Object data) {
+        WandNode condition = node.getCondition( );
+        WandNode loopBody = node.getLoopBody( );
+        
+        writeString( "do " );
+        loopBody.accept( this, data );
+        writeString( "while (" );
+        condition.accept( this, data );
+        writeNewline( ");" );
+        
+        return data;
+    }
+    
+    public Object visit(ASTLoopStatement node, Object data) {
+        WandNode condition = node.getCondition( );
+        WandNode loopBody = node.getLoopBody( );
+        
+        writeString( "do " );
+        loopBody.accept( this, data );
+        writeString( "while ( !(" );
+        if ( condition != null ) {
+            condition.accept( this, data );
+        } else {
+            writeString( " 0 " );
+        }
+        writeNewline( ") );" );
+        
+        return data;
+    }
+    
+    public Object visit(ASTBreakStatement node, Object data) {
+        writeNewline( "break;" );
+        return data;
+    }
+    
+    public Object visit(ASTContinueStatement node, Object data) {
+        writeNewline( "continue;" );
+        return data;
+    }
+    
     public Object visit(ASTAssertStatement node, Object data) {
         WandNode expression = node.getExpression( );
         WandNode message = node.getMessage( );

@@ -115,8 +115,12 @@ TOKEN: {
 | < STMT_ELSE: "else" >
 | < STMT_DO: "do" >
 | < STMT_WHILE: "while" >
+| < STMT_LOOP: "loop" >
+| < STMT_UNTIL: "until" >
 | < STMT_FOR: "for" >
 | < STMT_FOREACH: "foreach" >
+| < STMT_BREAK: "break" >
+| < STMT_CONTINUE: "continue" >
 
 | < END_STMT: ";" >
 
@@ -1747,7 +1751,7 @@ void IfStatement() : {/*@bgen(jjtree) IfStatement */
 {/*@bgen(jjtree) IfStatement */
     try {
 /*@egen*/
-    "if" "(" IfCondition() ")" ThenStatement() ["else" ElseStatement()]/*@bgen(jjtree)*/
+    "if" "(" IfCondition() ")" ThenStatement() [LOOKAHEAD(2) "else" ElseStatement()]/*@bgen(jjtree)*/
     } catch (Throwable jjte000) {
       if (jjtc000) {
         jjtree.clearNodeScope(jjtn000);
@@ -1798,7 +1802,139 @@ void NonEmptyStatement()       : {}
     ReturnStatement() |
     AssertStatement() |
     IfStatement() |
+    WhileStatement() |
+    DoWhileStatement() |
+    LoopStatement() |
+    BreakStatement() |
+    ContinueStatement() |
     LocalVariableDeclarationStatement()
+}
+
+void WhileStatement() : {/*@bgen(jjtree) WhileStatement */
+  ASTWhileStatement jjtn000 = new ASTWhileStatement(JJTWHILESTATEMENT);
+  boolean jjtc000 = true;
+  jjtree.openNodeScope(jjtn000);
+/*@egen*/}
+{/*@bgen(jjtree) WhileStatement */
+    try {
+/*@egen*/
+    "while" "(" Expression() ")" ScopeStatement()/*@bgen(jjtree)*/
+    } catch (Throwable jjte000) {
+      if (jjtc000) {
+        jjtree.clearNodeScope(jjtn000);
+        jjtc000 = false;
+      } else {
+        jjtree.popNode();
+      }
+      if (jjte000 instanceof RuntimeException) {
+        throw (RuntimeException)jjte000;
+      }
+      if (jjte000 instanceof ParseException) {
+        throw (ParseException)jjte000;
+      }
+      throw (Error)jjte000;
+    } finally {
+      if (jjtc000) {
+        jjtree.closeNodeScope(jjtn000, true);
+      }
+    }
+/*@egen*/
+}
+
+void DoWhileStatement() : {/*@bgen(jjtree) DoWhileStatement */
+  ASTDoWhileStatement jjtn000 = new ASTDoWhileStatement(JJTDOWHILESTATEMENT);
+  boolean jjtc000 = true;
+  jjtree.openNodeScope(jjtn000);
+/*@egen*/}
+{/*@bgen(jjtree) DoWhileStatement */
+    try {
+/*@egen*/
+    "do" ScopeStatement() "while" "(" Expression() ")" ";"/*@bgen(jjtree)*/
+    } catch (Throwable jjte000) {
+      if (jjtc000) {
+        jjtree.clearNodeScope(jjtn000);
+        jjtc000 = false;
+      } else {
+        jjtree.popNode();
+      }
+      if (jjte000 instanceof RuntimeException) {
+        throw (RuntimeException)jjte000;
+      }
+      if (jjte000 instanceof ParseException) {
+        throw (ParseException)jjte000;
+      }
+      throw (Error)jjte000;
+    } finally {
+      if (jjtc000) {
+        jjtree.closeNodeScope(jjtn000, true);
+      }
+    }
+/*@egen*/
+}
+
+void LoopStatement() : {/*@bgen(jjtree) LoopStatement */
+  ASTLoopStatement jjtn000 = new ASTLoopStatement(JJTLOOPSTATEMENT);
+  boolean jjtc000 = true;
+  jjtree.openNodeScope(jjtn000);
+/*@egen*/}
+{/*@bgen(jjtree) LoopStatement */
+    try {
+/*@egen*/
+    "loop" ScopeStatement() [LOOKAHEAD(2) "until" "(" Expression() ")" ";"]/*@bgen(jjtree)*/
+    } catch (Throwable jjte000) {
+      if (jjtc000) {
+        jjtree.clearNodeScope(jjtn000);
+        jjtc000 = false;
+      } else {
+        jjtree.popNode();
+      }
+      if (jjte000 instanceof RuntimeException) {
+        throw (RuntimeException)jjte000;
+      }
+      if (jjte000 instanceof ParseException) {
+        throw (ParseException)jjte000;
+      }
+      throw (Error)jjte000;
+    } finally {
+      if (jjtc000) {
+        jjtree.closeNodeScope(jjtn000, true);
+      }
+    }
+/*@egen*/
+}
+
+void BreakStatement() : {/*@bgen(jjtree) BreakStatement */
+  ASTBreakStatement jjtn000 = new ASTBreakStatement(JJTBREAKSTATEMENT);
+  boolean jjtc000 = true;
+  jjtree.openNodeScope(jjtn000);
+/*@egen*/}
+{/*@bgen(jjtree) BreakStatement */
+    try {
+/*@egen*/
+    "break" ";"/*@bgen(jjtree)*/
+    } finally {
+      if (jjtc000) {
+        jjtree.closeNodeScope(jjtn000, true);
+      }
+    }
+/*@egen*/
+}
+
+void ContinueStatement() : {/*@bgen(jjtree) ContinueStatement */
+  ASTContinueStatement jjtn000 = new ASTContinueStatement(JJTCONTINUESTATEMENT);
+  boolean jjtc000 = true;
+  jjtree.openNodeScope(jjtn000);
+/*@egen*/}
+{/*@bgen(jjtree) ContinueStatement */
+    try {
+/*@egen*/
+    "continue" ";"/*@bgen(jjtree)*/
+    } finally {
+      if (jjtc000) {
+        jjtree.closeNodeScope(jjtn000, true);
+      }
+    }
+/*@egen*/
 }
 
 void AssertStatement() : {/*@bgen(jjtree) AssertStatement */
