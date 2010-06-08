@@ -1545,14 +1545,26 @@ void UnaryOperator() : {/*@bgen(jjtree) UnaryOperator */
 }
 
 void PostfixOperator() : {/*@bgen(jjtree) PostfixOperator */
-  ASTPostfixOperator jjtn000 = new ASTPostfixOperator(JJTPOSTFIXOPERATOR);
-  boolean jjtc000 = true;
-  jjtree.openNodeScope(jjtn000);
-/*@egen*/}
+    ASTPostfixOperator jjtn000 = new ASTPostfixOperator(JJTPOSTFIXOPERATOR);
+    boolean jjtc000 = true;
+    jjtree.openNodeScope(jjtn000);
+/*@egen*/
+    Token t;
+}
 {/*@bgen(jjtree) PostfixOperator */
     try {
 /*@egen*/
-    "++" | "--"/*@bgen(jjtree)*/
+    (
+        t="++" |
+        t="--"
+    )/*@bgen(jjtree)*/
+    {
+      jjtree.closeNodeScope(jjtn000, true);
+      jjtc000 = false;
+    }
+/*@egen*/
+    
+    { jjtn000.setTokenType( t.kind ); }/*@bgen(jjtree)*/
     } finally {
       if (jjtc000) {
         jjtree.closeNodeScope(jjtn000, true);

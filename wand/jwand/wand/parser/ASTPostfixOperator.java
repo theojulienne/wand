@@ -4,18 +4,27 @@ package wand.parser;
 
 public
 class ASTPostfixOperator extends SimpleNode {
-  public ASTPostfixOperator(int id) {
-    super(id);
-  }
+    private int operatorType = 0;
+    
+    public ASTPostfixOperator(int id) {
+        super(id);
+    }
 
-  public ASTPostfixOperator(WandParser p, int id) {
-    super(p, id);
-  }
+    public ASTPostfixOperator(WandParser p, int id) {
+        super(p, id);
+    }
+    
+    public void setTokenType( int type ) {
+        operatorType = type;
+    }
+    
+    public int getOperatorType( ) {
+        return operatorType;
+    }
 
-
-  /** Accept the visitor. **/
-  public Object jjtAccept(WandParserVisitor visitor, Object data) {
-    return visitor.visit(this, data);
-  }
+    /** Accept the visitor. **/
+    public Object jjtAccept(WandParserVisitor visitor, Object data) {
+        return visitor.visit(this, data);
+    }
 }
 /* JavaCC - OriginalChecksum=5830d7df5da6364a7742fa0f10a4ecd2 (do not edit this line) */

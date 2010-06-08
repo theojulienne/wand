@@ -2,7 +2,7 @@
 /* JavaCCOptions:MULTI=true,NODE_USES_PARSER=false,VISITOR=true,TRACK_TOKENS=false,NODE_PREFIX=AST,NODE_EXTENDS=wand.core.WandNode,NODE_FACTORY=,SUPPORT_CLASS_VISIBILITY_PUBLIC=true */
 package wand.parser;
 
-import wand.generators.*;
+import wand.core.*;
 
 public
 class ASTAssignExpression extends ASTExpression {
@@ -14,10 +14,6 @@ class ASTAssignExpression extends ASTExpression {
         super(p, id);
     }
     
-    public Generator getGenerator( ) {
-        return GeneratorFactory.getGeneratorFactory( ).getAssignmentGenerator( );
-    }
-    
     public ASTIdentifier getTarget( ) {
         return (ASTIdentifier) jjtGetChild( 0 );
     }
@@ -26,8 +22,8 @@ class ASTAssignExpression extends ASTExpression {
         return (ASTAssignOperator) jjtGetChild( 1 );
     }
     
-    public ASTExpression getValueExpression( ) {
-        return (ASTExpression) jjtGetChild( 2 );
+    public WandNode getValueExpression( ) {
+        return (WandNode) jjtGetChild( 2 );
     }
     
     /** Accept the visitor. **/

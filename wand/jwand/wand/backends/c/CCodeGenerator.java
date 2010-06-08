@@ -187,7 +187,7 @@ public class CCodeGenerator extends WandVisitor {
     
     public Object visit(ASTAssignExpression node, Object data) {
         ASTIdentifier lhs = (ASTIdentifier)node.getTarget( );
-        ASTExpression rhs = (ASTExpression)node.getValueExpression( );
+        WandNode rhs = (WandNode)node.getValueExpression( );
         ASTAssignOperator op = (ASTAssignOperator)node.getOperator( );
         
         lhs.accept( this, data );
@@ -299,6 +299,35 @@ public class CCodeGenerator extends WandVisitor {
             //message.accept( this, data );
             writeNewline( "assert(0);" );
             writeBlockEnd( );
+        }
+        
+        return data;
+    }
+    
+    public Object visit(ASTPostfixExpression node, Object data) {
+        WandNode expression = node.getExpression( );
+        WandNode operator = node.getOperator( );
+        
+        writeString( "(" );
+        expression.accept( this, data );
+        writeString( ")" );
+        operator.accept( this, data );
+        
+        return data;
+    }
+    
+    public Object visit(ASTPostfixOperator node, Object data) {
+        int operatorType = node.getOperatorType( );
+        
+        switch ( operatorType ) {
+            case WandParserConstants.OP_INC:
+                writeString( "++" );
+                break;
+            case WandParserConstants.OP_DEC:
+                writeString( "--" );
+                break;
+            default:
+                assert false: "Unknown operator: " + WandParserConstants.tokenImage[operatorType];
         }
         
         return data;

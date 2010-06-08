@@ -575,9 +575,16 @@ void UnaryOperator() : {}
     "~"
 }
 
-void PostfixOperator() : {}
+void PostfixOperator() : {
+    Token t;
+}
 {
-    "++" | "--"
+    (
+        t="++" |
+        t="--"
+    )
+    
+    { jjtThis.setTokenType( t.kind ); }
 }
 
 
