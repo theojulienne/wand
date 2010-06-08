@@ -207,7 +207,7 @@ public class CCodeGenerator extends WandVisitor {
     public Object visit(ASTReturnStatement node, Object data) {
         writeString( "return (" );
         visitChildren(node, data);
-        writeString( ");" );
+        writeNewline( ");" );
         
         return data;
     }

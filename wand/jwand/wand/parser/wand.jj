@@ -78,6 +78,14 @@ TOKEN: {
 | < OP_EQUALS: "==" >
 | < OP_NOT_EQUAL: "!=" >
 
+| < OP_CMP_LTE: "<=" >
+| < OP_CMP_LT: "<" >
+| < OP_CMP_GTE: ">=" >
+| < OP_CMP_GT: ">" >
+
+| < OP_NOT_IN: "!in" >
+| < OP_IN: "in" >
+
 | < OP_ADD: "+" >
 | < OP_SUB: "-" >
 
@@ -86,6 +94,9 @@ TOKEN: {
 | < OP_MOD: "%" >
 
 | < OP_ASSIGN: "=" >
+
+| < OP_LOGICAL_OR: "||" >
+| < OP_BITWISE_OR: "|" >
 
 | < MODIFIER_PUBLIC: "public" >
 | < MODIFIER_PRIVATE: "private" >
@@ -106,6 +117,8 @@ TOKEN: {
 | < STMT_WHILE: "while" >
 | < STMT_FOR: "for" >
 | < STMT_FOREACH: "foreach" >
+
+| < END_STMT: ";" >
 
 }
 
@@ -533,8 +546,8 @@ void AssignExpression()                       : {/*@bgen(jjtree) #AssignExpressi
     // but this allowed syntax "3 += 1" which would be invalid and need
     // to be picked up elsewhere
     LOOKAHEAD(2)
-    Identifier() AssignOperator() InfixExpression() |
-    InfixExpression()/*@bgen(jjtree)*/
+    Identifier() AssignOperator() AssignExpression() |
+    ConditionalExpression()/*@bgen(jjtree)*/
     } catch (Throwable jjte000) {
       if (jjtc000) {
         jjtree.clearNodeScope(jjtn000);
@@ -557,7 +570,40 @@ void AssignExpression()                       : {/*@bgen(jjtree) #AssignExpressi
 /*@egen*/
 }
 
-void InfixExpression()                      : {/*@bgen(jjtree) #InfixExpression(> 1) */
+void ConditionalExpression()                            : {/*@bgen(jjtree) #ConditionalExpression(> 1) */
+  ASTConditionalExpression jjtn000 = new ASTConditionalExpression(JJTCONDITIONALEXPRESSION);
+  boolean jjtc000 = true;
+  jjtree.openNodeScope(jjtn000);
+/*@egen*/}
+{/*@bgen(jjtree) #ConditionalExpression(> 1) */
+    try {
+/*@egen*/
+    LOOKAHEAD(2)
+    OrOrExpression() |
+    OrOrExpression() "?" Expression() ":" ConditionalExpression()/*@bgen(jjtree)*/
+    } catch (Throwable jjte000) {
+      if (jjtc000) {
+        jjtree.clearNodeScope(jjtn000);
+        jjtc000 = false;
+      } else {
+        jjtree.popNode();
+      }
+      if (jjte000 instanceof RuntimeException) {
+        throw (RuntimeException)jjte000;
+      }
+      if (jjte000 instanceof ParseException) {
+        throw (ParseException)jjte000;
+      }
+      throw (Error)jjte000;
+    } finally {
+      if (jjtc000) {
+        jjtree.closeNodeScope(jjtn000, jjtree.nodeArity() > 1);
+      }
+    }
+/*@egen*/
+}
+
+void OrOrExpression()                      : {/*@bgen(jjtree) #InfixExpression(> 1) */
   ASTInfixExpression jjtn000 = new ASTInfixExpression(JJTINFIXEXPRESSION);
   boolean jjtc000 = true;
   jjtree.openNodeScope(jjtn000);
@@ -565,7 +611,7 @@ void InfixExpression()                      : {/*@bgen(jjtree) #InfixExpression(
 {/*@bgen(jjtree) #InfixExpression(> 1) */
     try {
 /*@egen*/
-    MulInfixExpression() [InfixOperator() InfixExpression()]/*@bgen(jjtree)*/
+    AndAndExpression() (OrOrOperator() AndAndExpression())*/*@bgen(jjtree)*/
     } catch (Throwable jjte000) {
       if (jjtc000) {
         jjtree.clearNodeScope(jjtn000);
@@ -588,7 +634,7 @@ void InfixExpression()                      : {/*@bgen(jjtree) #InfixExpression(
 /*@egen*/
 }
 
-void MulInfixExpression()                      : {/*@bgen(jjtree) #InfixExpression(> 1) */
+void AndAndExpression()                      : {/*@bgen(jjtree) #InfixExpression(> 1) */
   ASTInfixExpression jjtn000 = new ASTInfixExpression(JJTINFIXEXPRESSION);
   boolean jjtc000 = true;
   jjtree.openNodeScope(jjtn000);
@@ -596,7 +642,7 @@ void MulInfixExpression()                      : {/*@bgen(jjtree) #InfixExpressi
 {/*@bgen(jjtree) #InfixExpression(> 1) */
     try {
 /*@egen*/
-    PrefixExpression() [MulInfixOperator() MulInfixExpression()]/*@bgen(jjtree)*/
+    OrExpression() (AndAndOperator() OrExpression())*/*@bgen(jjtree)*/
     } catch (Throwable jjte000) {
       if (jjtc000) {
         jjtree.clearNodeScope(jjtn000);
@@ -619,16 +665,310 @@ void MulInfixExpression()                      : {/*@bgen(jjtree) #InfixExpressi
 /*@egen*/
 }
 
-void PrefixExpression()                       : {/*@bgen(jjtree) #PrefixExpression(> 1) */
-  ASTPrefixExpression jjtn000 = new ASTPrefixExpression(JJTPREFIXEXPRESSION);
+void OrExpression()                      : {/*@bgen(jjtree) #InfixExpression(> 1) */
+  ASTInfixExpression jjtn000 = new ASTInfixExpression(JJTINFIXEXPRESSION);
   boolean jjtc000 = true;
   jjtree.openNodeScope(jjtn000);
 /*@egen*/}
-{/*@bgen(jjtree) #PrefixExpression(> 1) */
+{/*@bgen(jjtree) #InfixExpression(> 1) */
     try {
 /*@egen*/
-    PrefixOperator() PrefixExpression() |
-    PostfixExpression()/*@bgen(jjtree)*/
+    XorExpression() (OrOperator() XorExpression())*/*@bgen(jjtree)*/
+    } catch (Throwable jjte000) {
+      if (jjtc000) {
+        jjtree.clearNodeScope(jjtn000);
+        jjtc000 = false;
+      } else {
+        jjtree.popNode();
+      }
+      if (jjte000 instanceof RuntimeException) {
+        throw (RuntimeException)jjte000;
+      }
+      if (jjte000 instanceof ParseException) {
+        throw (ParseException)jjte000;
+      }
+      throw (Error)jjte000;
+    } finally {
+      if (jjtc000) {
+        jjtree.closeNodeScope(jjtn000, jjtree.nodeArity() > 1);
+      }
+    }
+/*@egen*/
+}
+
+void XorExpression()                      : {/*@bgen(jjtree) #InfixExpression(> 1) */
+  ASTInfixExpression jjtn000 = new ASTInfixExpression(JJTINFIXEXPRESSION);
+  boolean jjtc000 = true;
+  jjtree.openNodeScope(jjtn000);
+/*@egen*/}
+{/*@bgen(jjtree) #InfixExpression(> 1) */
+    try {
+/*@egen*/
+    AndExpression() (XorOperator() AndExpression())*/*@bgen(jjtree)*/
+    } catch (Throwable jjte000) {
+      if (jjtc000) {
+        jjtree.clearNodeScope(jjtn000);
+        jjtc000 = false;
+      } else {
+        jjtree.popNode();
+      }
+      if (jjte000 instanceof RuntimeException) {
+        throw (RuntimeException)jjte000;
+      }
+      if (jjte000 instanceof ParseException) {
+        throw (ParseException)jjte000;
+      }
+      throw (Error)jjte000;
+    } finally {
+      if (jjtc000) {
+        jjtree.closeNodeScope(jjtn000, jjtree.nodeArity() > 1);
+      }
+    }
+/*@egen*/
+}
+
+void AndExpression()                      : {/*@bgen(jjtree) #InfixExpression(> 1) */
+  ASTInfixExpression jjtn000 = new ASTInfixExpression(JJTINFIXEXPRESSION);
+  boolean jjtc000 = true;
+  jjtree.openNodeScope(jjtn000);
+/*@egen*/}
+{/*@bgen(jjtree) #InfixExpression(> 1) */
+    try {
+/*@egen*/
+    CmpExpression() (AndOperator() CmpExpression())*/*@bgen(jjtree)*/
+    } catch (Throwable jjte000) {
+      if (jjtc000) {
+        jjtree.clearNodeScope(jjtn000);
+        jjtc000 = false;
+      } else {
+        jjtree.popNode();
+      }
+      if (jjte000 instanceof RuntimeException) {
+        throw (RuntimeException)jjte000;
+      }
+      if (jjte000 instanceof ParseException) {
+        throw (ParseException)jjte000;
+      }
+      throw (Error)jjte000;
+    } finally {
+      if (jjtc000) {
+        jjtree.closeNodeScope(jjtn000, jjtree.nodeArity() > 1);
+      }
+    }
+/*@egen*/
+}
+
+void CmpExpression()                      : {/*@bgen(jjtree) #InfixExpression(> 1) */
+  ASTInfixExpression jjtn000 = new ASTInfixExpression(JJTINFIXEXPRESSION);
+  boolean jjtc000 = true;
+  jjtree.openNodeScope(jjtn000);
+/*@egen*/}
+{/*@bgen(jjtree) #InfixExpression(> 1) */
+    try {
+/*@egen*/
+    ShiftExpression() (EqualExpressionRest() | RelExpressionRest() | InExpressionRest())/*@bgen(jjtree)*/
+    } catch (Throwable jjte000) {
+      if (jjtc000) {
+        jjtree.clearNodeScope(jjtn000);
+        jjtc000 = false;
+      } else {
+        jjtree.popNode();
+      }
+      if (jjte000 instanceof RuntimeException) {
+        throw (RuntimeException)jjte000;
+      }
+      if (jjte000 instanceof ParseException) {
+        throw (ParseException)jjte000;
+      }
+      throw (Error)jjte000;
+    } finally {
+      if (jjtc000) {
+        jjtree.closeNodeScope(jjtn000, jjtree.nodeArity() > 1);
+      }
+    }
+/*@egen*/
+}
+
+void ShiftExpression()                      : {/*@bgen(jjtree) #InfixExpression(> 1) */
+  ASTInfixExpression jjtn000 = new ASTInfixExpression(JJTINFIXEXPRESSION);
+  boolean jjtc000 = true;
+  jjtree.openNodeScope(jjtn000);
+/*@egen*/}
+{/*@bgen(jjtree) #InfixExpression(> 1) */
+    try {
+/*@egen*/
+    AddExpression() (ShiftOperator() AddExpression())*/*@bgen(jjtree)*/
+    } catch (Throwable jjte000) {
+      if (jjtc000) {
+        jjtree.clearNodeScope(jjtn000);
+        jjtc000 = false;
+      } else {
+        jjtree.popNode();
+      }
+      if (jjte000 instanceof RuntimeException) {
+        throw (RuntimeException)jjte000;
+      }
+      if (jjte000 instanceof ParseException) {
+        throw (ParseException)jjte000;
+      }
+      throw (Error)jjte000;
+    } finally {
+      if (jjtc000) {
+        jjtree.closeNodeScope(jjtn000, jjtree.nodeArity() > 1);
+      }
+    }
+/*@egen*/
+}
+
+void EqualExpressionRest()       : {}
+{
+    EqualOperator() ShiftExpression()
+}
+
+void RelExpressionRest()       : {}
+{
+    RelOperator() ShiftExpression()
+}
+
+void InExpressionRest()      : {}
+{
+    InOperator() ShiftExpression()
+}
+
+void CatExpression()                      : {/*@bgen(jjtree) #InfixExpression(> 1) */
+  ASTInfixExpression jjtn000 = new ASTInfixExpression(JJTINFIXEXPRESSION);
+  boolean jjtc000 = true;
+  jjtree.openNodeScope(jjtn000);
+/*@egen*/}
+{/*@bgen(jjtree) #InfixExpression(> 1) */
+    try {
+/*@egen*/
+    MulExpression() CatOperator() MulExpression()/*@bgen(jjtree)*/
+    } catch (Throwable jjte000) {
+      if (jjtc000) {
+        jjtree.clearNodeScope(jjtn000);
+        jjtc000 = false;
+      } else {
+        jjtree.popNode();
+      }
+      if (jjte000 instanceof RuntimeException) {
+        throw (RuntimeException)jjte000;
+      }
+      if (jjte000 instanceof ParseException) {
+        throw (ParseException)jjte000;
+      }
+      throw (Error)jjte000;
+    } finally {
+      if (jjtc000) {
+        jjtree.closeNodeScope(jjtn000, jjtree.nodeArity() > 1);
+      }
+    }
+/*@egen*/
+}
+
+void AddExpression()                      : {/*@bgen(jjtree) #InfixExpression(> 1) */
+  ASTInfixExpression jjtn000 = new ASTInfixExpression(JJTINFIXEXPRESSION);
+  boolean jjtc000 = true;
+  jjtree.openNodeScope(jjtn000);
+/*@egen*/}
+{/*@bgen(jjtree) #InfixExpression(> 1) */
+    try {
+/*@egen*/
+    MulExpression() (AddOperator() MulExpression())*/*@bgen(jjtree)*/
+    } catch (Throwable jjte000) {
+      if (jjtc000) {
+        jjtree.clearNodeScope(jjtn000);
+        jjtc000 = false;
+      } else {
+        jjtree.popNode();
+      }
+      if (jjte000 instanceof RuntimeException) {
+        throw (RuntimeException)jjte000;
+      }
+      if (jjte000 instanceof ParseException) {
+        throw (ParseException)jjte000;
+      }
+      throw (Error)jjte000;
+    } finally {
+      if (jjtc000) {
+        jjtree.closeNodeScope(jjtn000, jjtree.nodeArity() > 1);
+      }
+    }
+/*@egen*/
+}
+
+void MulExpression()                      : {/*@bgen(jjtree) #InfixExpression(> 1) */
+  ASTInfixExpression jjtn000 = new ASTInfixExpression(JJTINFIXEXPRESSION);
+  boolean jjtc000 = true;
+  jjtree.openNodeScope(jjtn000);
+/*@egen*/}
+{/*@bgen(jjtree) #InfixExpression(> 1) */
+    try {
+/*@egen*/
+    PowExpression() (MulInfixOperator() PowExpression())*/*@bgen(jjtree)*/
+    } catch (Throwable jjte000) {
+      if (jjtc000) {
+        jjtree.clearNodeScope(jjtn000);
+        jjtc000 = false;
+      } else {
+        jjtree.popNode();
+      }
+      if (jjte000 instanceof RuntimeException) {
+        throw (RuntimeException)jjte000;
+      }
+      if (jjte000 instanceof ParseException) {
+        throw (ParseException)jjte000;
+      }
+      throw (Error)jjte000;
+    } finally {
+      if (jjtc000) {
+        jjtree.closeNodeScope(jjtn000, jjtree.nodeArity() > 1);
+      }
+    }
+/*@egen*/
+}
+
+void PowExpression()                      : {/*@bgen(jjtree) #InfixExpression(> 1) */
+  ASTInfixExpression jjtn000 = new ASTInfixExpression(JJTINFIXEXPRESSION);
+  boolean jjtc000 = true;
+  jjtree.openNodeScope(jjtn000);
+/*@egen*/}
+{/*@bgen(jjtree) #InfixExpression(> 1) */
+    try {
+/*@egen*/
+    UnaryExpression() [PowOperator() PowExpression()]/*@bgen(jjtree)*/
+    } catch (Throwable jjte000) {
+      if (jjtc000) {
+        jjtree.clearNodeScope(jjtn000);
+        jjtc000 = false;
+      } else {
+        jjtree.popNode();
+      }
+      if (jjte000 instanceof RuntimeException) {
+        throw (RuntimeException)jjte000;
+      }
+      if (jjte000 instanceof ParseException) {
+        throw (ParseException)jjte000;
+      }
+      throw (Error)jjte000;
+    } finally {
+      if (jjtc000) {
+        jjtree.closeNodeScope(jjtn000, jjtree.nodeArity() > 1);
+      }
+    }
+/*@egen*/
+}
+
+void UnaryExpression()                      : {/*@bgen(jjtree) #UnaryExpression(> 1) */
+  ASTUnaryExpression jjtn000 = new ASTUnaryExpression(JJTUNARYEXPRESSION);
+  boolean jjtc000 = true;
+  jjtree.openNodeScope(jjtn000);
+/*@egen*/}
+{/*@bgen(jjtree) #UnaryExpression(> 1) */
+    try {
+/*@egen*/
+    PostfixExpression() |
+    UnaryOperator() UnaryExpression()/*@bgen(jjtree)*/
     } catch (Throwable jjte000) {
       if (jjtc000) {
         jjtree.clearNodeScope(jjtn000);
@@ -659,7 +999,7 @@ void PostfixExpression()                        : {/*@bgen(jjtree) #PostfixExpre
 {/*@bgen(jjtree) #PostfixExpression(> 1) */
     try {
 /*@egen*/
-    Primary() (PostfixOperator())*/*@bgen(jjtree)*/
+    PrimaryExpression() (PostfixOperator())*/*@bgen(jjtree)*/
     } catch (Throwable jjte000) {
       if (jjtc000) {
         jjtree.clearNodeScope(jjtn000);
@@ -680,10 +1020,32 @@ void PostfixExpression()                        : {/*@bgen(jjtree) #PostfixExpre
       }
     }
 /*@egen*/
-    
 }
 
-void Primary()       : {}
+/*
+void InfixExpression() #InfixExpression(>1) : {}
+{
+    MulInfixExpression() (InfixOperator() InfixExpression())*
+}
+
+void MulInfixExpression() #InfixExpression(>1) : {}
+{
+    PrefixExpression() [MulInfixOperator() MulInfixExpression()]
+}
+
+void PrefixExpression() #PrefixExpression(>1) : {}
+{
+    PrefixOperator() PrefixExpression() |
+    PostfixExpression()
+}
+
+void PostfixExpression() #PostfixExpression(>1) : {}
+{
+    PrimaryExpression() (PostfixOperator())*
+    
+}*/
+
+void PrimaryExpression()       : {}
 {
     <LPAREN> Expression() <RPAREN> |
     Literal() |
@@ -753,7 +1115,6 @@ void Arguments() : {/*@bgen(jjtree) Arguments */
 }
 
 
-
 void AssignOperator() : {/*@bgen(jjtree) AssignOperator */
     ASTAssignOperator jjtn000 = new ASTAssignOperator(JJTASSIGNOPERATOR);
     boolean jjtc000 = true;
@@ -793,7 +1154,7 @@ void AssignOperator() : {/*@bgen(jjtree) AssignOperator */
 /*@egen*/
 }
 
-void InfixOperator() : {/*@bgen(jjtree) InfixOperator */
+void AddOperator()                : {/*@bgen(jjtree) InfixOperator */
     ASTInfixOperator jjtn000 = new ASTInfixOperator(JJTINFIXOPERATOR);
     boolean jjtc000 = true;
     jjtree.openNodeScope(jjtn000);
@@ -804,20 +1165,6 @@ void InfixOperator() : {/*@bgen(jjtree) InfixOperator */
     try {
 /*@egen*/
     (
-        t="||" |
-        t="&&" |
-        t="|" |
-        t="^" |
-        t="&" |
-        t="==" |
-        t="!=" |
-        t="<" |
-        t=">" |
-        t="<=" |
-        t=">=" |
-        t="<<" |
-        t=">>" |
-        t=">>>" |
         t="+" |
         t="-"
     )/*@bgen(jjtree)*/
@@ -866,20 +1213,327 @@ void MulInfixOperator()                : {/*@bgen(jjtree) InfixOperator */
 /*@egen*/
 }
 
-void PrefixOperator() : {/*@bgen(jjtree) PrefixOperator */
-  ASTPrefixOperator jjtn000 = new ASTPrefixOperator(JJTPREFIXOPERATOR);
+void OrOrOperator()                : {/*@bgen(jjtree) InfixOperator */
+    ASTInfixOperator jjtn000 = new ASTInfixOperator(JJTINFIXOPERATOR);
+    boolean jjtc000 = true;
+    jjtree.openNodeScope(jjtn000);
+/*@egen*/
+    Token t;
+}
+{/*@bgen(jjtree) InfixOperator */
+    try {
+/*@egen*/
+    t="||"/*@bgen(jjtree)*/
+    {
+      jjtree.closeNodeScope(jjtn000, true);
+      jjtc000 = false;
+    }
+/*@egen*/
+    
+    { jjtn000.setTokenType( t.kind ); }/*@bgen(jjtree)*/
+    } finally {
+      if (jjtc000) {
+        jjtree.closeNodeScope(jjtn000, true);
+      }
+    }
+/*@egen*/
+}
+
+void AndAndOperator()                : {/*@bgen(jjtree) InfixOperator */
+    ASTInfixOperator jjtn000 = new ASTInfixOperator(JJTINFIXOPERATOR);
+    boolean jjtc000 = true;
+    jjtree.openNodeScope(jjtn000);
+/*@egen*/
+    Token t;
+}
+{/*@bgen(jjtree) InfixOperator */
+    try {
+/*@egen*/
+    t="&&"/*@bgen(jjtree)*/
+    {
+      jjtree.closeNodeScope(jjtn000, true);
+      jjtc000 = false;
+    }
+/*@egen*/
+    
+    { jjtn000.setTokenType( t.kind ); }/*@bgen(jjtree)*/
+    } finally {
+      if (jjtc000) {
+        jjtree.closeNodeScope(jjtn000, true);
+      }
+    }
+/*@egen*/
+}
+
+void OrOperator()                : {/*@bgen(jjtree) InfixOperator */
+    ASTInfixOperator jjtn000 = new ASTInfixOperator(JJTINFIXOPERATOR);
+    boolean jjtc000 = true;
+    jjtree.openNodeScope(jjtn000);
+/*@egen*/
+    Token t;
+}
+{/*@bgen(jjtree) InfixOperator */
+    try {
+/*@egen*/
+    t="|"/*@bgen(jjtree)*/
+    {
+      jjtree.closeNodeScope(jjtn000, true);
+      jjtc000 = false;
+    }
+/*@egen*/
+    
+    { jjtn000.setTokenType( t.kind ); }/*@bgen(jjtree)*/
+    } finally {
+      if (jjtc000) {
+        jjtree.closeNodeScope(jjtn000, true);
+      }
+    }
+/*@egen*/
+}
+
+void XorOperator()                : {/*@bgen(jjtree) InfixOperator */
+    ASTInfixOperator jjtn000 = new ASTInfixOperator(JJTINFIXOPERATOR);
+    boolean jjtc000 = true;
+    jjtree.openNodeScope(jjtn000);
+/*@egen*/
+    Token t;
+}
+{/*@bgen(jjtree) InfixOperator */
+    try {
+/*@egen*/
+    t="^"/*@bgen(jjtree)*/
+    {
+      jjtree.closeNodeScope(jjtn000, true);
+      jjtc000 = false;
+    }
+/*@egen*/
+    
+    { jjtn000.setTokenType( t.kind ); }/*@bgen(jjtree)*/
+    } finally {
+      if (jjtc000) {
+        jjtree.closeNodeScope(jjtn000, true);
+      }
+    }
+/*@egen*/
+}
+
+void AndOperator()                : {/*@bgen(jjtree) InfixOperator */
+    ASTInfixOperator jjtn000 = new ASTInfixOperator(JJTINFIXOPERATOR);
+    boolean jjtc000 = true;
+    jjtree.openNodeScope(jjtn000);
+/*@egen*/
+    Token t;
+}
+{/*@bgen(jjtree) InfixOperator */
+    try {
+/*@egen*/
+    t="&"/*@bgen(jjtree)*/
+    {
+      jjtree.closeNodeScope(jjtn000, true);
+      jjtc000 = false;
+    }
+/*@egen*/
+    
+    { jjtn000.setTokenType( t.kind ); }/*@bgen(jjtree)*/
+    } finally {
+      if (jjtc000) {
+        jjtree.closeNodeScope(jjtn000, true);
+      }
+    }
+/*@egen*/
+}
+
+void ShiftOperator()                : {/*@bgen(jjtree) InfixOperator */
+    ASTInfixOperator jjtn000 = new ASTInfixOperator(JJTINFIXOPERATOR);
+    boolean jjtc000 = true;
+    jjtree.openNodeScope(jjtn000);
+/*@egen*/
+    Token t;
+}
+{/*@bgen(jjtree) InfixOperator */
+    try {
+/*@egen*/
+    (
+        t=">>>" |
+        t=">>" |
+        t="<<"
+    )/*@bgen(jjtree)*/
+    {
+      jjtree.closeNodeScope(jjtn000, true);
+      jjtc000 = false;
+    }
+/*@egen*/
+    
+    { jjtn000.setTokenType( t.kind ); }/*@bgen(jjtree)*/
+    } finally {
+      if (jjtc000) {
+        jjtree.closeNodeScope(jjtn000, true);
+      }
+    }
+/*@egen*/
+}
+
+void EqualOperator()                : {/*@bgen(jjtree) InfixOperator */
+    ASTInfixOperator jjtn000 = new ASTInfixOperator(JJTINFIXOPERATOR);
+    boolean jjtc000 = true;
+    jjtree.openNodeScope(jjtn000);
+/*@egen*/
+    Token t;
+}
+{/*@bgen(jjtree) InfixOperator */
+    try {
+/*@egen*/
+    (
+        t="==" |
+        t="!="
+    )/*@bgen(jjtree)*/
+    {
+      jjtree.closeNodeScope(jjtn000, true);
+      jjtc000 = false;
+    }
+/*@egen*/
+    
+    { jjtn000.setTokenType( t.kind ); }/*@bgen(jjtree)*/
+    } finally {
+      if (jjtc000) {
+        jjtree.closeNodeScope(jjtn000, true);
+      }
+    }
+/*@egen*/
+}
+
+void RelOperator()                : {/*@bgen(jjtree) InfixOperator */
+    ASTInfixOperator jjtn000 = new ASTInfixOperator(JJTINFIXOPERATOR);
+    boolean jjtc000 = true;
+    jjtree.openNodeScope(jjtn000);
+/*@egen*/
+    Token t;
+}
+{/*@bgen(jjtree) InfixOperator */
+    try {
+/*@egen*/
+    (
+        t="<" |
+        t="<=" |
+        t=">" |
+        t=">="
+    )/*@bgen(jjtree)*/
+    {
+      jjtree.closeNodeScope(jjtn000, true);
+      jjtc000 = false;
+    }
+/*@egen*/
+    
+    { jjtn000.setTokenType( t.kind ); }/*@bgen(jjtree)*/
+    } finally {
+      if (jjtc000) {
+        jjtree.closeNodeScope(jjtn000, true);
+      }
+    }
+/*@egen*/
+}
+
+void InOperator()                : {/*@bgen(jjtree) InfixOperator */
+    ASTInfixOperator jjtn000 = new ASTInfixOperator(JJTINFIXOPERATOR);
+    boolean jjtc000 = true;
+    jjtree.openNodeScope(jjtn000);
+/*@egen*/
+    Token t;
+}
+{/*@bgen(jjtree) InfixOperator */
+    try {
+/*@egen*/
+    (
+        t="in" |
+        t="!in"
+    )/*@bgen(jjtree)*/
+    {
+      jjtree.closeNodeScope(jjtn000, true);
+      jjtc000 = false;
+    }
+/*@egen*/
+    
+    { jjtn000.setTokenType( t.kind ); }/*@bgen(jjtree)*/
+    } finally {
+      if (jjtc000) {
+        jjtree.closeNodeScope(jjtn000, true);
+      }
+    }
+/*@egen*/
+}
+
+void CatOperator()                : {/*@bgen(jjtree) InfixOperator */
+    ASTInfixOperator jjtn000 = new ASTInfixOperator(JJTINFIXOPERATOR);
+    boolean jjtc000 = true;
+    jjtree.openNodeScope(jjtn000);
+/*@egen*/
+    Token t;
+}
+{/*@bgen(jjtree) InfixOperator */
+    try {
+/*@egen*/
+    (
+        t="~"
+    )/*@bgen(jjtree)*/
+    {
+      jjtree.closeNodeScope(jjtn000, true);
+      jjtc000 = false;
+    }
+/*@egen*/
+    
+    { jjtn000.setTokenType( t.kind ); }/*@bgen(jjtree)*/
+    } finally {
+      if (jjtc000) {
+        jjtree.closeNodeScope(jjtn000, true);
+      }
+    }
+/*@egen*/
+}
+
+void PowOperator()                : {/*@bgen(jjtree) InfixOperator */
+    ASTInfixOperator jjtn000 = new ASTInfixOperator(JJTINFIXOPERATOR);
+    boolean jjtc000 = true;
+    jjtree.openNodeScope(jjtn000);
+/*@egen*/
+    Token t;
+}
+{/*@bgen(jjtree) InfixOperator */
+    try {
+/*@egen*/
+    (
+        t="^^"
+    )/*@bgen(jjtree)*/
+    {
+      jjtree.closeNodeScope(jjtn000, true);
+      jjtc000 = false;
+    }
+/*@egen*/
+    
+    { jjtn000.setTokenType( t.kind ); }/*@bgen(jjtree)*/
+    } finally {
+      if (jjtc000) {
+        jjtree.closeNodeScope(jjtn000, true);
+      }
+    }
+/*@egen*/
+}
+
+void UnaryOperator() : {/*@bgen(jjtree) UnaryOperator */
+  ASTUnaryOperator jjtn000 = new ASTUnaryOperator(JJTUNARYOPERATOR);
   boolean jjtc000 = true;
   jjtree.openNodeScope(jjtn000);
 /*@egen*/}
-{/*@bgen(jjtree) PrefixOperator */
+{/*@bgen(jjtree) UnaryOperator */
     try {
 /*@egen*/
+    "&" |
     "++" |
     "--" |
-    "!" |
-    "~" |
+    "*" |
+    "-" |
     "+" |
-    "-"/*@bgen(jjtree)*/
+    "!" |
+    "~"/*@bgen(jjtree)*/
     } finally {
       if (jjtc000) {
         jjtree.closeNodeScope(jjtn000, true);

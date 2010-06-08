@@ -74,6 +74,14 @@ TOKEN: {
 | < OP_EQUALS: "==" >
 | < OP_NOT_EQUAL: "!=" >
 
+| < OP_CMP_LTE: "<=" >
+| < OP_CMP_LT: "<" >
+| < OP_CMP_GTE: ">=" >
+| < OP_CMP_GT: ">" >
+
+| < OP_NOT_IN: "!in" >
+| < OP_IN: "in" >
+
 | < OP_ADD: "+" >
 | < OP_SUB: "-" >
 
@@ -82,6 +90,9 @@ TOKEN: {
 | < OP_MOD: "%" >
 
 | < OP_ASSIGN: "=" >
+
+| < OP_LOGICAL_OR: "||" >
+| < OP_BITWISE_OR: "|" >
 
 | < MODIFIER_PUBLIC: "public" >
 | < MODIFIER_PRIVATE: "private" >
@@ -102,6 +113,8 @@ TOKEN: {
 | < STMT_WHILE: "while" >
 | < STMT_FOR: "for" >
 | < STMT_FOREACH: "foreach" >
+
+| < END_STMT: ";" >
 
 }
 
@@ -250,13 +263,100 @@ void AssignExpression() #AssignExpression(>1) : {}
     // but this allowed syntax "3 += 1" which would be invalid and need
     // to be picked up elsewhere
     LOOKAHEAD(2)
-    Identifier() AssignOperator() InfixExpression() |
-    InfixExpression()
+    Identifier() AssignOperator() AssignExpression() |
+    ConditionalExpression()
 }
 
+void ConditionalExpression() #ConditionalExpression(>1) : {}
+{
+    OrOrExpression() ("?" Expression() ":" ConditionalExpression())*
+}
+
+void OrOrExpression() #InfixExpression(>1) : {}
+{
+    AndAndExpression() (OrOrOperator() AndAndExpression())*
+}
+
+void AndAndExpression() #InfixExpression(>1) : {}
+{
+    OrExpression() (AndAndOperator() OrExpression())*
+}
+
+void OrExpression() #InfixExpression(>1) : {}
+{
+    XorExpression() (OrOperator() XorExpression())*
+}
+
+void XorExpression() #InfixExpression(>1) : {}
+{
+    AndExpression() (XorOperator() AndExpression())*
+}
+
+void AndExpression() #InfixExpression(>1) : {}
+{
+    CmpExpression() (AndOperator() CmpExpression())*
+}
+
+void CmpExpression() #InfixExpression(>1) : {}
+{
+    ShiftExpression() (EqualExpressionRest() | RelExpressionRest() | InExpressionRest())
+}
+
+void ShiftExpression() #InfixExpression(>1) : {}
+{
+    AddExpression() (ShiftOperator() AddExpression())*
+}
+
+void EqualExpressionRest() #void : {}
+{
+    EqualOperator() ShiftExpression()
+}
+
+void RelExpressionRest() #void : {}
+{
+    RelOperator() ShiftExpression()
+}
+
+void InExpressionRest() #void: {}
+{
+    InOperator() ShiftExpression()
+}
+
+void CatExpression() #InfixExpression(>1) : {}
+{
+    MulExpression() CatOperator() MulExpression()
+}
+
+void AddExpression() #InfixExpression(>1) : {}
+{
+    MulExpression() (AddOperator() MulExpression())*
+}
+
+void MulExpression() #InfixExpression(>1) : {}
+{
+    PowExpression() (MulInfixOperator() PowExpression())*
+}
+
+void PowExpression() #InfixExpression(>1) : {}
+{
+    UnaryExpression() [PowOperator() PowExpression()]
+}
+
+void UnaryExpression() #UnaryExpression(>1) : {}
+{
+    PostfixExpression() |
+    UnaryOperator() UnaryExpression()
+}
+
+void PostfixExpression() #PostfixExpression(>1) : {}
+{
+    PrimaryExpression() (PostfixOperator())*
+}
+
+/*
 void InfixExpression() #InfixExpression(>1) : {}
 {
-    MulInfixExpression() [InfixOperator() InfixExpression()]
+    MulInfixExpression() (InfixOperator() InfixExpression())*
 }
 
 void MulInfixExpression() #InfixExpression(>1) : {}
@@ -272,11 +372,11 @@ void PrefixExpression() #PrefixExpression(>1) : {}
 
 void PostfixExpression() #PostfixExpression(>1) : {}
 {
-    Primary() (PostfixOperator())*
+    PrimaryExpression() (PostfixOperator())*
     
-}
+}*/
 
-void Primary() #void : {}
+void PrimaryExpression() #void : {}
 {
     <LPAREN> Expression() <RPAREN> |
     Literal() |
@@ -292,7 +392,6 @@ void Arguments() : {}
 {
     <LPAREN> [Expression()] ("," Expression())* <RPAREN>
 }
-
 
 
 void AssignOperator() : {
@@ -317,25 +416,11 @@ void AssignOperator() : {
     { jjtThis.setTokenType( t.kind ); }
 }
 
-void InfixOperator() : {
+void AddOperator() #InfixOperator : {
     Token t;
 }
 {
     (
-        t="||" |
-        t="&&" |
-        t="|" |
-        t="^" |
-        t="&" |
-        t="==" |
-        t="!=" |
-        t="<" |
-        t=">" |
-        t="<=" |
-        t=">=" |
-        t="<<" |
-        t=">>" |
-        t=">>>" |
         t="+" |
         t="-"
     )
@@ -356,14 +441,134 @@ void MulInfixOperator() #InfixOperator : {
     { jjtThis.setTokenType( t.kind ); }
 }
 
-void PrefixOperator() : {}
+void OrOrOperator() #InfixOperator : {
+    Token t;
+}
 {
+    t="||"
+    
+    { jjtThis.setTokenType( t.kind ); }
+}
+
+void AndAndOperator() #InfixOperator : {
+    Token t;
+}
+{
+    t="&&"
+    
+    { jjtThis.setTokenType( t.kind ); }
+}
+
+void OrOperator() #InfixOperator : {
+    Token t;
+}
+{
+    t="|"
+    
+    { jjtThis.setTokenType( t.kind ); }
+}
+
+void XorOperator() #InfixOperator : {
+    Token t;
+}
+{
+    t="^"
+    
+    { jjtThis.setTokenType( t.kind ); }
+}
+
+void AndOperator() #InfixOperator : {
+    Token t;
+}
+{
+    t="&"
+    
+    { jjtThis.setTokenType( t.kind ); }
+}
+
+void ShiftOperator() #InfixOperator : {
+    Token t;
+}
+{
+    (
+        t=">>>" |
+        t=">>" |
+        t="<<"
+    )
+    
+    { jjtThis.setTokenType( t.kind ); }
+}
+
+void EqualOperator() #InfixOperator : {
+    Token t;
+}
+{
+    (
+        t="==" |
+        t="!="
+    )
+    
+    { jjtThis.setTokenType( t.kind ); }
+}
+
+void RelOperator() #InfixOperator : {
+    Token t;
+}
+{
+    (
+        t="<" |
+        t="<=" |
+        t=">" |
+        t=">="
+    )
+    
+    { jjtThis.setTokenType( t.kind ); }
+}
+
+void InOperator() #InfixOperator : {
+    Token t;
+}
+{
+    (
+        t="in" |
+        t="!in"
+    )
+    
+    { jjtThis.setTokenType( t.kind ); }
+}
+
+void CatOperator() #InfixOperator : {
+    Token t;
+}
+{
+    (
+        t="~"
+    )
+    
+    { jjtThis.setTokenType( t.kind ); }
+}
+
+void PowOperator() #InfixOperator : {
+    Token t;
+}
+{
+    (
+        t="^^"
+    )
+    
+    { jjtThis.setTokenType( t.kind ); }
+}
+
+void UnaryOperator() : {}
+{
+    "&" |
     "++" |
     "--" |
-    "!" |
-    "~" |
+    "*" |
+    "-" |
     "+" |
-    "-"
+    "!" |
+    "~"
 }
 
 void PostfixOperator() : {}

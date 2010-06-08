@@ -55,51 +55,69 @@ public interface WandParserConstants {
   /** RegularExpression Id. */
   int OP_NOT_EQUAL = 31;
   /** RegularExpression Id. */
-  int OP_ADD = 32;
+  int OP_CMP_LTE = 32;
   /** RegularExpression Id. */
-  int OP_SUB = 33;
+  int OP_CMP_LT = 33;
   /** RegularExpression Id. */
-  int OP_MUL = 34;
+  int OP_CMP_GTE = 34;
   /** RegularExpression Id. */
-  int OP_DIV = 35;
+  int OP_CMP_GT = 35;
   /** RegularExpression Id. */
-  int OP_MOD = 36;
+  int OP_NOT_IN = 36;
   /** RegularExpression Id. */
-  int OP_ASSIGN = 37;
+  int OP_IN = 37;
   /** RegularExpression Id. */
-  int MODIFIER_PUBLIC = 38;
+  int OP_ADD = 38;
   /** RegularExpression Id. */
-  int MODIFIER_PRIVATE = 39;
+  int OP_SUB = 39;
   /** RegularExpression Id. */
-  int MODIFIER_PROTECTED = 40;
+  int OP_MUL = 40;
   /** RegularExpression Id. */
-  int MODIFIER_STATIC = 41;
+  int OP_DIV = 41;
   /** RegularExpression Id. */
-  int MODIFIER_ABSTRACT = 42;
+  int OP_MOD = 42;
   /** RegularExpression Id. */
-  int MODIFIER_FINAL = 43;
+  int OP_ASSIGN = 43;
   /** RegularExpression Id. */
-  int MODIFIER_COMPAT = 44;
+  int OP_LOGICAL_OR = 44;
   /** RegularExpression Id. */
-  int MODIFIER_ARG = 45;
+  int OP_BITWISE_OR = 45;
   /** RegularExpression Id. */
-  int STMT_RETURN = 46;
+  int MODIFIER_PUBLIC = 46;
   /** RegularExpression Id. */
-  int STMT_ASSERT = 47;
+  int MODIFIER_PRIVATE = 47;
   /** RegularExpression Id. */
-  int STMT_IF = 48;
+  int MODIFIER_PROTECTED = 48;
   /** RegularExpression Id. */
-  int STMT_ELSE = 49;
+  int MODIFIER_STATIC = 49;
   /** RegularExpression Id. */
-  int STMT_DO = 50;
+  int MODIFIER_ABSTRACT = 50;
   /** RegularExpression Id. */
-  int STMT_WHILE = 51;
+  int MODIFIER_FINAL = 51;
   /** RegularExpression Id. */
-  int STMT_FOR = 52;
+  int MODIFIER_COMPAT = 52;
   /** RegularExpression Id. */
-  int STMT_FOREACH = 53;
+  int MODIFIER_ARG = 53;
   /** RegularExpression Id. */
-  int ID = 54;
+  int STMT_RETURN = 54;
+  /** RegularExpression Id. */
+  int STMT_ASSERT = 55;
+  /** RegularExpression Id. */
+  int STMT_IF = 56;
+  /** RegularExpression Id. */
+  int STMT_ELSE = 57;
+  /** RegularExpression Id. */
+  int STMT_DO = 58;
+  /** RegularExpression Id. */
+  int STMT_WHILE = 59;
+  /** RegularExpression Id. */
+  int STMT_FOR = 60;
+  /** RegularExpression Id. */
+  int STMT_FOREACH = 61;
+  /** RegularExpression Id. */
+  int END_STMT = 62;
+  /** RegularExpression Id. */
+  int ID = 63;
 
   /** Lexical state. */
   int DEFAULT = 0;
@@ -138,12 +156,20 @@ public interface WandParserConstants {
     "\"%=\"",
     "\"==\"",
     "\"!=\"",
+    "\"<=\"",
+    "\"<\"",
+    "\">=\"",
+    "\">\"",
+    "\"!in\"",
+    "\"in\"",
     "\"+\"",
     "\"-\"",
     "\"*\"",
     "\"/\"",
     "\"%\"",
     "\"=\"",
+    "\"||\"",
+    "\"|\"",
     "\"public\"",
     "\"private\"",
     "\"protected\"",
@@ -160,32 +186,28 @@ public interface WandParserConstants {
     "\"while\"",
     "\"for\"",
     "\"foreach\"",
+    "\";\"",
     "<ID>",
     "\",\"",
     "\"[\"",
     "\"]\"",
     "\".\"",
+    "\"?\"",
     "\"&=\"",
     "\"|=\"",
     "\"^=\"",
     "\"<<=\"",
     "\">>=\"",
     "\">>>=\"",
-    "\"||\"",
     "\"&&\"",
-    "\"|\"",
     "\"^\"",
     "\"&\"",
-    "\"<\"",
-    "\">\"",
-    "\"<=\"",
-    "\">=\"",
-    "\"<<\"",
-    "\">>\"",
     "\">>>\"",
-    "\"!\"",
+    "\">>\"",
+    "\"<<\"",
     "\"~\"",
-    "\";\"",
+    "\"^^\"",
+    "\"!\"",
   };
 
 }

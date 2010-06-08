@@ -16,26 +16,27 @@ public interface WandParserTreeConstants
   public int JJTARRAYTYPE = 10;
   public int JJTQUALIFIEDIDENTIFIER = 11;
   public int JJTASSIGNEXPRESSION = 12;
-  public int JJTINFIXEXPRESSION = 13;
-  public int JJTPREFIXEXPRESSION = 14;
-  public int JJTPOSTFIXEXPRESSION = 15;
-  public int JJTFUNCTIONCALL = 16;
-  public int JJTARGUMENTS = 17;
-  public int JJTASSIGNOPERATOR = 18;
-  public int JJTINFIXOPERATOR = 19;
-  public int JJTPREFIXOPERATOR = 20;
-  public int JJTPOSTFIXOPERATOR = 21;
-  public int JJTINTEGERLITERAL = 22;
-  public int JJTFLOATINGPOINTLITERAL = 23;
-  public int JJTBOOLEANLITERAL = 24;
-  public int JJTNULLLITERAL = 25;
-  public int JJTBLOCK = 26;
-  public int JJTLOCALVARIABLEDECLARATIONSTATEMENT = 27;
-  public int JJTASSERTSTATEMENT = 28;
-  public int JJTRETURNSTATEMENT = 29;
-  public int JJTEXPRESSIONSTATEMENT = 30;
-  public int JJTVARIABLEDECLARATOR = 31;
-  public int JJTIDENTIFIER = 32;
+  public int JJTCONDITIONALEXPRESSION = 13;
+  public int JJTINFIXEXPRESSION = 14;
+  public int JJTUNARYEXPRESSION = 15;
+  public int JJTPOSTFIXEXPRESSION = 16;
+  public int JJTFUNCTIONCALL = 17;
+  public int JJTARGUMENTS = 18;
+  public int JJTASSIGNOPERATOR = 19;
+  public int JJTINFIXOPERATOR = 20;
+  public int JJTUNARYOPERATOR = 21;
+  public int JJTPOSTFIXOPERATOR = 22;
+  public int JJTINTEGERLITERAL = 23;
+  public int JJTFLOATINGPOINTLITERAL = 24;
+  public int JJTBOOLEANLITERAL = 25;
+  public int JJTNULLLITERAL = 26;
+  public int JJTBLOCK = 27;
+  public int JJTLOCALVARIABLEDECLARATIONSTATEMENT = 28;
+  public int JJTASSERTSTATEMENT = 29;
+  public int JJTRETURNSTATEMENT = 30;
+  public int JJTEXPRESSIONSTATEMENT = 31;
+  public int JJTVARIABLEDECLARATOR = 32;
+  public int JJTIDENTIFIER = 33;
 
 
   public String[] jjtNodeName = {
@@ -52,14 +53,15 @@ public interface WandParserTreeConstants
     "ArrayType",
     "QualifiedIdentifier",
     "AssignExpression",
+    "ConditionalExpression",
     "InfixExpression",
-    "PrefixExpression",
+    "UnaryExpression",
     "PostfixExpression",
     "FunctionCall",
     "Arguments",
     "AssignOperator",
     "InfixOperator",
-    "PrefixOperator",
+    "UnaryOperator",
     "PostfixOperator",
     "IntegerLiteral",
     "FloatingPointLiteral",
@@ -74,4 +76,4 @@ public interface WandParserTreeConstants
     "Identifier",
   };
 }
-/* JavaCC - OriginalChecksum=f8504bb48b700c15d075513ffb6f476d (do not edit this line) */
+/* JavaCC - OriginalChecksum=883f187b5c43212a97a7efccdd3145e7 (do not edit this line) */

@@ -1,9 +1,22 @@
 int foo( int n ) {
 	int m;
+	
+	assert n == 12;
+	
 	n = 42;
+	
+	assert n == 42;
+	
 	m = 24;
+	
+	assert n == 42;
+	assert m == 24;
+	
+	return 0 + 1 - 2 + 1;
 }
 
 int main( ) {
-	return 0;
+	int ret = foo( 12 );
+	assert ret == 0;
+	return ret;
 }

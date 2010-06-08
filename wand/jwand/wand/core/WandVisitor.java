@@ -25,7 +25,10 @@ public abstract class WandVisitor implements WandParserVisitor {
     public Object visit(ASTQualifiedIdentifier node, Object data) { return visitChildren(node, data); }
     public Object visit(ASTExpression node, Object data) { return visitChildren(node, data); }
     public Object visit(ASTAssignExpression node, Object data) { return visitChildren(node, data); }
+    public Object visit(ASTConditionalExpression node, Object data) { return visitChildren(node, data); }
     public Object visit(ASTInfixExpression node, Object data) { return visitChildren(node, data); }
+    public Object visit(ASTUnaryOperator node, Object data) { return visitChildren(node, data); }
+    public Object visit(ASTUnaryExpression node, Object data) { return visitChildren(node, data); }
     public Object visit(ASTPrefixExpression node, Object data) { return visitChildren(node, data); }
     public Object visit(ASTPostfixExpression node, Object data) { return visitChildren(node, data); }
     public Object visit(ASTFunctionCall node, Object data) { return visitChildren(node, data); }

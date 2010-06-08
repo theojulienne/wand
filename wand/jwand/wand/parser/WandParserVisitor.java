@@ -16,14 +16,15 @@ public interface WandParserVisitor
   public Object visit(ASTArrayType node, Object data);
   public Object visit(ASTQualifiedIdentifier node, Object data);
   public Object visit(ASTAssignExpression node, Object data);
+  public Object visit(ASTConditionalExpression node, Object data);
   public Object visit(ASTInfixExpression node, Object data);
-  public Object visit(ASTPrefixExpression node, Object data);
+  public Object visit(ASTUnaryExpression node, Object data);
   public Object visit(ASTPostfixExpression node, Object data);
   public Object visit(ASTFunctionCall node, Object data);
   public Object visit(ASTArguments node, Object data);
   public Object visit(ASTAssignOperator node, Object data);
   public Object visit(ASTInfixOperator node, Object data);
-  public Object visit(ASTPrefixOperator node, Object data);
+  public Object visit(ASTUnaryOperator node, Object data);
   public Object visit(ASTPostfixOperator node, Object data);
   public Object visit(ASTIntegerLiteral node, Object data);
   public Object visit(ASTFloatingPointLiteral node, Object data);
@@ -37,4 +38,4 @@ public interface WandParserVisitor
   public Object visit(ASTVariableDeclarator node, Object data);
   public Object visit(ASTIdentifier node, Object data);
 }
-/* JavaCC - OriginalChecksum=6407c71ab0682ddbb88726b2b8d24609 (do not edit this line) */
+/* JavaCC - OriginalChecksum=3142d5b32dc88ea3f888266597149f14 (do not edit this line) */
