@@ -4,6 +4,6 @@ int foo( int n ) {
 	m = 24;
 }
 
-void main( ) {
-	
+int main( ) {
+	return 0;
 }

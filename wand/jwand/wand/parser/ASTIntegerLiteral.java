@@ -28,7 +28,7 @@ class ASTIntegerLiteral extends ASTLiteral {
         } else if ( str.startsWith( "0x" ) ) {
             radix = 16;
             contentStart = 2;
-        } else if ( str.startsWith( "0" ) ) {
+        } else if ( str.startsWith( "0" ) && str.length() > 1 ) { // "0" isn't octal
             radix = 8;
             contentStart = 1;
         }

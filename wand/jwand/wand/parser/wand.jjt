@@ -64,6 +64,16 @@ TOKEN: {
 | < OP_INC: "++" >
 | < OP_DEC: "--" >
 
+| < OP_ADD_ASSIGN: "+=" >
+| < OP_SUB_ASSIGN: "-=" >
+
+| < OP_MUL_ASSIGN: "*=" >
+| < OP_DIV_ASSIGN: "/=" >
+| < OP_MOD_ASSIGN: "%=" >
+
+| < OP_EQUALS: "==" >
+| < OP_NOT_EQUAL: "!=" >
+
 | < OP_ADD: "+" >
 | < OP_SUB: "-" >
 
@@ -72,13 +82,6 @@ TOKEN: {
 | < OP_MOD: "%" >
 
 | < OP_ASSIGN: "=" >
-
-| < OP_ADD_ASSIGN: "+=" >
-| < OP_SUB_ASSIGN: "-=" >
-
-| < OP_MUL_ASSIGN: "*=" >
-| < OP_DIV_ASSIGN: "/=" >
-| < OP_MOD_ASSIGN: "%=" >
 
 | < MODIFIER_PUBLIC: "public" >
 | < MODIFIER_PRIVATE: "private" >
@@ -91,6 +94,7 @@ TOKEN: {
 | < MODIFIER_ARG: ":" >
 
 | < STMT_RETURN: "return" >
+| < STMT_ASSERT: "assert" >
 
 | < STMT_IF: "if" >
 | < STMT_ELSE: "else" >
@@ -216,10 +220,10 @@ void ArrayType() : {}
 
 
 
-void QualifiedIdentifier() : {}
+void QualifiedIdentifier() #QualifiedIdentifier(>1) : {}
 {
     (
-        <ID> [ "." QualifiedIdentifier() ]
+        Identifier() ("." <ID>)*
     )
 }
 
@@ -276,7 +280,17 @@ void Primary() #void : {}
 {
     <LPAREN> Expression() <RPAREN> |
     Literal() |
-    Identifier()
+    FunctionCall()
+}
+
+void FunctionCall() #FunctionCall(>1) : {}
+{
+    QualifiedIdentifier() [Arguments()]
+}
+
+void Arguments() : {}
+{
+    <LPAREN> [Expression()] ("," Expression())* <RPAREN>
 }
 
 
@@ -420,7 +434,13 @@ void Statement() #void : {}
 {
     Block() |
     ExpressionStatement() |
-    ReturnStatement()
+    ReturnStatement() |
+    AssertStatement()
+}
+
+void AssertStatement() : {}
+{
+    "assert" Expression() [":" Expression()] ";"
 }
 
 void ReturnStatement() : {}

@@ -28,6 +28,8 @@ public abstract class WandVisitor implements WandParserVisitor {
     public Object visit(ASTInfixExpression node, Object data) { return visitChildren(node, data); }
     public Object visit(ASTPrefixExpression node, Object data) { return visitChildren(node, data); }
     public Object visit(ASTPostfixExpression node, Object data) { return visitChildren(node, data); }
+    public Object visit(ASTFunctionCall node, Object data) { return visitChildren(node, data); }
+    public Object visit(ASTArguments node, Object data) { return visitChildren(node, data); }
     public Object visit(ASTAssignOperator node, Object data) { return visitChildren(node, data); }
     public Object visit(ASTInfixOperator node, Object data) { return visitChildren(node, data); }
     public Object visit(ASTPrefixOperator node, Object data) { return visitChildren(node, data); }
@@ -38,6 +40,7 @@ public abstract class WandVisitor implements WandParserVisitor {
     public Object visit(ASTNullLiteral node, Object data) { return visitChildren(node, data); }
     public Object visit(ASTBlock node, Object data) { return visitChildren(node, data); }
     public Object visit(ASTLocalVariableDeclarationStatement node, Object data) { return visitChildren(node, data); }
+    public Object visit(ASTAssertStatement node, Object data) { return visitChildren(node, data); }
     public Object visit(ASTReturnStatement node, Object data) { return visitChildren(node, data); }
     public Object visit(ASTExpressionStatement node, Object data) { return visitChildren(node, data); }
     public Object visit(ASTVariableDeclarator node, Object data) { return visitChildren(node, data); }

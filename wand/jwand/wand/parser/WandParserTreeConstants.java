@@ -19,20 +19,23 @@ public interface WandParserTreeConstants
   public int JJTINFIXEXPRESSION = 13;
   public int JJTPREFIXEXPRESSION = 14;
   public int JJTPOSTFIXEXPRESSION = 15;
-  public int JJTASSIGNOPERATOR = 16;
-  public int JJTINFIXOPERATOR = 17;
-  public int JJTPREFIXOPERATOR = 18;
-  public int JJTPOSTFIXOPERATOR = 19;
-  public int JJTINTEGERLITERAL = 20;
-  public int JJTFLOATINGPOINTLITERAL = 21;
-  public int JJTBOOLEANLITERAL = 22;
-  public int JJTNULLLITERAL = 23;
-  public int JJTBLOCK = 24;
-  public int JJTLOCALVARIABLEDECLARATIONSTATEMENT = 25;
-  public int JJTRETURNSTATEMENT = 26;
-  public int JJTEXPRESSIONSTATEMENT = 27;
-  public int JJTVARIABLEDECLARATOR = 28;
-  public int JJTIDENTIFIER = 29;
+  public int JJTFUNCTIONCALL = 16;
+  public int JJTARGUMENTS = 17;
+  public int JJTASSIGNOPERATOR = 18;
+  public int JJTINFIXOPERATOR = 19;
+  public int JJTPREFIXOPERATOR = 20;
+  public int JJTPOSTFIXOPERATOR = 21;
+  public int JJTINTEGERLITERAL = 22;
+  public int JJTFLOATINGPOINTLITERAL = 23;
+  public int JJTBOOLEANLITERAL = 24;
+  public int JJTNULLLITERAL = 25;
+  public int JJTBLOCK = 26;
+  public int JJTLOCALVARIABLEDECLARATIONSTATEMENT = 27;
+  public int JJTASSERTSTATEMENT = 28;
+  public int JJTRETURNSTATEMENT = 29;
+  public int JJTEXPRESSIONSTATEMENT = 30;
+  public int JJTVARIABLEDECLARATOR = 31;
+  public int JJTIDENTIFIER = 32;
 
 
   public String[] jjtNodeName = {
@@ -52,6 +55,8 @@ public interface WandParserTreeConstants
     "InfixExpression",
     "PrefixExpression",
     "PostfixExpression",
+    "FunctionCall",
+    "Arguments",
     "AssignOperator",
     "InfixOperator",
     "PrefixOperator",
@@ -62,10 +67,11 @@ public interface WandParserTreeConstants
     "NullLiteral",
     "Block",
     "LocalVariableDeclarationStatement",
+    "AssertStatement",
     "ReturnStatement",
     "ExpressionStatement",
     "VariableDeclarator",
     "Identifier",
   };
 }
-/* JavaCC - OriginalChecksum=33b08bffe59f07e1dc891022290af64e (do not edit this line) */
+/* JavaCC - OriginalChecksum=f8504bb48b700c15d075513ffb6f476d (do not edit this line) */

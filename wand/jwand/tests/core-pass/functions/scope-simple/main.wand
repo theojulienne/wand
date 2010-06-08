@@ -10,6 +10,8 @@ int foo( ) {
 	bar = 123; // OK
 }
 
-void main( ) {
-	//foo( );
+int main( ) {
+	foo( );
+	
+	return 0;
 }

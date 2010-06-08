@@ -94,4 +94,22 @@ public class VariableMapper extends WandVisitor {
         
         return data;
     }
+    
+    public Object visit(ASTFunctionCall node, Object data) {
+        // skip the identifier (first node), because it's a function,
+        // and we are only looking for variables.
+        // FIXME: this will break when we have delegate types that
+        // must be considered.
+        
+        boolean first = true;
+        for ( WandNode child: node ) {
+            if ( first ) {
+                first = false;
+                continue;
+            }
+            child.accept( this, data );
+        }
+        
+        return data;
+    }
 }
