@@ -181,7 +181,7 @@ void FunctionDeclaration() : {
 }
 {
 	(
-	    Type() functionName=<ID> FunctionParameters() Block()
+	    Type() functionName=<ID> FunctionParameters() BlockStatement()
 	    { jjtThis.setFunctionName( functionName.image ); }
 	)
 }
@@ -612,7 +612,7 @@ void NullLiteral() : {}
 }
 
 
-
+/*
 void Block() : {}
 {
     "{" BlockStatements() "}"
@@ -629,6 +629,7 @@ void BlockStatement() #void : {}
     LocalVariableDeclarationStatement() |
     Statement()
 }
+*/
 
 void LocalVariableDeclarationStatement() : {}
 {
@@ -637,10 +638,55 @@ void LocalVariableDeclarationStatement() : {}
 
 void Statement() #void : {}
 {
-    Block() |
+    ";" |
+    NonEmptyStatement() |
+    ScopeBlockStatement()
+}
+
+void ScopeBlockStatement() #void : {}
+{
+    BlockStatement()
+}
+
+void BlockStatement() : {}
+{
+    "{" (Statement())* "}"
+}
+
+void IfStatement() : {}
+{
+    "if" "(" IfCondition() ")" ThenStatement() ["else" ElseStatement()]
+}
+
+void IfCondition() #void : {}
+{
+    Expression()
+}
+
+void ThenStatement() #void : {}
+{
+    ScopeStatement()
+}
+
+void ElseStatement() #void : {}
+{
+    ScopeStatement()
+}
+
+void ScopeStatement() #void : {}
+{
+    NonEmptyStatement() |
+    BlockStatement()
+}
+
+void NonEmptyStatement() #void : {}
+{
+    LOOKAHEAD(2)
     ExpressionStatement() |
     ReturnStatement() |
-    AssertStatement()
+    AssertStatement() |
+    IfStatement() |
+    LocalVariableDeclarationStatement()
 }
 
 void AssertStatement() : {}

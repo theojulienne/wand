@@ -312,7 +312,7 @@ void FunctionDeclaration() : {/*@bgen(jjtree) FunctionDeclaration */
         try {
 /*@egen*/
 	(
-	    Type() functionName=<ID> FunctionParameters() Block()/*@bgen(jjtree)*/
+	    Type() functionName=<ID> FunctionParameters() BlockStatement()/*@bgen(jjtree)*/
             {
               jjtree.closeNodeScope(jjtn000, true);
               jjtc000 = false;
@@ -1646,49 +1646,24 @@ void NullLiteral() : {/*@bgen(jjtree) NullLiteral */
 }
 
 
-
-void Block() : {/*@bgen(jjtree) Block */
-  ASTBlock jjtn000 = new ASTBlock(JJTBLOCK);
-  boolean jjtc000 = true;
-  jjtree.openNodeScope(jjtn000);
-/*@egen*/}
-{/*@bgen(jjtree) Block */
-    try {
-/*@egen*/
-    "{" BlockStatements() "}"/*@bgen(jjtree)*/
-    } catch (Throwable jjte000) {
-      if (jjtc000) {
-        jjtree.clearNodeScope(jjtn000);
-        jjtc000 = false;
-      } else {
-        jjtree.popNode();
-      }
-      if (jjte000 instanceof RuntimeException) {
-        throw (RuntimeException)jjte000;
-      }
-      if (jjte000 instanceof ParseException) {
-        throw (ParseException)jjte000;
-      }
-      throw (Error)jjte000;
-    } finally {
-      if (jjtc000) {
-        jjtree.closeNodeScope(jjtn000, true);
-      }
-    }
-/*@egen*/
+/*
+void Block() : {}
+{
+    "{" BlockStatements() "}"
 }
 
-void BlockStatements()       : {}
+void BlockStatements() #void : {}
 {
     (BlockStatement())*
 }
 
-void BlockStatement()       : {}
+void BlockStatement() #void : {}
 {
     LOOKAHEAD(2)
     LocalVariableDeclarationStatement() |
     Statement()
 }
+*/
 
 void LocalVariableDeclarationStatement() : {/*@bgen(jjtree) LocalVariableDeclarationStatement */
   ASTLocalVariableDeclarationStatement jjtn000 = new ASTLocalVariableDeclarationStatement(JJTLOCALVARIABLEDECLARATIONSTATEMENT);
@@ -1723,10 +1698,107 @@ void LocalVariableDeclarationStatement() : {/*@bgen(jjtree) LocalVariableDeclara
 
 void Statement()       : {}
 {
-    Block() |
+    ";" |
+    NonEmptyStatement() |
+    ScopeBlockStatement()
+}
+
+void ScopeBlockStatement()       : {}
+{
+    BlockStatement()
+}
+
+void BlockStatement() : {/*@bgen(jjtree) BlockStatement */
+  ASTBlockStatement jjtn000 = new ASTBlockStatement(JJTBLOCKSTATEMENT);
+  boolean jjtc000 = true;
+  jjtree.openNodeScope(jjtn000);
+/*@egen*/}
+{/*@bgen(jjtree) BlockStatement */
+    try {
+/*@egen*/
+    "{" (Statement())* "}"/*@bgen(jjtree)*/
+    } catch (Throwable jjte000) {
+      if (jjtc000) {
+        jjtree.clearNodeScope(jjtn000);
+        jjtc000 = false;
+      } else {
+        jjtree.popNode();
+      }
+      if (jjte000 instanceof RuntimeException) {
+        throw (RuntimeException)jjte000;
+      }
+      if (jjte000 instanceof ParseException) {
+        throw (ParseException)jjte000;
+      }
+      throw (Error)jjte000;
+    } finally {
+      if (jjtc000) {
+        jjtree.closeNodeScope(jjtn000, true);
+      }
+    }
+/*@egen*/
+}
+
+void IfStatement() : {/*@bgen(jjtree) IfStatement */
+  ASTIfStatement jjtn000 = new ASTIfStatement(JJTIFSTATEMENT);
+  boolean jjtc000 = true;
+  jjtree.openNodeScope(jjtn000);
+/*@egen*/}
+{/*@bgen(jjtree) IfStatement */
+    try {
+/*@egen*/
+    "if" "(" IfCondition() ")" ThenStatement() ["else" ElseStatement()]/*@bgen(jjtree)*/
+    } catch (Throwable jjte000) {
+      if (jjtc000) {
+        jjtree.clearNodeScope(jjtn000);
+        jjtc000 = false;
+      } else {
+        jjtree.popNode();
+      }
+      if (jjte000 instanceof RuntimeException) {
+        throw (RuntimeException)jjte000;
+      }
+      if (jjte000 instanceof ParseException) {
+        throw (ParseException)jjte000;
+      }
+      throw (Error)jjte000;
+    } finally {
+      if (jjtc000) {
+        jjtree.closeNodeScope(jjtn000, true);
+      }
+    }
+/*@egen*/
+}
+
+void IfCondition()       : {}
+{
+    Expression()
+}
+
+void ThenStatement()       : {}
+{
+    ScopeStatement()
+}
+
+void ElseStatement()       : {}
+{
+    ScopeStatement()
+}
+
+void ScopeStatement()       : {}
+{
+    NonEmptyStatement() |
+    BlockStatement()
+}
+
+void NonEmptyStatement()       : {}
+{
+    LOOKAHEAD(2)
     ExpressionStatement() |
     ReturnStatement() |
-    AssertStatement()
+    AssertStatement() |
+    IfStatement() |
+    LocalVariableDeclarationStatement()
 }
 
 void AssertStatement() : {/*@bgen(jjtree) AssertStatement */

@@ -21,7 +21,7 @@ public class VariableMapper extends WandVisitor {
         currentScope = currentScope.getParentScope( );
     }
     
-    public Object visit( ASTBlock node, Object data ) {
+    public Object visit( ASTBlockStatement node, Object data ) {
         pushScope( );
         visitChildren( node, data );
         popScope( );

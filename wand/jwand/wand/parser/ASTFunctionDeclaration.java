@@ -37,8 +37,8 @@ class ASTFunctionDeclaration extends ASTDeclaration {
         return (ASTFunctionParameters) jjtGetChild( 1 );
     }
     
-    public ASTBlock getFunctionBody( ) {
-        return (ASTBlock) jjtGetChild( 2 );
+    public ASTBlockStatement getFunctionBody( ) {
+        return (ASTBlockStatement) jjtGetChild( 2 );
     }
     
     public void setFunctionModifiers( ASTModifiers modifiers ) {

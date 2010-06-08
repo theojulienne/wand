@@ -30,13 +30,14 @@ public interface WandParserTreeConstants
   public int JJTFLOATINGPOINTLITERAL = 24;
   public int JJTBOOLEANLITERAL = 25;
   public int JJTNULLLITERAL = 26;
-  public int JJTBLOCK = 27;
-  public int JJTLOCALVARIABLEDECLARATIONSTATEMENT = 28;
-  public int JJTASSERTSTATEMENT = 29;
-  public int JJTRETURNSTATEMENT = 30;
-  public int JJTEXPRESSIONSTATEMENT = 31;
-  public int JJTVARIABLEDECLARATOR = 32;
-  public int JJTIDENTIFIER = 33;
+  public int JJTLOCALVARIABLEDECLARATIONSTATEMENT = 27;
+  public int JJTBLOCKSTATEMENT = 28;
+  public int JJTIFSTATEMENT = 29;
+  public int JJTASSERTSTATEMENT = 30;
+  public int JJTRETURNSTATEMENT = 31;
+  public int JJTEXPRESSIONSTATEMENT = 32;
+  public int JJTVARIABLEDECLARATOR = 33;
+  public int JJTIDENTIFIER = 34;
 
 
   public String[] jjtNodeName = {
@@ -67,8 +68,9 @@ public interface WandParserTreeConstants
     "FloatingPointLiteral",
     "BooleanLiteral",
     "NullLiteral",
-    "Block",
     "LocalVariableDeclarationStatement",
+    "BlockStatement",
+    "IfStatement",
     "AssertStatement",
     "ReturnStatement",
     "ExpressionStatement",
@@ -76,4 +78,4 @@ public interface WandParserTreeConstants
     "Identifier",
   };
 }
-/* JavaCC - OriginalChecksum=883f187b5c43212a97a7efccdd3145e7 (do not edit this line) */
+/* JavaCC - OriginalChecksum=f24a79de1e0a5cd690509e3cc01f2474 (do not edit this line) */

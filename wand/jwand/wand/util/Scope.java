@@ -26,12 +26,10 @@ public class Scope {
     }
     
     public WandNode lookup( String name ) {
-        if ( symbolTable == null ) {
-            return null;
-        }
-        
-        if ( symbolTable.containsKey( name ) ) {
-            return symbolTable.get( name );
+        if ( symbolTable != null ) {
+            if ( symbolTable.containsKey( name ) ) {
+                return symbolTable.get( name );
+            }
         }
         
         if ( parentScope != null ) {

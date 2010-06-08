@@ -24,7 +24,7 @@ public class CCodeGenerator extends WandVisitor {
         program.jjtAccept( this, null );
     }
     
-    public Object visit(ASTBlock node, Object data) {
+    public Object visit(ASTBlockStatement node, Object data) {
         writeBlockStart( );
         visitChildren(node, data);
         writeBlockEnd( );
@@ -37,7 +37,7 @@ public class CCodeGenerator extends WandVisitor {
         
         ASTType returnType = (ASTType)node.getReturnType( );
         ASTFunctionParameters parameters = (ASTFunctionParameters)node.getFunctionParameters( );
-        ASTBlock body = (ASTBlock)node.getFunctionBody( );
+        ASTBlockStatement body = (ASTBlockStatement)node.getFunctionBody( );
         
         writeNewline( "// begin function " + functionName );
         
@@ -212,6 +212,24 @@ public class CCodeGenerator extends WandVisitor {
         return data;
     }
     
+    public Object visit(ASTIfStatement node, Object data) {
+        WandNode condition = node.getCondition( );
+        WandNode thenStatement = node.getThenStatement( );
+        WandNode elseStatement = node.getElseStatement( );
+        
+        writeString( "if (" );
+        condition.accept( this, data );
+        writeNewline( ") " );
+        thenStatement.accept( this, data );
+        
+        if ( elseStatement != null ) {
+            writeNewline( " else " );
+            elseStatement.accept( this, data );
+        }
+        
+        return data;
+    }
+    
     public Object visit(ASTAssertStatement node, Object data) {
         WandNode expression = node.getExpression( );
         WandNode message = node.getMessage( );
@@ -255,6 +273,21 @@ public class CCodeGenerator extends WandVisitor {
                 break;
             case WandParserConstants.OP_EQUALS:
                 writeString( "==" );
+                break;
+            case WandParserConstants.OP_NOT_EQUAL:
+                writeString( "!=" );
+                break;
+            case WandParserConstants.OP_CMP_LTE:
+                writeString( "<=" );
+                break;
+            case WandParserConstants.OP_CMP_LT:
+                writeString( "<" );
+                break;
+            case WandParserConstants.OP_CMP_GTE:
+                writeString( ">=" );
+                break;
+            case WandParserConstants.OP_CMP_GT:
+                writeString( ">" );
                 break;
             default:
                 assert false: "Unknown operator: " + WandParserConstants.tokenImage[operatorType];
