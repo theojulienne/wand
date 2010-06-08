@@ -28,6 +28,10 @@ class ASTIdentifier extends SimpleNode {
         return GeneratorFactory.getGeneratorFactory( ).getIdentifierGenerator( );
     }
     
+    public String toString( ) {
+        return "<Identifier: " + identifier + ">";
+    }
+    
     /** Accept the visitor. **/
     public Object jjtAccept(WandParserVisitor visitor, Object data) {
         return visitor.visit(this, data);

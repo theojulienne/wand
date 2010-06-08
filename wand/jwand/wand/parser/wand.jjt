@@ -269,7 +269,7 @@ void AssignExpression() #AssignExpression(>1) : {}
 
 void ConditionalExpression() #ConditionalExpression(>1) : {}
 {
-    OrOrExpression() ("?" Expression() ":" ConditionalExpression())*
+    OrOrExpression() ["?" Expression() ":" ConditionalExpression()]
 }
 
 void OrOrExpression() #InfixExpression(>1) : {}
@@ -299,7 +299,7 @@ void AndExpression() #InfixExpression(>1) : {}
 
 void CmpExpression() #InfixExpression(>1) : {}
 {
-    ShiftExpression() (EqualExpressionRest() | RelExpressionRest() | InExpressionRest())
+    ShiftExpression() [EqualExpressionRest() | RelExpressionRest() | InExpressionRest()]
 }
 
 void ShiftExpression() #InfixExpression(>1) : {}

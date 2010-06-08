@@ -578,9 +578,7 @@ void ConditionalExpression()                            : {/*@bgen(jjtree) #Cond
 {/*@bgen(jjtree) #ConditionalExpression(> 1) */
     try {
 /*@egen*/
-    LOOKAHEAD(2)
-    OrOrExpression() |
-    OrOrExpression() "?" Expression() ":" ConditionalExpression()/*@bgen(jjtree)*/
+    OrOrExpression() ["?" Expression() ":" ConditionalExpression()]/*@bgen(jjtree)*/
     } catch (Throwable jjte000) {
       if (jjtc000) {
         jjtree.clearNodeScope(jjtn000);
@@ -766,7 +764,7 @@ void CmpExpression()                      : {/*@bgen(jjtree) #InfixExpression(> 
 {/*@bgen(jjtree) #InfixExpression(> 1) */
     try {
 /*@egen*/
-    ShiftExpression() (EqualExpressionRest() | RelExpressionRest() | InExpressionRest())/*@bgen(jjtree)*/
+    ShiftExpression() [EqualExpressionRest() | RelExpressionRest() | InExpressionRest()]/*@bgen(jjtree)*/
     } catch (Throwable jjte000) {
       if (jjtc000) {
         jjtree.clearNodeScope(jjtn000);

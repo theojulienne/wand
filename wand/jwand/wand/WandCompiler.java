@@ -78,6 +78,9 @@ public class WandCompiler {
 		    System.exit( 1 );
 		}
 		
+		wand.visitors.InfixExpansion iexp = new wand.visitors.InfixExpansion( );
+		iexp.visitFrom( program, null );
+		
 		wand.visitors.VariableMapper vmap = new wand.visitors.VariableMapper( );
 		vmap.visitFrom( program, null );
 		
