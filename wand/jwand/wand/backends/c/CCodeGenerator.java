@@ -20,6 +20,7 @@ public class CCodeGenerator extends WandVisitor {
         writeNewline( );
         writeNewline( "#include <stdio.h>" );
         writeNewline( "#include <assert.h>" );
+        writeNewline( "#include <math.h>" );
         writeNewline( );
         program.jjtAccept( this, null );
     }
@@ -136,10 +137,10 @@ public class CCodeGenerator extends WandVisitor {
     }
     
     public Object visit(ASTFunctionCall node, Object data) {
-        boolean first = true;
+        boolean firstNode = true;
         for ( WandNode child: node ) {
-            if ( first ) {
-                first = false;
+            if ( firstNode ) {
+                firstNode = false;
                 // FIXME: this should eventually be a WandVariable
                 // and work automatically with accept()
                 ASTIdentifier identifier = (ASTIdentifier)child;
@@ -147,9 +148,27 @@ public class CCodeGenerator extends WandVisitor {
                 writeString( "( " );
                 continue;
             }
+            
             child.accept( this, data );
         }
         writeString( " )" );
+        
+        return data;
+    }
+    
+    public Object visit(ASTArguments node, Object data) {
+        boolean firstNode = true;
+        
+        for ( WandNode child: node ) {
+            if ( firstNode ) {
+                firstNode = false;
+            } else {
+                // add commas before subsequent arguments
+                writeString( ", " );
+            }
+            
+            child.accept( this, data );
+        }
         
         return data;
     }
@@ -158,6 +177,17 @@ public class CCodeGenerator extends WandVisitor {
         WandNode lhs = (WandNode)node.getLHS( );
         WandNode rhs = (WandNode)node.getRHS( );
         ASTInfixOperator op = (ASTInfixOperator)node.getOperator( );
+        
+        // some operators don't work as "a OP b" in C, such as pow
+        if ( op.getOperatorType() == WandParserConstants.OP_POW ) {
+            // FIXME: pow type needs to be determined from the types of sub expressions
+            writeString( "(int)pow( (" );
+            lhs.accept( this, data );
+            writeString( "), (" );
+            rhs.accept( this, data );
+            writeString( ") )" );
+            return data;
+        }
         
         writeString( "( " );
         lhs.accept( this, data );
@@ -327,7 +357,7 @@ public class CCodeGenerator extends WandVisitor {
                 writeString( "--" );
                 break;
             default:
-                assert false: "Unknown operator: " + WandParserConstants.tokenImage[operatorType];
+                assert false: "Unknown postfix operator: " + WandParserConstants.tokenImage[operatorType];
         }
         
         return data;
@@ -352,6 +382,9 @@ public class CCodeGenerator extends WandVisitor {
             case WandParserConstants.OP_SUB:
                 writeString( "-" );
                 break;
+            case WandParserConstants.OP_XOR:
+                writeString( "^" );
+                break;
             case WandParserConstants.OP_EQUALS:
                 writeString( "==" );
                 break;
@@ -371,7 +404,7 @@ public class CCodeGenerator extends WandVisitor {
                 writeString( ">" );
                 break;
             default:
-                assert false: "Unknown operator: " + WandParserConstants.tokenImage[operatorType];
+                assert false: "Unknown infix operator: " + WandParserConstants.tokenImage[operatorType];
         }
         
         return data;
@@ -400,7 +433,7 @@ public class CCodeGenerator extends WandVisitor {
                 writeString( "-=" );
                 break;
             default:
-                assert false: "Unknown operator: " + WandParserConstants.tokenImage[operatorType];
+                assert false: "Unknown assignment operator: " + WandParserConstants.tokenImage[operatorType];
         }
         
         return data;

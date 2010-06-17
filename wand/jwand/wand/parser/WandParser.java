@@ -263,14 +263,14 @@ public class WandParser/*@bgen(jjtree)*/implements WandParserTreeConstants, Wand
         label_3:
         while (true) {
           switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-          case 68:
+          case 70:
             ;
             break;
           default:
             jj_la1[3] = jj_gen;
             break label_3;
           }
-          jj_consume_token(68);
+          jj_consume_token(70);
           FunctionParameter();
         }
         break;
@@ -407,10 +407,10 @@ public class WandParser/*@bgen(jjtree)*/implements WandParserTreeConstants, Wand
       BuiltinType();
       label_4:
       while (true) {
-        jj_consume_token(69);
-        jj_consume_token(70);
+        jj_consume_token(71);
+        jj_consume_token(72);
         switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-        case 69:
+        case 71:
           ;
           break;
         default:
@@ -449,14 +449,14 @@ public class WandParser/*@bgen(jjtree)*/implements WandParserTreeConstants, Wand
       label_5:
       while (true) {
         switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-        case 71:
+        case 73:
           ;
           break;
         default:
           jj_la1[9] = jj_gen;
           break label_5;
         }
-        jj_consume_token(71);
+        jj_consume_token(73);
         jj_consume_token(ID);
       }
     } catch (Throwable jjte000) {
@@ -530,8 +530,8 @@ public class WandParser/*@bgen(jjtree)*/implements WandParserTreeConstants, Wand
         case OP_SUB:
         case OP_MUL:
         case ID:
-        case 81:
-        case 85:
+        case 82:
+        case 86:
         case 87:
           ConditionalExpression();
           break;
@@ -570,8 +570,8 @@ public class WandParser/*@bgen(jjtree)*/implements WandParserTreeConstants, Wand
     try {
       OrOrExpression();
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-      case 72:
-        jj_consume_token(72);
+      case 74:
+        jj_consume_token(74);
         Expression();
         jj_consume_token(MODIFIER_ARG);
         ConditionalExpression();
@@ -652,7 +652,7 @@ public class WandParser/*@bgen(jjtree)*/implements WandParserTreeConstants, Wand
       label_7:
       while (true) {
         switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-        case 79:
+        case 81:
           ;
           break;
         default:
@@ -734,7 +734,7 @@ public class WandParser/*@bgen(jjtree)*/implements WandParserTreeConstants, Wand
       label_9:
       while (true) {
         switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-        case 80:
+        case OP_XOR:
           ;
           break;
         default:
@@ -775,7 +775,7 @@ public class WandParser/*@bgen(jjtree)*/implements WandParserTreeConstants, Wand
       label_10:
       while (true) {
         switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-        case 81:
+        case 82:
           ;
           break;
         default:
@@ -878,9 +878,9 @@ public class WandParser/*@bgen(jjtree)*/implements WandParserTreeConstants, Wand
       label_11:
       while (true) {
         switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-        case 82:
         case 83:
         case 84:
+        case 85:
           ;
           break;
         default:
@@ -1049,7 +1049,7 @@ public class WandParser/*@bgen(jjtree)*/implements WandParserTreeConstants, Wand
     try {
       UnaryExpression();
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-      case 86:
+      case OP_POW:
         PowOperator();
         PowExpression();
         break;
@@ -1099,8 +1099,8 @@ public class WandParser/*@bgen(jjtree)*/implements WandParserTreeConstants, Wand
       case OP_ADD:
       case OP_SUB:
       case OP_MUL:
-      case 81:
-      case 85:
+      case 82:
+      case 86:
       case 87:
         UnaryOperator();
         UnaryExpression();
@@ -1274,8 +1274,8 @@ void PostfixExpression() #PostfixExpression(>1) : {}
       case OP_SUB:
       case OP_MUL:
       case ID:
-      case 81:
-      case 85:
+      case 82:
+      case 86:
       case 87:
         Expression();
         break;
@@ -1286,14 +1286,14 @@ void PostfixExpression() #PostfixExpression(>1) : {}
       label_15:
       while (true) {
         switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-        case 68:
+        case 70:
           ;
           break;
         default:
           jj_la1[29] = jj_gen;
           break label_15;
         }
-        jj_consume_token(68);
+        jj_consume_token(70);
         Expression();
       }
       jj_consume_token(RPAREN);
@@ -1340,17 +1340,8 @@ void PostfixExpression() #PostfixExpression(>1) : {}
       case OP_DIV_ASSIGN:
         t = jj_consume_token(OP_DIV_ASSIGN);
         break;
-      case 73:
-        t = jj_consume_token(73);
-        break;
-      case 74:
-        t = jj_consume_token(74);
-        break;
       case 75:
         t = jj_consume_token(75);
-        break;
-      case OP_MOD_ASSIGN:
-        t = jj_consume_token(OP_MOD_ASSIGN);
         break;
       case 76:
         t = jj_consume_token(76);
@@ -1358,8 +1349,17 @@ void PostfixExpression() #PostfixExpression(>1) : {}
       case 77:
         t = jj_consume_token(77);
         break;
+      case OP_MOD_ASSIGN:
+        t = jj_consume_token(OP_MOD_ASSIGN);
+        break;
       case 78:
         t = jj_consume_token(78);
+        break;
+      case 79:
+        t = jj_consume_token(79);
+        break;
+      case 80:
+        t = jj_consume_token(80);
         break;
       default:
         jj_la1[30] = jj_gen;
@@ -1458,7 +1458,7 @@ void PostfixExpression() #PostfixExpression(>1) : {}
     boolean jjtc000 = true;
     jjtree.openNodeScope(jjtn000);Token t;
     try {
-      t = jj_consume_token(79);
+      t = jj_consume_token(81);
       jjtree.closeNodeScope(jjtn000, true);
       jjtc000 = false;
       jjtn000.setTokenType( t.kind );
@@ -1492,7 +1492,7 @@ void PostfixExpression() #PostfixExpression(>1) : {}
     boolean jjtc000 = true;
     jjtree.openNodeScope(jjtn000);Token t;
     try {
-      t = jj_consume_token(80);
+      t = jj_consume_token(OP_XOR);
       jjtree.closeNodeScope(jjtn000, true);
       jjtc000 = false;
       jjtn000.setTokenType( t.kind );
@@ -1509,7 +1509,7 @@ void PostfixExpression() #PostfixExpression(>1) : {}
     boolean jjtc000 = true;
     jjtree.openNodeScope(jjtn000);Token t;
     try {
-      t = jj_consume_token(81);
+      t = jj_consume_token(82);
       jjtree.closeNodeScope(jjtn000, true);
       jjtc000 = false;
       jjtn000.setTokenType( t.kind );
@@ -1527,14 +1527,14 @@ void PostfixExpression() #PostfixExpression(>1) : {}
     jjtree.openNodeScope(jjtn000);Token t;
     try {
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-      case 82:
-        t = jj_consume_token(82);
-        break;
       case 83:
         t = jj_consume_token(83);
         break;
       case 84:
         t = jj_consume_token(84);
+        break;
+      case 85:
+        t = jj_consume_token(85);
         break;
       default:
         jj_la1[33] = jj_gen;
@@ -1647,7 +1647,7 @@ void PostfixExpression() #PostfixExpression(>1) : {}
     boolean jjtc000 = true;
     jjtree.openNodeScope(jjtn000);Token t;
     try {
-      t = jj_consume_token(85);
+      t = jj_consume_token(86);
       jjtree.closeNodeScope(jjtn000, true);
       jjtc000 = false;
       jjtn000.setTokenType( t.kind );
@@ -1664,7 +1664,7 @@ void PostfixExpression() #PostfixExpression(>1) : {}
     boolean jjtc000 = true;
     jjtree.openNodeScope(jjtn000);Token t;
     try {
-      t = jj_consume_token(86);
+      t = jj_consume_token(OP_POW);
       jjtree.closeNodeScope(jjtn000, true);
       jjtc000 = false;
       jjtn000.setTokenType( t.kind );
@@ -1682,8 +1682,8 @@ void PostfixExpression() #PostfixExpression(>1) : {}
   jjtree.openNodeScope(jjtn000);
     try {
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-      case 81:
-        jj_consume_token(81);
+      case 82:
+        jj_consume_token(82);
         break;
       case OP_INC:
         jj_consume_token(OP_INC);
@@ -1703,8 +1703,8 @@ void PostfixExpression() #PostfixExpression(>1) : {}
       case 87:
         jj_consume_token(87);
         break;
-      case 85:
-        jj_consume_token(85);
+      case 86:
+        jj_consume_token(86);
         break;
       default:
         jj_la1[37] = jj_gen;
@@ -1903,8 +1903,8 @@ void BlockStatement() #void : {}
     case STMT_BREAK:
     case STMT_CONTINUE:
     case ID:
-    case 81:
-    case 85:
+    case 82:
+    case 86:
     case 87:
       NonEmptyStatement();
       break;
@@ -1957,8 +1957,8 @@ void BlockStatement() #void : {}
         case STMT_CONTINUE:
         case END_STMT:
         case ID:
-        case 81:
-        case 85:
+        case 82:
+        case 86:
         case 87:
           ;
           break;
@@ -2065,8 +2065,8 @@ void BlockStatement() #void : {}
     case STMT_BREAK:
     case STMT_CONTINUE:
     case ID:
-    case 81:
-    case 85:
+    case 82:
+    case 86:
     case 87:
       NonEmptyStatement();
       break;
@@ -2360,14 +2360,14 @@ void BlockStatement() #void : {}
     label_17:
     while (true) {
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-      case 68:
+      case 70:
         ;
         break;
       default:
         jj_la1[45] = jj_gen;
         break label_17;
       }
-      jj_consume_token(68);
+      jj_consume_token(70);
       VariableDeclarator();
     }
   }
@@ -2471,7 +2471,7 @@ void BlockStatement() #void : {}
   }
 
   static private boolean jj_3R_95() {
-    if (jj_scan_token(86)) return true;
+    if (jj_scan_token(OP_POW)) return true;
     return false;
   }
 
@@ -2821,11 +2821,11 @@ void BlockStatement() #void : {}
   static private boolean jj_3R_80() {
     Token xsp;
     xsp = jj_scanpos;
-    if (jj_scan_token(82)) {
-    jj_scanpos = xsp;
     if (jj_scan_token(83)) {
     jj_scanpos = xsp;
-    if (jj_scan_token(84)) return true;
+    if (jj_scan_token(84)) {
+    jj_scanpos = xsp;
+    if (jj_scan_token(85)) return true;
     }
     }
     return false;
@@ -2857,7 +2857,7 @@ void BlockStatement() #void : {}
   }
 
   static private boolean jj_3R_72() {
-    if (jj_scan_token(81)) return true;
+    if (jj_scan_token(82)) return true;
     return false;
   }
 
@@ -2872,7 +2872,7 @@ void BlockStatement() #void : {}
   }
 
   static private boolean jj_3R_53() {
-    if (jj_scan_token(72)) return true;
+    if (jj_scan_token(74)) return true;
     return false;
   }
 
@@ -2887,7 +2887,7 @@ void BlockStatement() #void : {}
   }
 
   static private boolean jj_3R_69() {
-    if (jj_scan_token(80)) return true;
+    if (jj_scan_token(OP_XOR)) return true;
     return false;
   }
 
@@ -2940,7 +2940,7 @@ void BlockStatement() #void : {}
   }
 
   static private boolean jj_3R_63() {
-    if (jj_scan_token(79)) return true;
+    if (jj_scan_token(81)) return true;
     return false;
   }
 
@@ -2966,7 +2966,7 @@ void BlockStatement() #void : {}
   }
 
   static private boolean jj_3R_116() {
-    if (jj_scan_token(71)) return true;
+    if (jj_scan_token(73)) return true;
     return false;
   }
 
@@ -3001,7 +3001,7 @@ void BlockStatement() #void : {}
   }
 
   static private boolean jj_3R_24() {
-    if (jj_scan_token(69)) return true;
+    if (jj_scan_token(71)) return true;
     return false;
   }
 
@@ -3024,11 +3024,11 @@ void BlockStatement() #void : {}
   static private boolean jj_3R_92() {
     Token xsp;
     xsp = jj_scanpos;
-    if (jj_scan_token(40)) {
+    if (jj_scan_token(42)) {
     jj_scanpos = xsp;
-    if (jj_scan_token(41)) {
+    if (jj_scan_token(43)) {
     jj_scanpos = xsp;
-    if (jj_scan_token(42)) return true;
+    if (jj_scan_token(44)) return true;
     }
     }
     return false;
@@ -3063,9 +3063,9 @@ void BlockStatement() #void : {}
   static private boolean jj_3R_86() {
     Token xsp;
     xsp = jj_scanpos;
-    if (jj_scan_token(38)) {
+    if (jj_scan_token(40)) {
     jj_scanpos = xsp;
-    if (jj_scan_token(39)) return true;
+    if (jj_scan_token(41)) return true;
     }
     return false;
   }
@@ -3089,7 +3089,7 @@ void BlockStatement() #void : {}
     jj_scanpos = xsp;
     if (jj_scan_token(9)) {
     jj_scanpos = xsp;
-    if (jj_scan_token(67)) return true;
+    if (jj_scan_token(69)) return true;
     }
     }
     }
@@ -3119,7 +3119,7 @@ void BlockStatement() #void : {}
   static private boolean jj_3R_20() {
     Token xsp;
     xsp = jj_scanpos;
-    if (jj_scan_token(43)) {
+    if (jj_scan_token(45)) {
     jj_scanpos = xsp;
     if (jj_scan_token(25)) {
     jj_scanpos = xsp;
@@ -3129,19 +3129,19 @@ void BlockStatement() #void : {}
     jj_scanpos = xsp;
     if (jj_scan_token(28)) {
     jj_scanpos = xsp;
-    if (jj_scan_token(73)) {
-    jj_scanpos = xsp;
-    if (jj_scan_token(74)) {
-    jj_scanpos = xsp;
     if (jj_scan_token(75)) {
-    jj_scanpos = xsp;
-    if (jj_scan_token(29)) {
     jj_scanpos = xsp;
     if (jj_scan_token(76)) {
     jj_scanpos = xsp;
     if (jj_scan_token(77)) {
     jj_scanpos = xsp;
-    if (jj_scan_token(78)) return true;
+    if (jj_scan_token(29)) {
+    jj_scanpos = xsp;
+    if (jj_scan_token(78)) {
+    jj_scanpos = xsp;
+    if (jj_scan_token(79)) {
+    jj_scanpos = xsp;
+    if (jj_scan_token(80)) return true;
     }
     }
     }
@@ -3236,21 +3236,21 @@ void BlockStatement() #void : {}
   static private boolean jj_3R_97() {
     Token xsp;
     xsp = jj_scanpos;
-    if (jj_scan_token(81)) {
+    if (jj_scan_token(82)) {
     jj_scanpos = xsp;
     if (jj_scan_token(23)) {
     jj_scanpos = xsp;
     if (jj_scan_token(24)) {
     jj_scanpos = xsp;
+    if (jj_scan_token(42)) {
+    jj_scanpos = xsp;
+    if (jj_scan_token(41)) {
+    jj_scanpos = xsp;
     if (jj_scan_token(40)) {
-    jj_scanpos = xsp;
-    if (jj_scan_token(39)) {
-    jj_scanpos = xsp;
-    if (jj_scan_token(38)) {
     jj_scanpos = xsp;
     if (jj_scan_token(87)) {
     jj_scanpos = xsp;
-    if (jj_scan_token(85)) return true;
+    if (jj_scan_token(86)) return true;
     }
     }
     }
@@ -3286,10 +3286,10 @@ void BlockStatement() #void : {}
       jj_la1_0 = new int[] {0x380,0x0,0x0,0x0,0x380,0x0,0x380,0x380,0x0,0x0,0x70c00,0x18f0c00,0x0,0x0,0x0,0x0,0x0,0x0,0xc0000000,0xc0000000,0x0,0x0,0x0,0x0,0x18f0c00,0x1800000,0xf0c00,0x80000,0x18f0c00,0x0,0x3e000000,0x0,0x0,0x0,0xc0000000,0x0,0x0,0x1800000,0x1800000,0x60000,0x1af0f80,0x1af0f80,0x1af0f80,0x380,0x0,0x0,0x0,};
    }
    private static void jj_la1_init_1() {
-      jj_la1_1 = new int[] {0x1fc000,0x1fc000,0x1fc000,0x0,0x0,0x800,0x0,0x0,0x0,0x0,0x0,0x1c0,0x0,0x1000,0x0,0x2000,0x0,0x0,0x3f,0x3f,0x0,0xc0,0x700,0x0,0x1c0,0x0,0x0,0x0,0x1c0,0x0,0x800,0xc0,0x700,0x0,0x0,0xf,0x30,0x1c0,0x0,0x0,0x1dc001c0,0x1dc001c0,0x1dc001c0,0x1dc00000,0x200000,0x0,0x800,};
+      jj_la1_1 = new int[] {0x7f0000,0x7f0000,0x7f0000,0x0,0x0,0x2000,0x0,0x0,0x0,0x0,0x0,0x700,0x0,0x4000,0x0,0x8000,0x80,0x0,0x3f,0x3f,0x0,0x300,0x1c00,0x40,0x700,0x0,0x0,0x0,0x700,0x0,0x2000,0x300,0x1c00,0x0,0x0,0xf,0x30,0x700,0x0,0x0,0x77000700,0x77000700,0x77000700,0x77000000,0x800000,0x0,0x2000,};
    }
    private static void jj_la1_init_2() {
-      jj_la1_2 = new int[] {0x8,0x0,0x0,0x10,0x8,0x0,0x8,0x8,0x20,0x80,0x0,0xa20008,0x100,0x0,0x8000,0x0,0x10000,0x20000,0x0,0x0,0x1c0000,0x0,0x0,0x400000,0xa20008,0x0,0x8,0x0,0xa20008,0x10,0x7e00,0x0,0x0,0x1c0000,0x0,0x0,0x0,0xa20000,0x0,0x0,0xa2000f,0xa2000f,0xa2000b,0xb,0x0,0x10,0x0,};
+      jj_la1_2 = new int[] {0x20,0x0,0x0,0x40,0x20,0x0,0x20,0x20,0x80,0x200,0x0,0xc40020,0x400,0x0,0x20000,0x0,0x0,0x40000,0x0,0x0,0x380000,0x0,0x0,0x0,0xc40020,0x0,0x20,0x0,0xc40020,0x40,0x1f800,0x0,0x0,0x380000,0x0,0x0,0x0,0xc40000,0x0,0x0,0xc4003c,0xc4003c,0xc4002c,0x2c,0x0,0x40,0x0,};
    }
   static final private JJCalls[] jj_2_rtns = new JJCalls[5];
   static private boolean jj_rescan = false;

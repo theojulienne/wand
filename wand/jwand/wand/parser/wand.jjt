@@ -82,6 +82,8 @@ TOKEN: {
 | < OP_NOT_IN: "!in" >
 | < OP_IN: "in" >
 
+| < OP_POW: "^^" >
+| < OP_XOR: "^" >
 | < OP_ADD: "+" >
 | < OP_SUB: "-" >
 
