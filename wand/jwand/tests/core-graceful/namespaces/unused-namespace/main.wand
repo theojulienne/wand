@@ -1,6 +1,7 @@
 namespace Foo;
 
-using Bar;
+// "someFunction" is in "other", which is compiled with this
+// file, but isn't imported with "using"
 
 int main( ) {
 	someFunction( );

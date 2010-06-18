@@ -1,0 +1,9 @@
+namespace Foo;
+
+using Bar; // this namespace is undefined
+
+int main( ) {
+	someFunction( );
+	
+	return 0;
+}
