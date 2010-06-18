@@ -1,0 +1,9 @@
+namespace Foo;
+
+using Bar;
+
+int main( ) {
+	someFunction( );
+	
+	return 0;
+}
