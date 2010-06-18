@@ -124,6 +124,9 @@ TOKEN: {
 | < STMT_BREAK: "break" >
 | < STMT_CONTINUE: "continue" >
 
+| < DECL_NAMESPACE: "namespace" >
+| < STMT_USING: "using" >
+
 | < END_STMT: ";" >
 
 }
@@ -147,7 +150,7 @@ ASTProgram Program() : {/*@bgen(jjtree) Program */
 {/*@bgen(jjtree) Program */
     try {
 /*@egen*/
-    Declarations()/*@bgen(jjtree)*/
+    [NamespaceDeclaration()] Declarations()/*@bgen(jjtree)*/
     {
       jjtree.closeNodeScope(jjtn000, true);
       jjtc000 = false;
@@ -213,12 +216,121 @@ void Declarations() : {/*@bgen(jjtree) Declarations */
 /*@egen*/
 }
 
-
+void NamespaceDeclaration() : {/*@bgen(jjtree) NamespaceDeclaration */
+  ASTNamespaceDeclaration jjtn000 = new ASTNamespaceDeclaration(JJTNAMESPACEDECLARATION);
+  boolean jjtc000 = true;
+  jjtree.openNodeScope(jjtn000);
+/*@egen*/}
+{/*@bgen(jjtree) NamespaceDeclaration */
+    try {
+/*@egen*/
+    "namespace" QualifiedNamespaceName() ";"/*@bgen(jjtree)*/
+    } catch (Throwable jjte000) {
+      if (jjtc000) {
+        jjtree.clearNodeScope(jjtn000);
+        jjtc000 = false;
+      } else {
+        jjtree.popNode();
+      }
+      if (jjte000 instanceof RuntimeException) {
+        throw (RuntimeException)jjte000;
+      }
+      if (jjte000 instanceof ParseException) {
+        throw (ParseException)jjte000;
+      }
+      throw (Error)jjte000;
+    } finally {
+      if (jjtc000) {
+        jjtree.closeNodeScope(jjtn000, true);
+      }
+    }
+/*@egen*/
+}
 
 // Declaration -> FunctionDeclaration
 void Declaration()       : {}
 {
-	DecoratedFunctionDeclaration()
+	DecoratedFunctionDeclaration() |
+	UsingStatement()
+}
+
+void UsingStatement() : {/*@bgen(jjtree) UsingStatement */
+  ASTUsingStatement jjtn000 = new ASTUsingStatement(JJTUSINGSTATEMENT);
+  boolean jjtc000 = true;
+  jjtree.openNodeScope(jjtn000);
+/*@egen*/}
+{/*@bgen(jjtree) UsingStatement */
+    try {
+/*@egen*/
+    "using" QualifiedNamespaceName() ";"/*@bgen(jjtree)*/
+    } catch (Throwable jjte000) {
+      if (jjtc000) {
+        jjtree.clearNodeScope(jjtn000);
+        jjtc000 = false;
+      } else {
+        jjtree.popNode();
+      }
+      if (jjte000 instanceof RuntimeException) {
+        throw (RuntimeException)jjte000;
+      }
+      if (jjte000 instanceof ParseException) {
+        throw (ParseException)jjte000;
+      }
+      throw (Error)jjte000;
+    } finally {
+      if (jjtc000) {
+        jjtree.closeNodeScope(jjtn000, true);
+      }
+    }
+/*@egen*/
+}
+
+void QualifiedNamespaceName() : {/*@bgen(jjtree) QualifiedNamespaceName */
+  ASTQualifiedNamespaceName jjtn000 = new ASTQualifiedNamespaceName(JJTQUALIFIEDNAMESPACENAME);
+  boolean jjtc000 = true;
+  jjtree.openNodeScope(jjtn000);
+/*@egen*/}
+{/*@bgen(jjtree) QualifiedNamespaceName */
+    try {
+/*@egen*/
+    NamespaceName() ("." NamespaceName())*/*@bgen(jjtree)*/
+    } catch (Throwable jjte000) {
+      if (jjtc000) {
+        jjtree.clearNodeScope(jjtn000);
+        jjtc000 = false;
+      } else {
+        jjtree.popNode();
+      }
+      if (jjte000 instanceof RuntimeException) {
+        throw (RuntimeException)jjte000;
+      }
+      if (jjte000 instanceof ParseException) {
+        throw (ParseException)jjte000;
+      }
+      throw (Error)jjte000;
+    } finally {
+      if (jjtc000) {
+        jjtree.closeNodeScope(jjtn000, true);
+      }
+    }
+/*@egen*/
+}
+
+void NamespaceName() : {/*@bgen(jjtree) NamespaceName */
+  ASTNamespaceName jjtn000 = new ASTNamespaceName(JJTNAMESPACENAME);
+  boolean jjtc000 = true;
+  jjtree.openNodeScope(jjtn000);
+/*@egen*/}
+{/*@bgen(jjtree) NamespaceName */
+    try {
+/*@egen*/
+    <ID>/*@bgen(jjtree)*/
+    } finally {
+      if (jjtc000) {
+        jjtree.closeNodeScope(jjtn000, true);
+      }
+    }
+/*@egen*/
 }
 
 void DecoratedFunctionDeclaration() : {/*@bgen(jjtree) DecoratedFunctionDeclaration */

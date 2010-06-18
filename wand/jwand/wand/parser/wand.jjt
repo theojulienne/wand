@@ -120,6 +120,9 @@ TOKEN: {
 | < STMT_BREAK: "break" >
 | < STMT_CONTINUE: "continue" >
 
+| < DECL_NAMESPACE: "namespace" >
+| < STMT_USING: "using" >
+
 | < END_STMT: ";" >
 
 }
@@ -137,7 +140,7 @@ ASTProgram Program() : {
     ASTDeclarations declarations;
 }
 {
-    Declarations()
+    [NamespaceDeclaration()] Declarations()
     
     { return jjtThis; }
 }
@@ -152,12 +155,31 @@ void Declarations() : {
     ( Declaration() )*
 }
 
-
+void NamespaceDeclaration() : {}
+{
+    "namespace" QualifiedNamespaceName() ";"
+}
 
 // Declaration -> FunctionDeclaration
 void Declaration() #void : {}
 {
-	DecoratedFunctionDeclaration()
+	DecoratedFunctionDeclaration() |
+	UsingStatement()
+}
+
+void UsingStatement() : {}
+{
+    "using" QualifiedNamespaceName() ";"
+}
+
+void QualifiedNamespaceName() : {}
+{
+    NamespaceName() ("." NamespaceName())*
+}
+
+void NamespaceName() : {}
+{
+    <ID>
 }
 
 void DecoratedFunctionDeclaration() : {}

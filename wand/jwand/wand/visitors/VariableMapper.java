@@ -10,7 +10,7 @@ public class VariableMapper extends WandVisitor {
     private boolean inDeclaration = false;
     
     public VariableMapper( ) {
-        
+        pushScope( );
     }
     
     private void pushScope( ) {

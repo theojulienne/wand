@@ -127,9 +127,13 @@ public interface WandParserConstants {
   /** RegularExpression Id. */
   int STMT_CONTINUE = 67;
   /** RegularExpression Id. */
-  int END_STMT = 68;
+  int DECL_NAMESPACE = 68;
   /** RegularExpression Id. */
-  int ID = 69;
+  int STMT_USING = 69;
+  /** RegularExpression Id. */
+  int END_STMT = 70;
+  /** RegularExpression Id. */
+  int ID = 71;
 
   /** Lexical state. */
   int DEFAULT = 0;
@@ -204,12 +208,14 @@ public interface WandParserConstants {
     "\"foreach\"",
     "\"break\"",
     "\"continue\"",
+    "\"namespace\"",
+    "\"using\"",
     "\";\"",
     "<ID>",
+    "\".\"",
     "\",\"",
     "\"[\"",
     "\"]\"",
-    "\".\"",
     "\"?\"",
     "\"&=\"",
     "\"|=\"",
