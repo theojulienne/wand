@@ -1,5 +1,5 @@
 namespace Bar;
 
-void someFunction( ) {
+public void someFunction( ) {
 
 }
