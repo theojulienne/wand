@@ -2,6 +2,7 @@ package wand;
 
 import wand.generators.GeneratorFactory;
 import wand.parser.*;
+import wand.core.WandVisitor;
 
 import jargs.gnu.CmdLineParser;
 
@@ -78,14 +79,16 @@ public class WandCompiler {
 		    System.exit( 1 );
 		}
 		
-		wand.visitors.InfixExpansion iexp = new wand.visitors.InfixExpansion( );
-		iexp.visitFrom( program, null );
+		WandVisitor[] visitors = {
+		    new wand.visitors.InfixExpansion( ),
+		    new wand.visitors.TypeMapper( ),
+		    new wand.visitors.VariableMapper( ),
+		    new wand.visitors.FunctionModifiers( ),
+		};
 		
-		wand.visitors.VariableMapper vmap = new wand.visitors.VariableMapper( );
-		vmap.visitFrom( program, null );
-		
-		wand.visitors.FunctionModifiers fmod = new wand.visitors.FunctionModifiers( );
-		fmod.visitFrom( program, null );
+		for ( int i = 0; i < visitors.length; i++ ) {
+		    visitors[i].visitFrom( program, null );
+		}
 		
 		wand.backends.c.CCodeGenerator codegen = new wand.backends.c.CCodeGenerator( );
 		codegen.setOutputStream( output );
