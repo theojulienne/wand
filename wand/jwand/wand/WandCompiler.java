@@ -80,10 +80,23 @@ public class WandCompiler {
 		}
 		
 		WandVisitor[] visitors = {
+		    /**** Parse tree modifications ****/
+		    
+		    // Expand infix expressions (a op b op c) -> ((a op b) op c)
 		    new wand.visitors.InfixExpansion( ),
-		    new wand.visitors.TypeMapper( ),
-		    new wand.visitors.VariableMapper( ),
+		    // Merge function modifiers into FunctionDeclaration nodes
 		    new wand.visitors.FunctionModifiers( ),
+		    
+		    /**** Compilation passes ****/
+		    
+		    // Load all C header imports
+		    //new wand.visitors.ImportCHeaders( ),
+		    // Find all declared types (classes etc) and register them
+		    new wand.visitors.TypeFinder( ),
+		    // Find all uses of types and map them to registered types
+		    new wand.visitors.TypeMapper( ),
+		    // Find all uses of variables and map them to scope'd declarations
+		    new wand.visitors.VariableMapper( ),
 		};
 		
 		for ( int i = 0; i < visitors.length; i++ ) {
