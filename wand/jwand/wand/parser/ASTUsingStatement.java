@@ -4,18 +4,27 @@ package wand.parser;
 
 public
 class ASTUsingStatement extends SimpleNode {
-  public ASTUsingStatement(int id) {
-    super(id);
-  }
+    public ASTUsingStatement(int id) {
+        super(id);
+    }
 
-  public ASTUsingStatement(WandParser p, int id) {
-    super(p, id);
-  }
+    public ASTUsingStatement(WandParser p, int id) {
+        super(p, id);
+    }
 
+    public String getQualifiedName( ) {
+        ASTQualifiedNamespaceName qualName = 
+            (ASTQualifiedNamespaceName)this.getChild( 0 );
+        return qualName.getQualifiedName( );
+    }
+    
+    public String toString( ) {
+        return "<ASTUsingStatement: " + getQualifiedName( ) + ">";
+    }
 
-  /** Accept the visitor. **/
-  public Object jjtAccept(WandParserVisitor visitor, Object data) {
-    return visitor.visit(this, data);
-  }
+    /** Accept the visitor. **/
+    public Object jjtAccept(WandParserVisitor visitor, Object data) {
+        return visitor.visit(this, data);
+    }
 }
 /* JavaCC - OriginalChecksum=e97263d2aa79cf91316462757ae9511e (do not edit this line) */

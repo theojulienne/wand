@@ -2,12 +2,12 @@
 package wand.parser;
 
 public class WandParser/*@bgen(jjtree)*/implements WandParserTreeConstants, WandParserConstants {/*@bgen(jjtree)*/
-  protected static JJTWandParserState jjtree = new JJTWandParserState();
+  protected JJTWandParserState jjtree = new JJTWandParserState();
 
 /* *** Context-free grammar (EBNF) *** */
 
 /* The start nonterminal and its productions. */
-  static final public ASTProgram Program() throws ParseException {
+  final public ASTProgram Program() throws ParseException {
                         /*@bgen(jjtree) Program */
     ASTProgram jjtn000 = new ASTProgram(JJTPROGRAM);
     boolean jjtc000 = true;
@@ -50,7 +50,7 @@ public class WandParser/*@bgen(jjtree)*/implements WandParserTreeConstants, Wand
 /* Other nonterminals and their productions */
 
 // Declarations -> Declaration [Declarations]
-  static final public void Declarations() throws ParseException {
+  final public void Declarations() throws ParseException {
                        /*@bgen(jjtree) Declarations */
     ASTDeclarations jjtn000 = new ASTDeclarations(JJTDECLARATIONS);
     boolean jjtc000 = true;
@@ -100,7 +100,7 @@ public class WandParser/*@bgen(jjtree)*/implements WandParserTreeConstants, Wand
     }
   }
 
-  static final public void NamespaceDeclaration() throws ParseException {
+  final public void NamespaceDeclaration() throws ParseException {
                                /*@bgen(jjtree) NamespaceDeclaration */
   ASTNamespaceDeclaration jjtn000 = new ASTNamespaceDeclaration(JJTNAMESPACEDECLARATION);
   boolean jjtc000 = true;
@@ -131,7 +131,7 @@ public class WandParser/*@bgen(jjtree)*/implements WandParserTreeConstants, Wand
   }
 
 // Declaration -> FunctionDeclaration
-  static final public void Declaration() throws ParseException {
+  final public void Declaration() throws ParseException {
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
     case VOID:
     case INT:
@@ -156,7 +156,7 @@ public class WandParser/*@bgen(jjtree)*/implements WandParserTreeConstants, Wand
     }
   }
 
-  static final public void UsingStatement() throws ParseException {
+  final public void UsingStatement() throws ParseException {
                          /*@bgen(jjtree) UsingStatement */
   ASTUsingStatement jjtn000 = new ASTUsingStatement(JJTUSINGSTATEMENT);
   boolean jjtc000 = true;
@@ -186,7 +186,7 @@ public class WandParser/*@bgen(jjtree)*/implements WandParserTreeConstants, Wand
     }
   }
 
-  static final public void QualifiedNamespaceName() throws ParseException {
+  final public void QualifiedNamespaceName() throws ParseException {
                                  /*@bgen(jjtree) QualifiedNamespaceName */
   ASTQualifiedNamespaceName jjtn000 = new ASTQualifiedNamespaceName(JJTQUALIFIEDNAMESPACENAME);
   boolean jjtc000 = true;
@@ -227,13 +227,16 @@ public class WandParser/*@bgen(jjtree)*/implements WandParserTreeConstants, Wand
     }
   }
 
-  static final public void NamespaceName() throws ParseException {
+  final public void NamespaceName() throws ParseException {
                         /*@bgen(jjtree) NamespaceName */
-  ASTNamespaceName jjtn000 = new ASTNamespaceName(JJTNAMESPACENAME);
-  boolean jjtc000 = true;
-  jjtree.openNodeScope(jjtn000);
+    ASTNamespaceName jjtn000 = new ASTNamespaceName(JJTNAMESPACENAME);
+    boolean jjtc000 = true;
+    jjtree.openNodeScope(jjtn000);Token t;
     try {
-      jj_consume_token(ID);
+      t = jj_consume_token(ID);
+      jjtree.closeNodeScope(jjtn000, true);
+      jjtc000 = false;
+      jjtn000.setName( t.image );
     } finally {
       if (jjtc000) {
         jjtree.closeNodeScope(jjtn000, true);
@@ -241,7 +244,7 @@ public class WandParser/*@bgen(jjtree)*/implements WandParserTreeConstants, Wand
     }
   }
 
-  static final public void DecoratedFunctionDeclaration() throws ParseException {
+  final public void DecoratedFunctionDeclaration() throws ParseException {
                                        /*@bgen(jjtree) DecoratedFunctionDeclaration */
   ASTDecoratedFunctionDeclaration jjtn000 = new ASTDecoratedFunctionDeclaration(JJTDECORATEDFUNCTIONDECLARATION);
   boolean jjtc000 = true;
@@ -270,7 +273,7 @@ public class WandParser/*@bgen(jjtree)*/implements WandParserTreeConstants, Wand
     }
   }
 
-  static final public void Modifiers() throws ParseException {
+  final public void Modifiers() throws ParseException {
                     /*@bgen(jjtree) Modifiers */
   ASTModifiers jjtn000 = new ASTModifiers(JJTMODIFIERS);
   boolean jjtc000 = true;
@@ -315,7 +318,7 @@ public class WandParser/*@bgen(jjtree)*/implements WandParserTreeConstants, Wand
     }
   }
 
-  static final public void Modifier() throws ParseException {
+  final public void Modifier() throws ParseException {
                    /*@bgen(jjtree) Modifier */
   ASTModifier jjtn000 = new ASTModifier(JJTMODIFIER);
   boolean jjtc000 = true;
@@ -358,7 +361,7 @@ public class WandParser/*@bgen(jjtree)*/implements WandParserTreeConstants, Wand
   }
 
 // FunctionDeclaration -> "void" Identifier "(" ")" "{" FunctionBody "}"
-  static final public void FunctionDeclaration() throws ParseException {
+  final public void FunctionDeclaration() throws ParseException {
                               /*@bgen(jjtree) FunctionDeclaration */
         ASTFunctionDeclaration jjtn000 = new ASTFunctionDeclaration(JJTFUNCTIONDECLARATION);
         boolean jjtc000 = true;
@@ -392,7 +395,7 @@ public class WandParser/*@bgen(jjtree)*/implements WandParserTreeConstants, Wand
     }
   }
 
-  static final public void FunctionParameters() throws ParseException {
+  final public void FunctionParameters() throws ParseException {
                              /*@bgen(jjtree) FunctionParameters */
   ASTFunctionParameters jjtn000 = new ASTFunctionParameters(JJTFUNCTIONPARAMETERS);
   boolean jjtc000 = true;
@@ -445,7 +448,7 @@ public class WandParser/*@bgen(jjtree)*/implements WandParserTreeConstants, Wand
     }
   }
 
-  static final public void FunctionParameter() throws ParseException {
+  final public void FunctionParameter() throws ParseException {
                             /*@bgen(jjtree) FunctionParameter */
   ASTFunctionParameter jjtn000 = new ASTFunctionParameter(JJTFUNCTIONPARAMETER);
   boolean jjtc000 = true;
@@ -490,7 +493,7 @@ public class WandParser/*@bgen(jjtree)*/implements WandParserTreeConstants, Wand
 }*/
 
 // Type ->
-  static final public void Type() throws ParseException {
+  final public void Type() throws ParseException {
     if (jj_2_1(2)) {
       ArrayType();
     } else {
@@ -509,7 +512,7 @@ public class WandParser/*@bgen(jjtree)*/implements WandParserTreeConstants, Wand
     }
   }
 
-  static final public void BuiltinType() throws ParseException {
+  final public void BuiltinType() throws ParseException {
                       /*@bgen(jjtree) BuiltinType */
     ASTBuiltinType jjtn000 = new ASTBuiltinType(JJTBUILTINTYPE);
     boolean jjtc000 = true;
@@ -543,7 +546,7 @@ public class WandParser/*@bgen(jjtree)*/implements WandParserTreeConstants, Wand
     }
   }
 
-  static final public void ArrayType() throws ParseException {
+  final public void ArrayType() throws ParseException {
                     /*@bgen(jjtree) ArrayType */
   ASTArrayType jjtn000 = new ASTArrayType(JJTARRAYTYPE);
   boolean jjtc000 = true;
@@ -584,7 +587,7 @@ public class WandParser/*@bgen(jjtree)*/implements WandParserTreeConstants, Wand
     }
   }
 
-  static final public void QualifiedIdentifier() throws ParseException {
+  final public void QualifiedIdentifier() throws ParseException {
                                                        /*@bgen(jjtree) #QualifiedIdentifier(> 1) */
   ASTQualifiedIdentifier jjtn000 = new ASTQualifiedIdentifier(JJTQUALIFIEDIDENTIFIER);
   boolean jjtc000 = true;
@@ -625,7 +628,7 @@ public class WandParser/*@bgen(jjtree)*/implements WandParserTreeConstants, Wand
     }
   }
 
-  static final public void Literal() throws ParseException {
+  final public void Literal() throws ParseException {
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
     case INTEGER_LITERAL:
       IntegerLiteral();
@@ -647,11 +650,11 @@ public class WandParser/*@bgen(jjtree)*/implements WandParserTreeConstants, Wand
     }
   }
 
-  static final public void Expression() throws ParseException {
+  final public void Expression() throws ParseException {
     AssignExpression();
   }
 
-  static final public void AssignExpression() throws ParseException {
+  final public void AssignExpression() throws ParseException {
                                                  /*@bgen(jjtree) #AssignExpression(> 1) */
   ASTAssignExpression jjtn000 = new ASTAssignExpression(JJTASSIGNEXPRESSION);
   boolean jjtc000 = true;
@@ -707,7 +710,7 @@ public class WandParser/*@bgen(jjtree)*/implements WandParserTreeConstants, Wand
     }
   }
 
-  static final public void ConditionalExpression() throws ParseException {
+  final public void ConditionalExpression() throws ParseException {
                                                            /*@bgen(jjtree) #ConditionalExpression(> 1) */
   ASTConditionalExpression jjtn000 = new ASTConditionalExpression(JJTCONDITIONALEXPRESSION);
   boolean jjtc000 = true;
@@ -746,7 +749,7 @@ public class WandParser/*@bgen(jjtree)*/implements WandParserTreeConstants, Wand
     }
   }
 
-  static final public void OrOrExpression() throws ParseException {
+  final public void OrOrExpression() throws ParseException {
                                               /*@bgen(jjtree) #InfixExpression(> 1) */
   ASTInfixExpression jjtn000 = new ASTInfixExpression(JJTINFIXEXPRESSION);
   boolean jjtc000 = true;
@@ -787,7 +790,7 @@ public class WandParser/*@bgen(jjtree)*/implements WandParserTreeConstants, Wand
     }
   }
 
-  static final public void AndAndExpression() throws ParseException {
+  final public void AndAndExpression() throws ParseException {
                                                 /*@bgen(jjtree) #InfixExpression(> 1) */
   ASTInfixExpression jjtn000 = new ASTInfixExpression(JJTINFIXEXPRESSION);
   boolean jjtc000 = true;
@@ -828,7 +831,7 @@ public class WandParser/*@bgen(jjtree)*/implements WandParserTreeConstants, Wand
     }
   }
 
-  static final public void OrExpression() throws ParseException {
+  final public void OrExpression() throws ParseException {
                                             /*@bgen(jjtree) #InfixExpression(> 1) */
   ASTInfixExpression jjtn000 = new ASTInfixExpression(JJTINFIXEXPRESSION);
   boolean jjtc000 = true;
@@ -869,7 +872,7 @@ public class WandParser/*@bgen(jjtree)*/implements WandParserTreeConstants, Wand
     }
   }
 
-  static final public void XorExpression() throws ParseException {
+  final public void XorExpression() throws ParseException {
                                              /*@bgen(jjtree) #InfixExpression(> 1) */
   ASTInfixExpression jjtn000 = new ASTInfixExpression(JJTINFIXEXPRESSION);
   boolean jjtc000 = true;
@@ -910,7 +913,7 @@ public class WandParser/*@bgen(jjtree)*/implements WandParserTreeConstants, Wand
     }
   }
 
-  static final public void AndExpression() throws ParseException {
+  final public void AndExpression() throws ParseException {
                                              /*@bgen(jjtree) #InfixExpression(> 1) */
   ASTInfixExpression jjtn000 = new ASTInfixExpression(JJTINFIXEXPRESSION);
   boolean jjtc000 = true;
@@ -951,7 +954,7 @@ public class WandParser/*@bgen(jjtree)*/implements WandParserTreeConstants, Wand
     }
   }
 
-  static final public void CmpExpression() throws ParseException {
+  final public void CmpExpression() throws ParseException {
                                              /*@bgen(jjtree) #InfixExpression(> 1) */
   ASTInfixExpression jjtn000 = new ASTInfixExpression(JJTINFIXEXPRESSION);
   boolean jjtc000 = true;
@@ -1013,7 +1016,7 @@ public class WandParser/*@bgen(jjtree)*/implements WandParserTreeConstants, Wand
     }
   }
 
-  static final public void ShiftExpression() throws ParseException {
+  final public void ShiftExpression() throws ParseException {
                                                /*@bgen(jjtree) #InfixExpression(> 1) */
   ASTInfixExpression jjtn000 = new ASTInfixExpression(JJTINFIXEXPRESSION);
   boolean jjtc000 = true;
@@ -1056,22 +1059,22 @@ public class WandParser/*@bgen(jjtree)*/implements WandParserTreeConstants, Wand
     }
   }
 
-  static final public void EqualExpressionRest() throws ParseException {
+  final public void EqualExpressionRest() throws ParseException {
     EqualOperator();
     ShiftExpression();
   }
 
-  static final public void RelExpressionRest() throws ParseException {
+  final public void RelExpressionRest() throws ParseException {
     RelOperator();
     ShiftExpression();
   }
 
-  static final public void InExpressionRest() throws ParseException {
+  final public void InExpressionRest() throws ParseException {
     InOperator();
     ShiftExpression();
   }
 
-  static final public void CatExpression() throws ParseException {
+  final public void CatExpression() throws ParseException {
                                              /*@bgen(jjtree) #InfixExpression(> 1) */
   ASTInfixExpression jjtn000 = new ASTInfixExpression(JJTINFIXEXPRESSION);
   boolean jjtc000 = true;
@@ -1101,7 +1104,7 @@ public class WandParser/*@bgen(jjtree)*/implements WandParserTreeConstants, Wand
     }
   }
 
-  static final public void AddExpression() throws ParseException {
+  final public void AddExpression() throws ParseException {
                                              /*@bgen(jjtree) #InfixExpression(> 1) */
   ASTInfixExpression jjtn000 = new ASTInfixExpression(JJTINFIXEXPRESSION);
   boolean jjtc000 = true;
@@ -1143,7 +1146,7 @@ public class WandParser/*@bgen(jjtree)*/implements WandParserTreeConstants, Wand
     }
   }
 
-  static final public void MulExpression() throws ParseException {
+  final public void MulExpression() throws ParseException {
                                              /*@bgen(jjtree) #InfixExpression(> 1) */
   ASTInfixExpression jjtn000 = new ASTInfixExpression(JJTINFIXEXPRESSION);
   boolean jjtc000 = true;
@@ -1186,7 +1189,7 @@ public class WandParser/*@bgen(jjtree)*/implements WandParserTreeConstants, Wand
     }
   }
 
-  static final public void PowExpression() throws ParseException {
+  final public void PowExpression() throws ParseException {
                                              /*@bgen(jjtree) #InfixExpression(> 1) */
   ASTInfixExpression jjtn000 = new ASTInfixExpression(JJTINFIXEXPRESSION);
   boolean jjtc000 = true;
@@ -1223,7 +1226,7 @@ public class WandParser/*@bgen(jjtree)*/implements WandParserTreeConstants, Wand
     }
   }
 
-  static final public void UnaryExpression() throws ParseException {
+  final public void UnaryExpression() throws ParseException {
                                                /*@bgen(jjtree) #UnaryExpression(> 1) */
   ASTUnaryExpression jjtn000 = new ASTUnaryExpression(JJTUNARYEXPRESSION);
   boolean jjtc000 = true;
@@ -1276,7 +1279,7 @@ public class WandParser/*@bgen(jjtree)*/implements WandParserTreeConstants, Wand
     }
   }
 
-  static final public void PostfixExpression() throws ParseException {
+  final public void PostfixExpression() throws ParseException {
                                                    /*@bgen(jjtree) #PostfixExpression(> 1) */
   ASTPostfixExpression jjtn000 = new ASTPostfixExpression(JJTPOSTFIXEXPRESSION);
   boolean jjtc000 = true;
@@ -1339,7 +1342,7 @@ void PostfixExpression() #PostfixExpression(>1) : {}
     PrimaryExpression() (PostfixOperator())*
     
 }*/
-  static final public void PrimaryExpression() throws ParseException {
+  final public void PrimaryExpression() throws ParseException {
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
     case LPAREN:
       jj_consume_token(LPAREN);
@@ -1363,7 +1366,7 @@ void PostfixExpression() #PostfixExpression(>1) : {}
     }
   }
 
-  static final public void FunctionCall() throws ParseException {
+  final public void FunctionCall() throws ParseException {
                                          /*@bgen(jjtree) #FunctionCall(> 1) */
   ASTFunctionCall jjtn000 = new ASTFunctionCall(JJTFUNCTIONCALL);
   boolean jjtc000 = true;
@@ -1399,7 +1402,7 @@ void PostfixExpression() #PostfixExpression(>1) : {}
     }
   }
 
-  static final public void Arguments() throws ParseException {
+  final public void Arguments() throws ParseException {
                     /*@bgen(jjtree) Arguments */
   ASTArguments jjtn000 = new ASTArguments(JJTARGUMENTS);
   boolean jjtc000 = true;
@@ -1463,7 +1466,7 @@ void PostfixExpression() #PostfixExpression(>1) : {}
     }
   }
 
-  static final public void AssignOperator() throws ParseException {
+  final public void AssignOperator() throws ParseException {
                          /*@bgen(jjtree) AssignOperator */
     ASTAssignOperator jjtn000 = new ASTAssignOperator(JJTASSIGNOPERATOR);
     boolean jjtc000 = true;
@@ -1521,7 +1524,7 @@ void PostfixExpression() #PostfixExpression(>1) : {}
     }
   }
 
-  static final public void AddOperator() throws ParseException {
+  final public void AddOperator() throws ParseException {
                                      /*@bgen(jjtree) InfixOperator */
     ASTInfixOperator jjtn000 = new ASTInfixOperator(JJTINFIXOPERATOR);
     boolean jjtc000 = true;
@@ -1549,7 +1552,7 @@ void PostfixExpression() #PostfixExpression(>1) : {}
     }
   }
 
-  static final public void MulInfixOperator() throws ParseException {
+  final public void MulInfixOperator() throws ParseException {
                                           /*@bgen(jjtree) InfixOperator */
     ASTInfixOperator jjtn000 = new ASTInfixOperator(JJTINFIXOPERATOR);
     boolean jjtc000 = true;
@@ -1580,7 +1583,7 @@ void PostfixExpression() #PostfixExpression(>1) : {}
     }
   }
 
-  static final public void OrOrOperator() throws ParseException {
+  final public void OrOrOperator() throws ParseException {
                                       /*@bgen(jjtree) InfixOperator */
     ASTInfixOperator jjtn000 = new ASTInfixOperator(JJTINFIXOPERATOR);
     boolean jjtc000 = true;
@@ -1597,7 +1600,7 @@ void PostfixExpression() #PostfixExpression(>1) : {}
     }
   }
 
-  static final public void AndAndOperator() throws ParseException {
+  final public void AndAndOperator() throws ParseException {
                                         /*@bgen(jjtree) InfixOperator */
     ASTInfixOperator jjtn000 = new ASTInfixOperator(JJTINFIXOPERATOR);
     boolean jjtc000 = true;
@@ -1614,7 +1617,7 @@ void PostfixExpression() #PostfixExpression(>1) : {}
     }
   }
 
-  static final public void OrOperator() throws ParseException {
+  final public void OrOperator() throws ParseException {
                                     /*@bgen(jjtree) InfixOperator */
     ASTInfixOperator jjtn000 = new ASTInfixOperator(JJTINFIXOPERATOR);
     boolean jjtc000 = true;
@@ -1631,7 +1634,7 @@ void PostfixExpression() #PostfixExpression(>1) : {}
     }
   }
 
-  static final public void XorOperator() throws ParseException {
+  final public void XorOperator() throws ParseException {
                                      /*@bgen(jjtree) InfixOperator */
     ASTInfixOperator jjtn000 = new ASTInfixOperator(JJTINFIXOPERATOR);
     boolean jjtc000 = true;
@@ -1648,7 +1651,7 @@ void PostfixExpression() #PostfixExpression(>1) : {}
     }
   }
 
-  static final public void AndOperator() throws ParseException {
+  final public void AndOperator() throws ParseException {
                                      /*@bgen(jjtree) InfixOperator */
     ASTInfixOperator jjtn000 = new ASTInfixOperator(JJTINFIXOPERATOR);
     boolean jjtc000 = true;
@@ -1665,7 +1668,7 @@ void PostfixExpression() #PostfixExpression(>1) : {}
     }
   }
 
-  static final public void ShiftOperator() throws ParseException {
+  final public void ShiftOperator() throws ParseException {
                                        /*@bgen(jjtree) InfixOperator */
     ASTInfixOperator jjtn000 = new ASTInfixOperator(JJTINFIXOPERATOR);
     boolean jjtc000 = true;
@@ -1696,7 +1699,7 @@ void PostfixExpression() #PostfixExpression(>1) : {}
     }
   }
 
-  static final public void EqualOperator() throws ParseException {
+  final public void EqualOperator() throws ParseException {
                                        /*@bgen(jjtree) InfixOperator */
     ASTInfixOperator jjtn000 = new ASTInfixOperator(JJTINFIXOPERATOR);
     boolean jjtc000 = true;
@@ -1724,7 +1727,7 @@ void PostfixExpression() #PostfixExpression(>1) : {}
     }
   }
 
-  static final public void RelOperator() throws ParseException {
+  final public void RelOperator() throws ParseException {
                                      /*@bgen(jjtree) InfixOperator */
     ASTInfixOperator jjtn000 = new ASTInfixOperator(JJTINFIXOPERATOR);
     boolean jjtc000 = true;
@@ -1758,7 +1761,7 @@ void PostfixExpression() #PostfixExpression(>1) : {}
     }
   }
 
-  static final public void InOperator() throws ParseException {
+  final public void InOperator() throws ParseException {
                                     /*@bgen(jjtree) InfixOperator */
     ASTInfixOperator jjtn000 = new ASTInfixOperator(JJTINFIXOPERATOR);
     boolean jjtc000 = true;
@@ -1786,7 +1789,7 @@ void PostfixExpression() #PostfixExpression(>1) : {}
     }
   }
 
-  static final public void CatOperator() throws ParseException {
+  final public void CatOperator() throws ParseException {
                                      /*@bgen(jjtree) InfixOperator */
     ASTInfixOperator jjtn000 = new ASTInfixOperator(JJTINFIXOPERATOR);
     boolean jjtc000 = true;
@@ -1803,7 +1806,7 @@ void PostfixExpression() #PostfixExpression(>1) : {}
     }
   }
 
-  static final public void PowOperator() throws ParseException {
+  final public void PowOperator() throws ParseException {
                                      /*@bgen(jjtree) InfixOperator */
     ASTInfixOperator jjtn000 = new ASTInfixOperator(JJTINFIXOPERATOR);
     boolean jjtc000 = true;
@@ -1820,7 +1823,7 @@ void PostfixExpression() #PostfixExpression(>1) : {}
     }
   }
 
-  static final public void UnaryOperator() throws ParseException {
+  final public void UnaryOperator() throws ParseException {
                         /*@bgen(jjtree) UnaryOperator */
   ASTUnaryOperator jjtn000 = new ASTUnaryOperator(JJTUNARYOPERATOR);
   boolean jjtc000 = true;
@@ -1863,7 +1866,7 @@ void PostfixExpression() #PostfixExpression(>1) : {}
     }
   }
 
-  static final public void PostfixOperator() throws ParseException {
+  final public void PostfixOperator() throws ParseException {
                           /*@bgen(jjtree) PostfixOperator */
     ASTPostfixOperator jjtn000 = new ASTPostfixOperator(JJTPOSTFIXOPERATOR);
     boolean jjtc000 = true;
@@ -1891,7 +1894,7 @@ void PostfixExpression() #PostfixExpression(>1) : {}
     }
   }
 
-  static final public void IntegerLiteral() throws ParseException {
+  final public void IntegerLiteral() throws ParseException {
                          /*@bgen(jjtree) IntegerLiteral */
     ASTIntegerLiteral jjtn000 = new ASTIntegerLiteral(JJTINTEGERLITERAL);
     boolean jjtc000 = true;
@@ -1908,7 +1911,7 @@ void PostfixExpression() #PostfixExpression(>1) : {}
     }
   }
 
-  static final public void FloatingPointLiteral() throws ParseException {
+  final public void FloatingPointLiteral() throws ParseException {
                                /*@bgen(jjtree) FloatingPointLiteral */
   ASTFloatingPointLiteral jjtn000 = new ASTFloatingPointLiteral(JJTFLOATINGPOINTLITERAL);
   boolean jjtc000 = true;
@@ -1933,7 +1936,7 @@ void StringLiteral() : {}
     <FPLIT>
 }
 */
-  static final public void BooleanLiteral() throws ParseException {
+  final public void BooleanLiteral() throws ParseException {
                          /*@bgen(jjtree) BooleanLiteral */
   ASTBooleanLiteral jjtn000 = new ASTBooleanLiteral(JJTBOOLEANLITERAL);
   boolean jjtc000 = true;
@@ -1958,7 +1961,7 @@ void StringLiteral() : {}
     }
   }
 
-  static final public void NullLiteral() throws ParseException {
+  final public void NullLiteral() throws ParseException {
                       /*@bgen(jjtree) NullLiteral */
   ASTNullLiteral jjtn000 = new ASTNullLiteral(JJTNULLLITERAL);
   boolean jjtc000 = true;
@@ -1990,7 +1993,7 @@ void BlockStatement() #void : {}
     Statement()
 }
 */
-  static final public void LocalVariableDeclarationStatement() throws ParseException {
+  final public void LocalVariableDeclarationStatement() throws ParseException {
                                             /*@bgen(jjtree) LocalVariableDeclarationStatement */
   ASTLocalVariableDeclarationStatement jjtn000 = new ASTLocalVariableDeclarationStatement(JJTLOCALVARIABLEDECLARATIONSTATEMENT);
   boolean jjtc000 = true;
@@ -2020,7 +2023,7 @@ void BlockStatement() #void : {}
     }
   }
 
-  static final public void Statement() throws ParseException {
+  final public void Statement() throws ParseException {
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
     case END_STMT:
       jj_consume_token(END_STMT);
@@ -2063,11 +2066,11 @@ void BlockStatement() #void : {}
     }
   }
 
-  static final public void ScopeBlockStatement() throws ParseException {
+  final public void ScopeBlockStatement() throws ParseException {
     BlockStatement();
   }
 
-  static final public void BlockStatement() throws ParseException {
+  final public void BlockStatement() throws ParseException {
                          /*@bgen(jjtree) BlockStatement */
   ASTBlockStatement jjtn000 = new ASTBlockStatement(JJTBLOCKSTATEMENT);
   boolean jjtc000 = true;
@@ -2135,7 +2138,7 @@ void BlockStatement() #void : {}
     }
   }
 
-  static final public void IfStatement() throws ParseException {
+  final public void IfStatement() throws ParseException {
                       /*@bgen(jjtree) IfStatement */
   ASTIfStatement jjtn000 = new ASTIfStatement(JJTIFSTATEMENT);
   boolean jjtc000 = true;
@@ -2173,19 +2176,19 @@ void BlockStatement() #void : {}
     }
   }
 
-  static final public void IfCondition() throws ParseException {
+  final public void IfCondition() throws ParseException {
     Expression();
   }
 
-  static final public void ThenStatement() throws ParseException {
+  final public void ThenStatement() throws ParseException {
     ScopeStatement();
   }
 
-  static final public void ElseStatement() throws ParseException {
+  final public void ElseStatement() throws ParseException {
     ScopeStatement();
   }
 
-  static final public void ScopeStatement() throws ParseException {
+  final public void ScopeStatement() throws ParseException {
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
     case VOID:
     case INT:
@@ -2225,7 +2228,7 @@ void BlockStatement() #void : {}
     }
   }
 
-  static final public void NonEmptyStatement() throws ParseException {
+  final public void NonEmptyStatement() throws ParseException {
     if (jj_2_4(2)) {
       ExpressionStatement();
     } else {
@@ -2268,7 +2271,7 @@ void BlockStatement() #void : {}
     }
   }
 
-  static final public void WhileStatement() throws ParseException {
+  final public void WhileStatement() throws ParseException {
                          /*@bgen(jjtree) WhileStatement */
   ASTWhileStatement jjtn000 = new ASTWhileStatement(JJTWHILESTATEMENT);
   boolean jjtc000 = true;
@@ -2300,7 +2303,7 @@ void BlockStatement() #void : {}
     }
   }
 
-  static final public void DoWhileStatement() throws ParseException {
+  final public void DoWhileStatement() throws ParseException {
                            /*@bgen(jjtree) DoWhileStatement */
   ASTDoWhileStatement jjtn000 = new ASTDoWhileStatement(JJTDOWHILESTATEMENT);
   boolean jjtc000 = true;
@@ -2334,7 +2337,7 @@ void BlockStatement() #void : {}
     }
   }
 
-  static final public void LoopStatement() throws ParseException {
+  final public void LoopStatement() throws ParseException {
                         /*@bgen(jjtree) LoopStatement */
   ASTLoopStatement jjtn000 = new ASTLoopStatement(JJTLOOPSTATEMENT);
   boolean jjtc000 = true;
@@ -2372,7 +2375,7 @@ void BlockStatement() #void : {}
     }
   }
 
-  static final public void BreakStatement() throws ParseException {
+  final public void BreakStatement() throws ParseException {
                          /*@bgen(jjtree) BreakStatement */
   ASTBreakStatement jjtn000 = new ASTBreakStatement(JJTBREAKSTATEMENT);
   boolean jjtc000 = true;
@@ -2387,7 +2390,7 @@ void BlockStatement() #void : {}
     }
   }
 
-  static final public void ContinueStatement() throws ParseException {
+  final public void ContinueStatement() throws ParseException {
                             /*@bgen(jjtree) ContinueStatement */
   ASTContinueStatement jjtn000 = new ASTContinueStatement(JJTCONTINUESTATEMENT);
   boolean jjtc000 = true;
@@ -2402,7 +2405,7 @@ void BlockStatement() #void : {}
     }
   }
 
-  static final public void AssertStatement() throws ParseException {
+  final public void AssertStatement() throws ParseException {
                           /*@bgen(jjtree) AssertStatement */
   ASTAssertStatement jjtn000 = new ASTAssertStatement(JJTASSERTSTATEMENT);
   boolean jjtc000 = true;
@@ -2441,7 +2444,7 @@ void BlockStatement() #void : {}
     }
   }
 
-  static final public void ReturnStatement() throws ParseException {
+  final public void ReturnStatement() throws ParseException {
                           /*@bgen(jjtree) ReturnStatement */
   ASTReturnStatement jjtn000 = new ASTReturnStatement(JJTRETURNSTATEMENT);
   boolean jjtc000 = true;
@@ -2471,7 +2474,7 @@ void BlockStatement() #void : {}
     }
   }
 
-  static final public void ExpressionStatement() throws ParseException {
+  final public void ExpressionStatement() throws ParseException {
                               /*@bgen(jjtree) ExpressionStatement */
   ASTExpressionStatement jjtn000 = new ASTExpressionStatement(JJTEXPRESSIONSTATEMENT);
   boolean jjtc000 = true;
@@ -2500,7 +2503,7 @@ void BlockStatement() #void : {}
     }
   }
 
-  static final public void VariableDeclarators() throws ParseException {
+  final public void VariableDeclarators() throws ParseException {
     VariableDeclarator();
     label_18:
     while (true) {
@@ -2517,7 +2520,7 @@ void BlockStatement() #void : {}
     }
   }
 
-  static final public void VariableDeclarator() throws ParseException {
+  final public void VariableDeclarator() throws ParseException {
                              /*@bgen(jjtree) VariableDeclarator */
   ASTVariableDeclarator jjtn000 = new ASTVariableDeclarator(JJTVARIABLEDECLARATOR);
   boolean jjtc000 = true;
@@ -2554,11 +2557,11 @@ void BlockStatement() #void : {}
     }
   }
 
-  static final public void VariableInitializer() throws ParseException {
+  final public void VariableInitializer() throws ParseException {
     Expression();
   }
 
-  static final public void Identifier() throws ParseException {
+  final public void Identifier() throws ParseException {
                      /*@bgen(jjtree) Identifier */
     ASTIdentifier jjtn000 = new ASTIdentifier(JJTIDENTIFIER);
     boolean jjtc000 = true;
@@ -2575,73 +2578,47 @@ void BlockStatement() #void : {}
     }
   }
 
-  static private boolean jj_2_1(int xla) {
+  private boolean jj_2_1(int xla) {
     jj_la = xla; jj_lastpos = jj_scanpos = token;
     try { return !jj_3_1(); }
     catch(LookaheadSuccess ls) { return true; }
     finally { jj_save(0, xla); }
   }
 
-  static private boolean jj_2_2(int xla) {
+  private boolean jj_2_2(int xla) {
     jj_la = xla; jj_lastpos = jj_scanpos = token;
     try { return !jj_3_2(); }
     catch(LookaheadSuccess ls) { return true; }
     finally { jj_save(1, xla); }
   }
 
-  static private boolean jj_2_3(int xla) {
+  private boolean jj_2_3(int xla) {
     jj_la = xla; jj_lastpos = jj_scanpos = token;
     try { return !jj_3_3(); }
     catch(LookaheadSuccess ls) { return true; }
     finally { jj_save(2, xla); }
   }
 
-  static private boolean jj_2_4(int xla) {
+  private boolean jj_2_4(int xla) {
     jj_la = xla; jj_lastpos = jj_scanpos = token;
     try { return !jj_3_4(); }
     catch(LookaheadSuccess ls) { return true; }
     finally { jj_save(3, xla); }
   }
 
-  static private boolean jj_2_5(int xla) {
+  private boolean jj_2_5(int xla) {
     jj_la = xla; jj_lastpos = jj_scanpos = token;
     try { return !jj_3_5(); }
     catch(LookaheadSuccess ls) { return true; }
     finally { jj_save(4, xla); }
   }
 
-  static private boolean jj_3R_95() {
-    if (jj_3R_98()) return true;
-    if (jj_3R_91()) return true;
-    return false;
-  }
-
-  static private boolean jj_3R_94() {
-    if (jj_3R_97()) return true;
-    return false;
-  }
-
-  static private boolean jj_3R_91() {
-    Token xsp;
-    xsp = jj_scanpos;
-    if (jj_3R_94()) {
-    jj_scanpos = xsp;
-    if (jj_3R_95()) return true;
-    }
-    return false;
-  }
-
-  static private boolean jj_3R_77() {
-    if (jj_3R_83()) return true;
-    return false;
-  }
-
-  static private boolean jj_3R_51() {
+  private boolean jj_3R_51() {
     if (jj_scan_token(STMT_CONTINUE)) return true;
     return false;
   }
 
-  static private boolean jj_3R_85() {
+  private boolean jj_3R_85() {
     if (jj_3R_91()) return true;
     Token xsp;
     xsp = jj_scanpos;
@@ -2649,7 +2626,7 @@ void BlockStatement() #void : {}
     return false;
   }
 
-  static private boolean jj_3R_90() {
+  private boolean jj_3R_90() {
     Token xsp;
     xsp = jj_scanpos;
     if (jj_scan_token(37)) {
@@ -2659,12 +2636,12 @@ void BlockStatement() #void : {}
     return false;
   }
 
-  static private boolean jj_3R_50() {
+  private boolean jj_3R_50() {
     if (jj_scan_token(STMT_BREAK)) return true;
     return false;
   }
 
-  static private boolean jj_3R_79() {
+  private boolean jj_3R_79() {
     if (jj_3R_85()) return true;
     Token xsp;
     while (true) {
@@ -2674,12 +2651,12 @@ void BlockStatement() #void : {}
     return false;
   }
 
-  static private boolean jj_3R_49() {
+  private boolean jj_3R_49() {
     if (jj_scan_token(STMT_LOOP)) return true;
     return false;
   }
 
-  static private boolean jj_3R_74() {
+  private boolean jj_3R_74() {
     if (jj_3R_79()) return true;
     Token xsp;
     while (true) {
@@ -2689,12 +2666,12 @@ void BlockStatement() #void : {}
     return false;
   }
 
-  static private boolean jj_3R_48() {
+  private boolean jj_3R_48() {
     if (jj_scan_token(STMT_DO)) return true;
     return false;
   }
 
-  static private boolean jj_3R_89() {
+  private boolean jj_3R_89() {
     Token xsp;
     xsp = jj_scanpos;
     if (jj_scan_token(33)) {
@@ -2710,28 +2687,28 @@ void BlockStatement() #void : {}
     return false;
   }
 
-  static private boolean jj_3_3() {
+  private boolean jj_3_3() {
     if (jj_scan_token(STMT_ELSE)) return true;
     if (jj_3R_22()) return true;
     return false;
   }
 
-  static private boolean jj_3R_75() {
+  private boolean jj_3R_75() {
     if (jj_3R_81()) return true;
     return false;
   }
 
-  static private boolean jj_3R_47() {
+  private boolean jj_3R_47() {
     if (jj_scan_token(STMT_WHILE)) return true;
     return false;
   }
 
-  static private boolean jj_3R_84() {
+  private boolean jj_3R_84() {
     if (jj_3R_90()) return true;
     return false;
   }
 
-  static private boolean jj_3R_72() {
+  private boolean jj_3R_72() {
     Token xsp;
     xsp = jj_scanpos;
     if (jj_3R_76()) {
@@ -2744,37 +2721,37 @@ void BlockStatement() #void : {}
     return false;
   }
 
-  static private boolean jj_3R_76() {
+  private boolean jj_3R_76() {
     if (jj_3R_82()) return true;
     return false;
   }
 
-  static private boolean jj_3R_42() {
+  private boolean jj_3R_42() {
     if (jj_3R_52()) return true;
     return false;
   }
 
-  static private boolean jj_3R_41() {
+  private boolean jj_3R_41() {
     if (jj_3R_51()) return true;
     return false;
   }
 
-  static private boolean jj_3R_83() {
+  private boolean jj_3R_83() {
     if (jj_3R_89()) return true;
     return false;
   }
 
-  static private boolean jj_3R_40() {
+  private boolean jj_3R_40() {
     if (jj_3R_50()) return true;
     return false;
   }
 
-  static private boolean jj_3R_39() {
+  private boolean jj_3R_39() {
     if (jj_3R_49()) return true;
     return false;
   }
 
-  static private boolean jj_3R_88() {
+  private boolean jj_3R_88() {
     Token xsp;
     xsp = jj_scanpos;
     if (jj_scan_token(30)) {
@@ -2784,47 +2761,47 @@ void BlockStatement() #void : {}
     return false;
   }
 
-  static private boolean jj_3R_38() {
+  private boolean jj_3R_38() {
     if (jj_3R_48()) return true;
     return false;
   }
 
-  static private boolean jj_3R_69() {
+  private boolean jj_3R_69() {
     if (jj_3R_73()) return true;
     return false;
   }
 
-  static private boolean jj_3R_37() {
+  private boolean jj_3R_37() {
     if (jj_3R_47()) return true;
     return false;
   }
 
-  static private boolean jj_3R_36() {
+  private boolean jj_3R_36() {
     if (jj_3R_46()) return true;
     return false;
   }
 
-  static private boolean jj_3R_82() {
+  private boolean jj_3R_82() {
     if (jj_3R_88()) return true;
     return false;
   }
 
-  static private boolean jj_3R_35() {
+  private boolean jj_3R_35() {
     if (jj_3R_45()) return true;
     return false;
   }
 
-  static private boolean jj_3R_34() {
+  private boolean jj_3R_34() {
     if (jj_3R_44()) return true;
     return false;
   }
 
-  static private boolean jj_3R_66() {
+  private boolean jj_3R_66() {
     if (jj_3R_70()) return true;
     return false;
   }
 
-  static private boolean jj_3R_31() {
+  private boolean jj_3R_31() {
     Token xsp;
     xsp = jj_scanpos;
     if (jj_3_4()) {
@@ -2858,12 +2835,12 @@ void BlockStatement() #void : {}
     return false;
   }
 
-  static private boolean jj_3_4() {
+  private boolean jj_3_4() {
     if (jj_3R_23()) return true;
     return false;
   }
 
-  static private boolean jj_3R_71() {
+  private boolean jj_3R_71() {
     if (jj_3R_74()) return true;
     Token xsp;
     while (true) {
@@ -2873,17 +2850,17 @@ void BlockStatement() #void : {}
     return false;
   }
 
-  static private boolean jj_3R_63() {
+  private boolean jj_3R_63() {
     if (jj_3R_67()) return true;
     return false;
   }
 
-  static private boolean jj_3R_29() {
+  private boolean jj_3R_29() {
     if (jj_3R_32()) return true;
     return false;
   }
 
-  static private boolean jj_3R_26() {
+  private boolean jj_3R_26() {
     Token xsp;
     xsp = jj_scanpos;
     if (jj_3R_28()) {
@@ -2893,12 +2870,12 @@ void BlockStatement() #void : {}
     return false;
   }
 
-  static private boolean jj_3R_28() {
+  private boolean jj_3R_28() {
     if (jj_3R_31()) return true;
     return false;
   }
 
-  static private boolean jj_3R_68() {
+  private boolean jj_3R_68() {
     if (jj_3R_71()) return true;
     Token xsp;
     xsp = jj_scanpos;
@@ -2906,7 +2883,7 @@ void BlockStatement() #void : {}
     return false;
   }
 
-  static private boolean jj_3R_81() {
+  private boolean jj_3R_81() {
     Token xsp;
     xsp = jj_scanpos;
     if (jj_scan_token(85)) {
@@ -2919,22 +2896,22 @@ void BlockStatement() #void : {}
     return false;
   }
 
-  static private boolean jj_3R_60() {
+  private boolean jj_3R_60() {
     if (jj_3R_64()) return true;
     return false;
   }
 
-  static private boolean jj_3R_22() {
+  private boolean jj_3R_22() {
     if (jj_3R_26()) return true;
     return false;
   }
 
-  static private boolean jj_3R_57() {
+  private boolean jj_3R_57() {
     if (jj_3R_61()) return true;
     return false;
   }
 
-  static private boolean jj_3R_65() {
+  private boolean jj_3R_65() {
     if (jj_3R_68()) return true;
     Token xsp;
     while (true) {
@@ -2944,12 +2921,12 @@ void BlockStatement() #void : {}
     return false;
   }
 
-  static private boolean jj_3R_73() {
+  private boolean jj_3R_73() {
     if (jj_scan_token(84)) return true;
     return false;
   }
 
-  static private boolean jj_3R_62() {
+  private boolean jj_3R_62() {
     if (jj_3R_65()) return true;
     Token xsp;
     while (true) {
@@ -2959,12 +2936,12 @@ void BlockStatement() #void : {}
     return false;
   }
 
-  static private boolean jj_3R_54() {
+  private boolean jj_3R_54() {
     if (jj_scan_token(76)) return true;
     return false;
   }
 
-  static private boolean jj_3R_59() {
+  private boolean jj_3R_59() {
     if (jj_3R_62()) return true;
     Token xsp;
     while (true) {
@@ -2974,17 +2951,17 @@ void BlockStatement() #void : {}
     return false;
   }
 
-  static private boolean jj_3R_70() {
+  private boolean jj_3R_70() {
     if (jj_scan_token(OP_XOR)) return true;
     return false;
   }
 
-  static private boolean jj_3R_46() {
+  private boolean jj_3R_46() {
     if (jj_scan_token(STMT_IF)) return true;
     return false;
   }
 
-  static private boolean jj_3R_56() {
+  private boolean jj_3R_56() {
     if (jj_3R_59()) return true;
     Token xsp;
     while (true) {
@@ -2994,12 +2971,12 @@ void BlockStatement() #void : {}
     return false;
   }
 
-  static private boolean jj_3R_32() {
+  private boolean jj_3R_32() {
     if (jj_scan_token(OPENBLOCK)) return true;
     return false;
   }
 
-  static private boolean jj_3R_53() {
+  private boolean jj_3R_53() {
     if (jj_3R_56()) return true;
     Token xsp;
     while (true) {
@@ -3009,12 +2986,12 @@ void BlockStatement() #void : {}
     return false;
   }
 
-  static private boolean jj_3R_67() {
+  private boolean jj_3R_67() {
     if (jj_scan_token(OP_BITWISE_OR)) return true;
     return false;
   }
 
-  static private boolean jj_3R_43() {
+  private boolean jj_3R_43() {
     if (jj_3R_53()) return true;
     Token xsp;
     xsp = jj_scanpos;
@@ -3022,23 +2999,23 @@ void BlockStatement() #void : {}
     return false;
   }
 
-  static private boolean jj_3R_33() {
+  private boolean jj_3R_33() {
     if (jj_3R_43()) return true;
     return false;
   }
 
-  static private boolean jj_3R_64() {
+  private boolean jj_3R_64() {
     if (jj_scan_token(83)) return true;
     return false;
   }
 
-  static private boolean jj_3_2() {
+  private boolean jj_3_2() {
     if (jj_3R_20()) return true;
     if (jj_3R_21()) return true;
     return false;
   }
 
-  static private boolean jj_3R_30() {
+  private boolean jj_3R_30() {
     Token xsp;
     xsp = jj_scanpos;
     if (jj_3_2()) {
@@ -3048,52 +3025,52 @@ void BlockStatement() #void : {}
     return false;
   }
 
-  static private boolean jj_3R_52() {
+  private boolean jj_3R_52() {
     if (jj_3R_55()) return true;
     return false;
   }
 
-  static private boolean jj_3R_117() {
+  private boolean jj_3R_117() {
     if (jj_scan_token(72)) return true;
     return false;
   }
 
-  static private boolean jj_3R_27() {
+  private boolean jj_3R_27() {
     if (jj_3R_30()) return true;
     return false;
   }
 
-  static private boolean jj_3R_61() {
+  private boolean jj_3R_61() {
     if (jj_scan_token(OP_LOGICAL_OR)) return true;
     return false;
   }
 
-  static private boolean jj_3R_110() {
+  private boolean jj_3R_110() {
     if (jj_3R_116()) return true;
     return false;
   }
 
-  static private boolean jj_3R_109() {
+  private boolean jj_3R_109() {
     if (jj_3R_115()) return true;
     return false;
   }
 
-  static private boolean jj_3R_108() {
+  private boolean jj_3R_108() {
     if (jj_3R_114()) return true;
     return false;
   }
 
-  static private boolean jj_3R_107() {
+  private boolean jj_3R_107() {
     if (jj_3R_113()) return true;
     return false;
   }
 
-  static private boolean jj_3R_25() {
+  private boolean jj_3R_25() {
     if (jj_scan_token(74)) return true;
     return false;
   }
 
-  static private boolean jj_3R_105() {
+  private boolean jj_3R_105() {
     Token xsp;
     xsp = jj_scanpos;
     if (jj_3R_107()) {
@@ -3109,7 +3086,7 @@ void BlockStatement() #void : {}
     return false;
   }
 
-  static private boolean jj_3R_93() {
+  private boolean jj_3R_93() {
     Token xsp;
     xsp = jj_scanpos;
     if (jj_scan_token(42)) {
@@ -3122,7 +3099,7 @@ void BlockStatement() #void : {}
     return false;
   }
 
-  static private boolean jj_3R_111() {
+  private boolean jj_3R_111() {
     if (jj_3R_20()) return true;
     Token xsp;
     while (true) {
@@ -3132,12 +3109,12 @@ void BlockStatement() #void : {}
     return false;
   }
 
-  static private boolean jj_3R_116() {
+  private boolean jj_3R_116() {
     if (jj_scan_token(16)) return true;
     return false;
   }
 
-  static private boolean jj_3R_19() {
+  private boolean jj_3R_19() {
     if (jj_3R_24()) return true;
     Token xsp;
     if (jj_3R_25()) return true;
@@ -3148,7 +3125,7 @@ void BlockStatement() #void : {}
     return false;
   }
 
-  static private boolean jj_3R_87() {
+  private boolean jj_3R_87() {
     Token xsp;
     xsp = jj_scanpos;
     if (jj_scan_token(40)) {
@@ -3158,7 +3135,7 @@ void BlockStatement() #void : {}
     return false;
   }
 
-  static private boolean jj_3R_115() {
+  private boolean jj_3R_115() {
     Token xsp;
     xsp = jj_scanpos;
     if (jj_scan_token(17)) {
@@ -3168,7 +3145,7 @@ void BlockStatement() #void : {}
     return false;
   }
 
-  static private boolean jj_3R_24() {
+  private boolean jj_3R_24() {
     Token xsp;
     xsp = jj_scanpos;
     if (jj_scan_token(7)) {
@@ -3184,27 +3161,27 @@ void BlockStatement() #void : {}
     return false;
   }
 
-  static private boolean jj_3R_112() {
+  private boolean jj_3R_112() {
     if (jj_3R_118()) return true;
     return false;
   }
 
-  static private boolean jj_3R_114() {
+  private boolean jj_3R_114() {
     if (jj_scan_token(FLOAT_LITERAL)) return true;
     return false;
   }
 
-  static private boolean jj_3R_58() {
+  private boolean jj_3R_58() {
     if (jj_3R_24()) return true;
     return false;
   }
 
-  static private boolean jj_3R_113() {
+  private boolean jj_3R_113() {
     if (jj_scan_token(INTEGER_LITERAL)) return true;
     return false;
   }
 
-  static private boolean jj_3R_21() {
+  private boolean jj_3R_21() {
     Token xsp;
     xsp = jj_scanpos;
     if (jj_scan_token(45)) {
@@ -3244,12 +3221,12 @@ void BlockStatement() #void : {}
     return false;
   }
 
-  static private boolean jj_3_1() {
+  private boolean jj_3_1() {
     if (jj_3R_19()) return true;
     return false;
   }
 
-  static private boolean jj_3R_55() {
+  private boolean jj_3R_55() {
     Token xsp;
     xsp = jj_scanpos;
     if (jj_3_1()) {
@@ -3259,12 +3236,12 @@ void BlockStatement() #void : {}
     return false;
   }
 
-  static private boolean jj_3R_118() {
+  private boolean jj_3R_118() {
     if (jj_scan_token(LPAREN)) return true;
     return false;
   }
 
-  static private boolean jj_3R_106() {
+  private boolean jj_3R_106() {
     if (jj_3R_111()) return true;
     Token xsp;
     xsp = jj_scanpos;
@@ -3272,7 +3249,7 @@ void BlockStatement() #void : {}
     return false;
   }
 
-  static private boolean jj_3R_104() {
+  private boolean jj_3R_104() {
     Token xsp;
     xsp = jj_scanpos;
     if (jj_scan_token(23)) {
@@ -3282,28 +3259,28 @@ void BlockStatement() #void : {}
     return false;
   }
 
-  static private boolean jj_3R_20() {
+  private boolean jj_3R_20() {
     if (jj_scan_token(ID)) return true;
     return false;
   }
 
-  static private boolean jj_3R_103() {
+  private boolean jj_3R_103() {
     if (jj_3R_106()) return true;
     return false;
   }
 
-  static private boolean jj_3R_102() {
+  private boolean jj_3R_102() {
     if (jj_3R_105()) return true;
     return false;
   }
 
-  static private boolean jj_3R_101() {
+  private boolean jj_3R_101() {
     if (jj_scan_token(LPAREN)) return true;
     if (jj_3R_27()) return true;
     return false;
   }
 
-  static private boolean jj_3R_99() {
+  private boolean jj_3R_99() {
     Token xsp;
     xsp = jj_scanpos;
     if (jj_3R_101()) {
@@ -3316,12 +3293,12 @@ void BlockStatement() #void : {}
     return false;
   }
 
-  static private boolean jj_3R_100() {
+  private boolean jj_3R_100() {
     if (jj_3R_104()) return true;
     return false;
   }
 
-  static private boolean jj_3R_98() {
+  private boolean jj_3R_98() {
     Token xsp;
     xsp = jj_scanpos;
     if (jj_scan_token(84)) {
@@ -3349,44 +3326,44 @@ void BlockStatement() #void : {}
     return false;
   }
 
-  static private boolean jj_3R_78() {
+  private boolean jj_3R_78() {
     if (jj_3R_84()) return true;
     return false;
   }
 
-  static private boolean jj_3R_96() {
+  private boolean jj_3R_96() {
     if (jj_scan_token(OP_POW)) return true;
     return false;
   }
 
-  static private boolean jj_3R_92() {
+  private boolean jj_3R_92() {
     if (jj_3R_96()) return true;
     return false;
   }
 
-  static private boolean jj_3_5() {
+  private boolean jj_3_5() {
     if (jj_scan_token(STMT_UNTIL)) return true;
     if (jj_scan_token(LPAREN)) return true;
     return false;
   }
 
-  static private boolean jj_3R_23() {
+  private boolean jj_3R_23() {
     if (jj_3R_27()) return true;
     if (jj_scan_token(END_STMT)) return true;
     return false;
   }
 
-  static private boolean jj_3R_86() {
+  private boolean jj_3R_86() {
     if (jj_3R_93()) return true;
     return false;
   }
 
-  static private boolean jj_3R_44() {
+  private boolean jj_3R_44() {
     if (jj_scan_token(STMT_RETURN)) return true;
     return false;
   }
 
-  static private boolean jj_3R_97() {
+  private boolean jj_3R_97() {
     if (jj_3R_99()) return true;
     Token xsp;
     while (true) {
@@ -3396,29 +3373,54 @@ void BlockStatement() #void : {}
     return false;
   }
 
-  static private boolean jj_3R_80() {
+  private boolean jj_3R_80() {
     if (jj_3R_87()) return true;
     return false;
   }
 
-  static private boolean jj_3R_45() {
+  private boolean jj_3R_45() {
     if (jj_scan_token(STMT_ASSERT)) return true;
     return false;
   }
 
-  static private boolean jj_initialized_once = false;
+  private boolean jj_3R_95() {
+    if (jj_3R_98()) return true;
+    if (jj_3R_91()) return true;
+    return false;
+  }
+
+  private boolean jj_3R_94() {
+    if (jj_3R_97()) return true;
+    return false;
+  }
+
+  private boolean jj_3R_91() {
+    Token xsp;
+    xsp = jj_scanpos;
+    if (jj_3R_94()) {
+    jj_scanpos = xsp;
+    if (jj_3R_95()) return true;
+    }
+    return false;
+  }
+
+  private boolean jj_3R_77() {
+    if (jj_3R_83()) return true;
+    return false;
+  }
+
   /** Generated Token Manager. */
-  static public WandParserTokenManager token_source;
-  static SimpleCharStream jj_input_stream;
+  public WandParserTokenManager token_source;
+  SimpleCharStream jj_input_stream;
   /** Current token. */
-  static public Token token;
+  public Token token;
   /** Next token. */
-  static public Token jj_nt;
-  static private int jj_ntk;
-  static private Token jj_scanpos, jj_lastpos;
-  static private int jj_la;
-  static private int jj_gen;
-  static final private int[] jj_la1 = new int[50];
+  public Token jj_nt;
+  private int jj_ntk;
+  private Token jj_scanpos, jj_lastpos;
+  private int jj_la;
+  private int jj_gen;
+  final private int[] jj_la1 = new int[50];
   static private int[] jj_la1_0;
   static private int[] jj_la1_1;
   static private int[] jj_la1_2;
@@ -3436,9 +3438,9 @@ void BlockStatement() #void : {}
    private static void jj_la1_init_2() {
       jj_la1_2 = new int[] {0x10,0xa0,0xa0,0x100,0x0,0x0,0x200,0x80,0x0,0x80,0x80,0x400,0x100,0x0,0x3100080,0x1000,0x0,0x80000,0x0,0x0,0x100000,0x0,0x0,0xe00000,0x0,0x0,0x0,0x3100080,0x0,0x80,0x0,0x3100080,0x200,0x7e000,0x0,0x0,0xe00000,0x0,0x0,0x0,0x3100000,0x0,0x0,0x31000cc,0x31000cc,0x310008c,0x8c,0x0,0x200,0x0,};
    }
-  static final private JJCalls[] jj_2_rtns = new JJCalls[5];
-  static private boolean jj_rescan = false;
-  static private int jj_gc = 0;
+  final private JJCalls[] jj_2_rtns = new JJCalls[5];
+  private boolean jj_rescan = false;
+  private int jj_gc = 0;
 
   /** Constructor with InputStream. */
   public WandParser(java.io.InputStream stream) {
@@ -3446,13 +3448,6 @@ void BlockStatement() #void : {}
   }
   /** Constructor with InputStream and supplied encoding */
   public WandParser(java.io.InputStream stream, String encoding) {
-    if (jj_initialized_once) {
-      System.out.println("ERROR: Second call to constructor of static parser.  ");
-      System.out.println("       You must either use ReInit() or set the JavaCC option STATIC to false");
-      System.out.println("       during parser generation.");
-      throw new Error();
-    }
-    jj_initialized_once = true;
     try { jj_input_stream = new SimpleCharStream(stream, encoding, 1, 1); } catch(java.io.UnsupportedEncodingException e) { throw new RuntimeException(e); }
     token_source = new WandParserTokenManager(jj_input_stream);
     token = new Token();
@@ -3463,11 +3458,11 @@ void BlockStatement() #void : {}
   }
 
   /** Reinitialise. */
-  static public void ReInit(java.io.InputStream stream) {
+  public void ReInit(java.io.InputStream stream) {
      ReInit(stream, null);
   }
   /** Reinitialise. */
-  static public void ReInit(java.io.InputStream stream, String encoding) {
+  public void ReInit(java.io.InputStream stream, String encoding) {
     try { jj_input_stream.ReInit(stream, encoding, 1, 1); } catch(java.io.UnsupportedEncodingException e) { throw new RuntimeException(e); }
     token_source.ReInit(jj_input_stream);
     token = new Token();
@@ -3480,13 +3475,6 @@ void BlockStatement() #void : {}
 
   /** Constructor. */
   public WandParser(java.io.Reader stream) {
-    if (jj_initialized_once) {
-      System.out.println("ERROR: Second call to constructor of static parser. ");
-      System.out.println("       You must either use ReInit() or set the JavaCC option STATIC to false");
-      System.out.println("       during parser generation.");
-      throw new Error();
-    }
-    jj_initialized_once = true;
     jj_input_stream = new SimpleCharStream(stream, 1, 1);
     token_source = new WandParserTokenManager(jj_input_stream);
     token = new Token();
@@ -3497,7 +3485,7 @@ void BlockStatement() #void : {}
   }
 
   /** Reinitialise. */
-  static public void ReInit(java.io.Reader stream) {
+  public void ReInit(java.io.Reader stream) {
     jj_input_stream.ReInit(stream, 1, 1);
     token_source.ReInit(jj_input_stream);
     token = new Token();
@@ -3510,13 +3498,6 @@ void BlockStatement() #void : {}
 
   /** Constructor with generated Token Manager. */
   public WandParser(WandParserTokenManager tm) {
-    if (jj_initialized_once) {
-      System.out.println("ERROR: Second call to constructor of static parser. ");
-      System.out.println("       You must either use ReInit() or set the JavaCC option STATIC to false");
-      System.out.println("       during parser generation.");
-      throw new Error();
-    }
-    jj_initialized_once = true;
     token_source = tm;
     token = new Token();
     jj_ntk = -1;
@@ -3536,7 +3517,7 @@ void BlockStatement() #void : {}
     for (int i = 0; i < jj_2_rtns.length; i++) jj_2_rtns[i] = new JJCalls();
   }
 
-  static private Token jj_consume_token(int kind) throws ParseException {
+  private Token jj_consume_token(int kind) throws ParseException {
     Token oldToken;
     if ((oldToken = token).next != null) token = token.next;
     else token = token.next = token_source.getNextToken();
@@ -3561,8 +3542,8 @@ void BlockStatement() #void : {}
   }
 
   static private final class LookaheadSuccess extends java.lang.Error { }
-  static final private LookaheadSuccess jj_ls = new LookaheadSuccess();
-  static private boolean jj_scan_token(int kind) {
+  final private LookaheadSuccess jj_ls = new LookaheadSuccess();
+  private boolean jj_scan_token(int kind) {
     if (jj_scanpos == jj_lastpos) {
       jj_la--;
       if (jj_scanpos.next == null) {
@@ -3585,7 +3566,7 @@ void BlockStatement() #void : {}
 
 
 /** Get the next Token. */
-  static final public Token getNextToken() {
+  final public Token getNextToken() {
     if (token.next != null) token = token.next;
     else token = token.next = token_source.getNextToken();
     jj_ntk = -1;
@@ -3594,7 +3575,7 @@ void BlockStatement() #void : {}
   }
 
 /** Get the specific Token. */
-  static final public Token getToken(int index) {
+  final public Token getToken(int index) {
     Token t = token;
     for (int i = 0; i < index; i++) {
       if (t.next != null) t = t.next;
@@ -3603,20 +3584,20 @@ void BlockStatement() #void : {}
     return t;
   }
 
-  static private int jj_ntk() {
+  private int jj_ntk() {
     if ((jj_nt=token.next) == null)
       return (jj_ntk = (token.next=token_source.getNextToken()).kind);
     else
       return (jj_ntk = jj_nt.kind);
   }
 
-  static private java.util.List<int[]> jj_expentries = new java.util.ArrayList<int[]>();
-  static private int[] jj_expentry;
-  static private int jj_kind = -1;
-  static private int[] jj_lasttokens = new int[100];
-  static private int jj_endpos;
+  private java.util.List<int[]> jj_expentries = new java.util.ArrayList<int[]>();
+  private int[] jj_expentry;
+  private int jj_kind = -1;
+  private int[] jj_lasttokens = new int[100];
+  private int jj_endpos;
 
-  static private void jj_add_error_token(int kind, int pos) {
+  private void jj_add_error_token(int kind, int pos) {
     if (pos >= 100) return;
     if (pos == jj_endpos + 1) {
       jj_lasttokens[jj_endpos++] = kind;
@@ -3642,7 +3623,7 @@ void BlockStatement() #void : {}
   }
 
   /** Generate ParseException. */
-  static public ParseException generateParseException() {
+  public ParseException generateParseException() {
     jj_expentries.clear();
     boolean[] la1tokens = new boolean[90];
     if (jj_kind >= 0) {
@@ -3682,14 +3663,14 @@ void BlockStatement() #void : {}
   }
 
   /** Enable tracing. */
-  static final public void enable_tracing() {
+  final public void enable_tracing() {
   }
 
   /** Disable tracing. */
-  static final public void disable_tracing() {
+  final public void disable_tracing() {
   }
 
-  static private void jj_rescan_token() {
+  private void jj_rescan_token() {
     jj_rescan = true;
     for (int i = 0; i < 5; i++) {
     try {
@@ -3712,7 +3693,7 @@ void BlockStatement() #void : {}
     jj_rescan = false;
   }
 
-  static private void jj_save(int index, int xla) {
+  private void jj_save(int index, int xla) {
     JJCalls p = jj_2_rtns[index];
     while (p.gen > jj_gen) {
       if (p.next == null) { p = p.next = new JJCalls(); break; }

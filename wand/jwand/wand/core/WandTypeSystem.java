@@ -6,12 +6,9 @@ public class WandTypeSystem {
     private static HashMap<WandBasicType,WandType> basicTypes;
     private static HashMap<String,WandType> typeMap;
     
-    private static HashMap<String,WandNamespace> namespaces;
-    
     static {
         basicTypes = new HashMap<WandBasicType,WandType>();
         typeMap = new HashMap<String,WandType>();
-        namespaces = new HashMap<String,WandNamespace>();
         initBasicTypes( );
     }
     

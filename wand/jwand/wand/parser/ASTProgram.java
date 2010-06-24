@@ -2,20 +2,38 @@
 /* JavaCCOptions:MULTI=true,NODE_USES_PARSER=false,VISITOR=true,TRACK_TOKENS=false,NODE_PREFIX=AST,NODE_EXTENDS=wand.core.WandNode,NODE_FACTORY=,SUPPORT_CLASS_VISIBILITY_PUBLIC=true */
 package wand.parser;
 
+import java.util.*;
+
+import wand.core.*;
+
 public
 class ASTProgram extends SimpleNode {
-  public ASTProgram(int id) {
-    super(id);
-  }
-
-  public ASTProgram(WandParser p, int id) {
-    super(p, id);
-  }
-
-
-  /** Accept the visitor. **/
-  public Object jjtAccept(WandParserVisitor visitor, Object data) {
-    return visitor.visit(this, data);
-  }
+    private WandNamespace namespace;
+    
+    private List<WandNamespace> importedNamespaces = new ArrayList<WandNamespace>( );
+    
+    public ASTProgram(int id) {
+        super(id);
+    }
+    
+    public ASTProgram(WandParser p, int id) {
+        super(p, id);
+    }
+    
+    public void setNamespace( WandNamespace namespace ) {
+        this.namespace = namespace;
+    }
+    
+    public void importNamespace( WandNamespace namespace ) {
+        if ( !this.importedNamespaces.contains( namespace ) ) {
+            System.out.println( "using: " + namespace );
+            this.importedNamespaces.add( namespace );
+        }
+    }
+    
+    /** Accept the visitor. **/
+    public Object jjtAccept(WandParserVisitor visitor, Object data) {
+        return visitor.visit(this, data);
+    }
 }
 /* JavaCC - OriginalChecksum=d96d2f1838ebd1fe037ab7008bbe7cc3 (do not edit this line) */

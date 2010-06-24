@@ -4,18 +4,27 @@ package wand.parser;
 
 public
 class ASTNamespaceName extends SimpleNode {
-  public ASTNamespaceName(int id) {
-    super(id);
-  }
+    private String name;
+    
+    public ASTNamespaceName(int id) {
+        super(id);
+    }
 
-  public ASTNamespaceName(WandParser p, int id) {
-    super(p, id);
-  }
+    public ASTNamespaceName(WandParser p, int id) {
+        super(p, id);
+    }
+    
+    public void setName( String name ) {
+        this.name = name;
+    }
+    
+    public String getName( ) {
+        return this.name;
+    }
 
-
-  /** Accept the visitor. **/
-  public Object jjtAccept(WandParserVisitor visitor, Object data) {
-    return visitor.visit(this, data);
-  }
+    /** Accept the visitor. **/
+    public Object jjtAccept(WandParserVisitor visitor, Object data) {
+        return visitor.visit(this, data);
+    }
 }
 /* JavaCC - OriginalChecksum=7f61334cad8e7992f4ed0780f203d368 (do not edit this line) */

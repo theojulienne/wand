@@ -3,6 +3,7 @@ options {
 	NODE_EXTENDS="wand.core.WandNode";
 	NODE_PACKAGE="wand.parser";
 	VISITOR=true;
+	STATIC=false;
 }
 
 
@@ -177,9 +178,12 @@ void QualifiedNamespaceName() : {}
     NamespaceName() ("." NamespaceName())*
 }
 
-void NamespaceName() : {}
+void NamespaceName() : {
+    Token t;
+}
 {
-    <ID>
+    t=<ID>
+    { jjtThis.setName( t.image ); }
 }
 
 void DecoratedFunctionDeclaration() : {}

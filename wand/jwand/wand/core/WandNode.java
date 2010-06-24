@@ -41,6 +41,11 @@ public abstract class WandNode implements Node, Iterable<WandNode> {
         return (WandNode)jjtGetParent( );
     }
     
+    public WandNode getChild( int i ) {
+        assert i < jjtGetNumChildren( ) : "Requested child that doesn't exist: " + i;
+        return (WandNode)jjtGetChild( i );
+    }
+    
     public Iterator<WandNode> iterator() {
         return new Iterator<WandNode>() {
             private int currentIndex = 0;

@@ -4,6 +4,7 @@
 	                                  
 	                           
 	             
+	STATIC=false;
 }
 
 
@@ -13,7 +14,7 @@ PARSER_BEGIN(WandParser)
 package wand.parser;
 
 public class WandParser/*@bgen(jjtree)*/implements WandParserTreeConstants/*@egen*/ {/*@bgen(jjtree)*/
-  protected static JJTWandParserState jjtree = new JJTWandParserState();
+  protected JJTWandParserState jjtree = new JJTWandParserState();
 
 /*@egen*/}
 PARSER_END(WandParser)
@@ -317,14 +318,22 @@ void QualifiedNamespaceName() : {/*@bgen(jjtree) QualifiedNamespaceName */
 }
 
 void NamespaceName() : {/*@bgen(jjtree) NamespaceName */
-  ASTNamespaceName jjtn000 = new ASTNamespaceName(JJTNAMESPACENAME);
-  boolean jjtc000 = true;
-  jjtree.openNodeScope(jjtn000);
-/*@egen*/}
+    ASTNamespaceName jjtn000 = new ASTNamespaceName(JJTNAMESPACENAME);
+    boolean jjtc000 = true;
+    jjtree.openNodeScope(jjtn000);
+/*@egen*/
+    Token t;
+}
 {/*@bgen(jjtree) NamespaceName */
     try {
 /*@egen*/
-    <ID>/*@bgen(jjtree)*/
+    t=<ID>/*@bgen(jjtree)*/
+    {
+      jjtree.closeNodeScope(jjtn000, true);
+      jjtc000 = false;
+    }
+/*@egen*/
+    { jjtn000.setName( t.image ); }/*@bgen(jjtree)*/
     } finally {
       if (jjtc000) {
         jjtree.closeNodeScope(jjtn000, true);

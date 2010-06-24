@@ -4,18 +4,27 @@ package wand.parser;
 
 public
 class ASTNamespaceDeclaration extends SimpleNode {
-  public ASTNamespaceDeclaration(int id) {
-    super(id);
-  }
+    public ASTNamespaceDeclaration(int id) {
+        super(id);
+    }
 
-  public ASTNamespaceDeclaration(WandParser p, int id) {
-    super(p, id);
-  }
+    public ASTNamespaceDeclaration(WandParser p, int id) {
+        super(p, id);
+    }
+    
+    public String getQualifiedName( ) {
+        ASTQualifiedNamespaceName qualName = 
+            (ASTQualifiedNamespaceName)this.getChild( 0 );
+        return qualName.getQualifiedName( );
+    }
+    
+    public String toString( ) {
+        return "<ASTNamespaceDeclaration: " + getQualifiedName( ) + ">";
+    }
 
-
-  /** Accept the visitor. **/
-  public Object jjtAccept(WandParserVisitor visitor, Object data) {
-    return visitor.visit(this, data);
-  }
+    /** Accept the visitor. **/
+    public Object jjtAccept(WandParserVisitor visitor, Object data) {
+        return visitor.visit(this, data);
+    }
 }
 /* JavaCC - OriginalChecksum=d250417b0dee76ab878653f35db6470f (do not edit this line) */
