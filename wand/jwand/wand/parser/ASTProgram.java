@@ -26,9 +26,13 @@ class ASTProgram extends SimpleNode {
     
     public void importNamespace( WandNamespace namespace ) {
         if ( !this.importedNamespaces.contains( namespace ) ) {
-            System.out.println( "using: " + namespace );
+            //System.out.println( "using: " + namespace );
             this.importedNamespaces.add( namespace );
         }
+    }
+    
+    public List<WandNamespace> getUsedNamespaces( ) {
+        return importedNamespaces;
     }
     
     /** Accept the visitor. **/

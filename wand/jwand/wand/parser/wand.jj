@@ -405,20 +405,37 @@ void Modifiers() : {/*@bgen(jjtree) Modifiers */
 }
 
 void Modifier() : {/*@bgen(jjtree) Modifier */
-  ASTModifier jjtn000 = new ASTModifier(JJTMODIFIER);
-  boolean jjtc000 = true;
-  jjtree.openNodeScope(jjtn000);
-/*@egen*/}
+    ASTModifier jjtn000 = new ASTModifier(JJTMODIFIER);
+    boolean jjtc000 = true;
+    jjtree.openNodeScope(jjtn000);
+/*@egen*/
+    Token t;
+    Token meta = null;
+}
 {/*@bgen(jjtree) Modifier */
     try {
 /*@egen*/
-    "public" |
-    "private" |
-    "protected" |
-    "static" |
-    "abstract" |
-    "final" |
-    "compat" ":" <ID>/*@bgen(jjtree)*/
+    (
+        t="public" |
+        t="private" |
+        t="protected" |
+        t="static" |
+        t="abstract" |
+        t="final" |
+        t="compat" ":" meta=<ID>
+    )/*@bgen(jjtree)*/
+    {
+      jjtree.closeNodeScope(jjtn000, true);
+      jjtc000 = false;
+    }
+/*@egen*/
+    
+    {
+        jjtn000.setKind( t.kind );
+        if ( meta != null ) {
+            jjtn000.setMeta( meta.image );
+        }
+    }/*@bgen(jjtree)*/
     } finally {
       if (jjtc000) {
         jjtree.closeNodeScope(jjtn000, true);

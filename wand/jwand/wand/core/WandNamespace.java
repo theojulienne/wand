@@ -31,4 +31,28 @@ public class WandNamespace {
     private WandNamespace( String name ) {
         this.name = name;
     }
+    
+    public String getName( ) {
+        return this.name;
+    }
+    
+    public boolean containsName( String name ) {
+        return symbolTable.containsKey( name );
+    }
+    
+    public WandSymbol getSymbol( String name ) {
+        return symbolTable.get( name );
+    }
+    
+    public FunctionSymbol addFunction( String name ) {
+        FunctionSymbol symbol = new FunctionSymbol( this, name );
+        
+        symbolTable.put( name, symbol );
+        
+        return symbol;
+    }
+    
+    public Set<String> getSymbols( ) {
+        return symbolTable.keySet( );
+    }
 }

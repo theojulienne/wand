@@ -320,39 +320,46 @@ public class WandParser/*@bgen(jjtree)*/implements WandParserTreeConstants, Wand
 
   final public void Modifier() throws ParseException {
                    /*@bgen(jjtree) Modifier */
-  ASTModifier jjtn000 = new ASTModifier(JJTMODIFIER);
-  boolean jjtc000 = true;
-  jjtree.openNodeScope(jjtn000);
+    ASTModifier jjtn000 = new ASTModifier(JJTMODIFIER);
+    boolean jjtc000 = true;
+    jjtree.openNodeScope(jjtn000);Token t;
+    Token meta = null;
     try {
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
       case MODIFIER_PUBLIC:
-        jj_consume_token(MODIFIER_PUBLIC);
+        t = jj_consume_token(MODIFIER_PUBLIC);
         break;
       case MODIFIER_PRIVATE:
-        jj_consume_token(MODIFIER_PRIVATE);
+        t = jj_consume_token(MODIFIER_PRIVATE);
         break;
       case MODIFIER_PROTECTED:
-        jj_consume_token(MODIFIER_PROTECTED);
+        t = jj_consume_token(MODIFIER_PROTECTED);
         break;
       case MODIFIER_STATIC:
-        jj_consume_token(MODIFIER_STATIC);
+        t = jj_consume_token(MODIFIER_STATIC);
         break;
       case MODIFIER_ABSTRACT:
-        jj_consume_token(MODIFIER_ABSTRACT);
+        t = jj_consume_token(MODIFIER_ABSTRACT);
         break;
       case MODIFIER_FINAL:
-        jj_consume_token(MODIFIER_FINAL);
+        t = jj_consume_token(MODIFIER_FINAL);
         break;
       case MODIFIER_COMPAT:
-        jj_consume_token(MODIFIER_COMPAT);
+        t = jj_consume_token(MODIFIER_COMPAT);
         jj_consume_token(MODIFIER_ARG);
-        jj_consume_token(ID);
+        meta = jj_consume_token(ID);
         break;
       default:
         jj_la1[5] = jj_gen;
         jj_consume_token(-1);
         throw new ParseException();
       }
+      jjtree.closeNodeScope(jjtn000, true);
+      jjtc000 = false;
+        jjtn000.setKind( t.kind );
+        if ( meta != null ) {
+            jjtn000.setMeta( meta.image );
+        }
     } finally {
       if (jjtc000) {
         jjtree.closeNodeScope(jjtn000, true);
@@ -2613,49 +2620,6 @@ void BlockStatement() #void : {}
     finally { jj_save(4, xla); }
   }
 
-  private boolean jj_3R_51() {
-    if (jj_scan_token(STMT_CONTINUE)) return true;
-    return false;
-  }
-
-  private boolean jj_3R_85() {
-    if (jj_3R_91()) return true;
-    Token xsp;
-    xsp = jj_scanpos;
-    if (jj_3R_92()) jj_scanpos = xsp;
-    return false;
-  }
-
-  private boolean jj_3R_90() {
-    Token xsp;
-    xsp = jj_scanpos;
-    if (jj_scan_token(37)) {
-    jj_scanpos = xsp;
-    if (jj_scan_token(36)) return true;
-    }
-    return false;
-  }
-
-  private boolean jj_3R_50() {
-    if (jj_scan_token(STMT_BREAK)) return true;
-    return false;
-  }
-
-  private boolean jj_3R_79() {
-    if (jj_3R_85()) return true;
-    Token xsp;
-    while (true) {
-      xsp = jj_scanpos;
-      if (jj_3R_86()) { jj_scanpos = xsp; break; }
-    }
-    return false;
-  }
-
-  private boolean jj_3R_49() {
-    if (jj_scan_token(STMT_LOOP)) return true;
-    return false;
-  }
-
   private boolean jj_3R_74() {
     if (jj_3R_79()) return true;
     Token xsp;
@@ -3406,6 +3370,49 @@ void BlockStatement() #void : {}
 
   private boolean jj_3R_77() {
     if (jj_3R_83()) return true;
+    return false;
+  }
+
+  private boolean jj_3R_51() {
+    if (jj_scan_token(STMT_CONTINUE)) return true;
+    return false;
+  }
+
+  private boolean jj_3R_85() {
+    if (jj_3R_91()) return true;
+    Token xsp;
+    xsp = jj_scanpos;
+    if (jj_3R_92()) jj_scanpos = xsp;
+    return false;
+  }
+
+  private boolean jj_3R_90() {
+    Token xsp;
+    xsp = jj_scanpos;
+    if (jj_scan_token(37)) {
+    jj_scanpos = xsp;
+    if (jj_scan_token(36)) return true;
+    }
+    return false;
+  }
+
+  private boolean jj_3R_50() {
+    if (jj_scan_token(STMT_BREAK)) return true;
+    return false;
+  }
+
+  private boolean jj_3R_79() {
+    if (jj_3R_85()) return true;
+    Token xsp;
+    while (true) {
+      xsp = jj_scanpos;
+      if (jj_3R_86()) { jj_scanpos = xsp; break; }
+    }
+    return false;
+  }
+
+  private boolean jj_3R_49() {
+    if (jj_scan_token(STMT_LOOP)) return true;
     return false;
   }
 

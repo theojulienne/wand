@@ -3,11 +3,13 @@
 package wand.parser;
 
 import wand.generators.*;
+import wand.core.*;
 
 public
-class ASTFunctionDeclaration extends ASTDeclaration {
+class ASTFunctionDeclaration extends ASTDeclaration implements WandFunctionDeclaration {
     private ASTModifiers modifiers = null;
     private String functionName = null;
+    private WandNamespace namespace = null;
     
     public ASTFunctionDeclaration(int id) {
         super(id);
@@ -47,6 +49,26 @@ class ASTFunctionDeclaration extends ASTDeclaration {
     
     public ASTModifiers getFunctionModifiers( ) {
         return modifiers;
+    }
+    
+    public boolean hasModifier( int kind ) {
+        return getFunctionModifiers( ).hasModifier( kind );
+    }
+    
+    public String getModifierMeta( int kind ) {
+        return getFunctionModifiers( ).getModifierMeta( kind );
+    }
+    
+    public String toString( ) {
+        return "<ASTFunctionDeclaration: " + getFunctionName() + ">";
+    }
+    
+    public void setNamespace( WandNamespace namespace ) {
+        this.namespace = namespace;
+    }
+    
+    public WandNamespace getNamespace( ) {
+        return this.namespace;
     }
     
     /** Accept the visitor. **/

@@ -20,8 +20,6 @@ public class NamespaceMapper extends WandVisitor {
     }
     
     public Object visit(ASTUsingStatement node, Object data) {
-        System.out.println( "using statement: " + node );
-        
         String qualifiedName = node.getQualifiedName( );
         
         // FIXME: real compile error

@@ -56,13 +56,12 @@ public class WandCompiler {
         }
         
         System.out.println( sourceFiles + " -> " + outputExec );
-        String[] outputFiles = compileWandSources( sourceFiles );
+        String[] outputCFiles = compileWandSources( sourceFiles );
         
         if ( !shouldCompileOnly ) {
-            assert outputExec.endsWith(".wand"): "Output file should not end with a .wand extension!";
+            assert !outputExec.endsWith(".wand"): "Output file should not end with a .wand extension!";
             System.out.println( "Compiling and linking with gcc.." );
-            //gccCompileProgram( outputFile, baseFilename );
-            assert false: "wand gcc support temporarily disabled";
+            gccCompileProgram( outputCFiles, outputExec );
         }
 	}
 	
@@ -188,11 +187,21 @@ public class WandCompiler {
 		return outputFilenames;
 	}
 	
-	private static void gccCompileProgram( String sourceFile, String outputBinary ) {
+	private static void gccCompileProgram( String[] sourceFiles, String outputBinary ) {
 	    String s;
 	    
+	    StringBuilder command = new StringBuilder( );
+	    command.append( "gcc " );
+	    for ( int i = 0; i < sourceFiles.length; i++ ) {
+	        command.append( " " );
+	        command.append( sourceFiles[i] );
+	    }
+	    command.append( " -o " );
+	    command.append( outputBinary );
+	    command.append( " -Wall -Werror" );
+	    
 	    try {
-    	    Process p = Runtime.getRuntime().exec( "gcc " + sourceFile + " -o " + outputBinary );
+    	    Process p = Runtime.getRuntime().exec( command.toString( ) );
     	    p.waitFor( );
 	    
     	    BufferedReader stdInput = new BufferedReader(new InputStreamReader(p.getInputStream()));

@@ -14,7 +14,10 @@ int main() {
 	loop {
 		seed = blumBlumShub( p, q, seed );
 		iteration++;
-	} until ( seed == goalSeed );
+	} until ( seed == goalSeed 
+				// below added to stop accidental infinite loop
+				// when the test fails
+				|| iteration > 100 );
 	
 	assert iteration == 99;
 

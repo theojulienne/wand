@@ -7,8 +7,8 @@ WAND_COMPILER = '../bin/wandc'
 
 PASS_STATS = {}
 
-def wand_compile( src_file ):
-	cmd = [WAND_COMPILER, '-c', src_file]
+def wand_compile( src_files ):
+	cmd = [WAND_COMPILER, '-c', ] + src_files
 	
 	proc = subprocess.Popen( cmd, 
 		stdin=subprocess.PIPE,
@@ -44,7 +44,7 @@ def run_executable( command ):
 	return (proc.returncode == 0)
 
 def gcc_files( sources, binary ):
-	cmd = ['gcc'] + sources + ['-o', binary]
+	cmd = ['gcc', '-Wall', '-Werror'] + sources + ['-o', binary]
 	return run_executable( cmd )
 
 def cleanup( created_files ):
@@ -66,13 +66,7 @@ def run_test( test_type, path, files ):
 	TARGET_FILENAME = path + '/test'
 	created_files = gen_c_files + [ TARGET_FILENAME ]
 	
-	all_compiled = True
-	exception_thrown = False
-	
-	for wand_file in wand_files:
-		exit_success, exception_thrown_child = wand_compile( wand_file )
-		all_compiled = all_compiled and exit_success
-		exception_thrown = exception_thrown or exception_thrown_child
+	all_compiled, exception_thrown = wand_compile( wand_files )
 	
 	expect_graceful = test_type.endswith( '-graceful' )
 	

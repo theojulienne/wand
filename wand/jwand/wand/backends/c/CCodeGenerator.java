@@ -1,6 +1,7 @@
 package wand.backends.c;
 
 import java.io.*;
+import java.util.*;
 
 import wand.core.*;
 import wand.parser.*;
@@ -22,7 +23,37 @@ public class CCodeGenerator extends WandVisitor {
         writeNewline( "#include <assert.h>" );
         writeNewline( "#include <math.h>" );
         writeNewline( );
+        
+        writeNamespacePrototypes( program );
+        
         program.jjtAccept( this, null );
+    }
+    
+    /**
+     * Writes out C prototypes for all functions in imported namespaces
+     */
+    public void writeNamespacePrototypes( ASTProgram program ) {
+        List<WandNamespace> namespaces = program.getUsedNamespaces( );
+        
+        writeNewline( "// namespace prototypes" );
+        for ( WandNamespace namespace: namespaces ) {
+            // FIXME: use a better pattern for this, maybe even another
+            // visitor type?
+            Set<String> symbols = namespace.getSymbols( );
+            for ( String symbolName: symbols ) {
+                WandSymbol symbol = namespace.getSymbol( symbolName );
+                
+                FunctionSymbol function = (FunctionSymbol)symbol;
+                if ( function != null ) {
+                    // write each function prototype
+                    for ( ASTFunctionDeclaration declaration: function ) {
+                        writeFunctionPrototype( declaration, null );
+                        writeNewline( ";" );
+                    }
+                }
+            }
+        }
+        writeNewline( );
     }
     
     public Object visit(ASTBlockStatement node, Object data) {
@@ -36,23 +67,35 @@ public class CCodeGenerator extends WandVisitor {
     public Object visit(ASTFunctionDeclaration node, Object data) {
         String functionName = node.getFunctionName( );
         
-        ASTType returnType = (ASTType)node.getReturnType( );
-        ASTFunctionParameters parameters = (ASTFunctionParameters)node.getFunctionParameters( );
         ASTBlockStatement body = (ASTBlockStatement)node.getFunctionBody( );
         
         writeNewline( "// begin function " + functionName );
         
-        returnType.accept( this, data );
-        writeString( " " );
-        writeString( functionName );
-        writeString( "( " );
-        parameters.accept( this, data );
-        writeString( " ) " );
-        
+        writeFunctionPrototype( node, data );
         body.accept( this, data );
+        
         writeNewline( "// end function " + functionName );
         
         return data;
+    }
+    
+    public void writeFunctionPrototype( WandFunctionDeclaration node, Object data ) {
+        String mangledName = WandNameMangler.mangleFunction( node );
+        
+        // HACK: special case for main. can we do something better?
+        if ( node.getFunctionName().equals( "main" ) ) {
+            mangledName = node.getFunctionName( );
+        }
+        
+        ASTType returnType = (ASTType)node.getReturnType( );
+        ASTFunctionParameters parameters = (ASTFunctionParameters)node.getFunctionParameters( );
+        
+        returnType.accept( this, data );
+        writeString( " " );
+        writeString( mangledName );
+        writeString( "( " );
+        parameters.accept( this, data );
+        writeString( " ) " );
     }
     
     public Object visit(ASTFunctionParameters node, Object data) {
@@ -66,6 +109,11 @@ public class CCodeGenerator extends WandVisitor {
             child.accept( this, data );
             
             first = false;
+        }
+        
+        if ( first ) {
+            // no parameters!
+            writeString( "void" );
         }
         
         return data;
@@ -143,8 +191,10 @@ public class CCodeGenerator extends WandVisitor {
                 firstNode = false;
                 // FIXME: this should eventually be a WandVariable
                 // and work automatically with accept()
-                ASTIdentifier identifier = (ASTIdentifier)child;
-                writeString( identifier.getIdentifier() );
+                WandFunctionReference function = (WandFunctionReference)child;
+                WandFunctionDeclaration declaration = function.getDeclaration( );
+                String mangledName = WandNameMangler.mangleFunction( declaration );
+                writeString( mangledName );
                 writeString( "( " );
                 continue;
             }
@@ -402,6 +452,9 @@ public class CCodeGenerator extends WandVisitor {
                 break;
             case WandParserConstants.OP_CMP_GT:
                 writeString( ">" );
+                break;
+            case WandParserConstants.OP_LOGICAL_OR:
+                writeString( "||" );
                 break;
             default:
                 assert false: "Unknown infix operator: " + WandParserConstants.tokenImage[operatorType];

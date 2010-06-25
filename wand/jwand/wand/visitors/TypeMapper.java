@@ -10,19 +10,19 @@ public class TypeMapper extends WandVisitor {
     }
     
     public Object visit(ASTBuiltinType node, Object data) {
-        System.out.println( "builtin type: " + node );
+        //System.out.println( "builtin type: " + node );
         
         String typeName = node.getTypeName( );
         
         WandType type = WandTypeSystem.getTypeByName( typeName );
         
-        System.out.println( " -> " + type );
+        //System.out.println( " -> " + type );
         
         return data;
     }
     
     public Object visit(ASTArrayType node, Object data) {
-        System.out.println( "array type: " + node );
+        //System.out.println( "array type: " + node );
         return data;
     }
 }

@@ -15,8 +15,6 @@ public class NamespaceFinder extends WandVisitor {
     public Object visit(ASTProgram node, Object data) {
         program = node;
         
-        System.out.println( "program: " + node );
-        
         // FIXME: only if no NamespaceDeclaration node exists?
         namespace = WandNamespace.getGlobalNamespace( );
         
@@ -29,10 +27,26 @@ public class NamespaceFinder extends WandVisitor {
     }
     
     public Object visit(ASTNamespaceDeclaration node, Object data) {
-        System.out.println( "namespace: " + node );
-        
         namespace = WandNamespace.getNamespace( node.getQualifiedName( ) );
         program.importNamespace( namespace );
+        
+        return data;
+    }
+    
+    // look for functions
+    public Object visit(ASTFunctionDeclaration node, Object data) {
+        String functionName = node.getFunctionName( );
+        
+        FunctionSymbol function = null;
+        
+        if ( namespace.containsName( functionName ) ) {
+            function = (FunctionSymbol)namespace.getSymbol( functionName );
+            assert function != null: "Name conflict between a type/variable and function " + functionName;
+        } else {
+            function = namespace.addFunction( functionName );
+        }
+        
+        function.addDeclaration( node );
         
         return data;
     }

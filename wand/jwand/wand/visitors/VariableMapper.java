@@ -1,10 +1,13 @@
 package wand.visitors;
 
+import java.util.*;
+
 import wand.core.*;
 import wand.util.*;
 import wand.parser.*;
 
 public class VariableMapper extends WandVisitor {
+    private ASTProgram currentProgram = null;
     private Scope currentScope = null;
     
     private boolean inDeclaration = false;
@@ -19,6 +22,12 @@ public class VariableMapper extends WandVisitor {
     
     private void popScope( ) {
         currentScope = currentScope.getParentScope( );
+    }
+    
+    public Object visit( ASTProgram node, Object data ) {
+        currentProgram = node;
+        
+        return visitChildren( node, data );
     }
     
     public Object visit( ASTBlockStatement node, Object data ) {
@@ -96,15 +105,40 @@ public class VariableMapper extends WandVisitor {
     }
     
     public Object visit(ASTFunctionCall node, Object data) {
-        // skip the identifier (first node), because it's a function,
-        // and we are only looking for variables.
-        // FIXME: this will break when we have delegate types that
-        // must be considered.
-        
         boolean first = true;
         for ( WandNode child: node ) {
             if ( first ) {
+                // the first node is the function name itself
+                
                 first = false;
+                
+                ASTIdentifier identifierNode = (ASTIdentifier)child;
+                String identifier = identifierNode.getIdentifier( );
+                //System.out.println( "Function called: " + identifier );
+                
+                List<WandNamespace> usedNamespaces = currentProgram.getUsedNamespaces( );
+                
+                FunctionSymbol symbol = null;
+                
+                // FIXME: this needs to allow for qualified identifiers
+                
+                // FIXME: instead of using just any old match, use the BEST match 
+                // based on the type, and error if types can't be implicitly cast.
+                for ( WandNamespace namespace: usedNamespaces ) {
+                    if ( namespace.containsName( identifier ) ) {
+                        symbol = (FunctionSymbol)namespace.getSymbol( identifier );
+                        break;
+                    }
+                }
+                
+                assert symbol != null: "Function " + identifier + " could not be found. Typo or missing a namespace?";
+                
+                WandFunctionDeclaration declaration = symbol.getFirstDeclaration( );
+                WandFunctionReference reference = new WandFunctionReference( declaration );
+                // replace node in parent
+                
+                node.replaceChild( identifierNode, reference );
+                
                 continue;
             }
             child.accept( this, data );

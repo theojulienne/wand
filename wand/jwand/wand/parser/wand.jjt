@@ -196,15 +196,27 @@ void Modifiers() : {}
     (Modifier())*
 }
 
-void Modifier() : {}
+void Modifier() : {
+    Token t;
+    Token meta = null;
+}
 {
-    "public" |
-    "private" |
-    "protected" |
-    "static" |
-    "abstract" |
-    "final" |
-    "compat" ":" <ID>
+    (
+        t="public" |
+        t="private" |
+        t="protected" |
+        t="static" |
+        t="abstract" |
+        t="final" |
+        t="compat" ":" meta=<ID>
+    )
+    
+    {
+        jjtThis.setKind( t.kind );
+        if ( meta != null ) {
+            jjtThis.setMeta( meta.image );
+        }
+    }
 }
 
 // FunctionDeclaration -> "void" Identifier "(" ")" "{" FunctionBody "}"

@@ -4,18 +4,36 @@ package wand.parser;
 
 public
 class ASTModifier extends SimpleNode {
-  public ASTModifier(int id) {
-    super(id);
-  }
+    private int tokenKind;
+    private String metadata = null;
+    
+    public ASTModifier(int id) {
+        super(id);
+    }
 
-  public ASTModifier(WandParser p, int id) {
-    super(p, id);
-  }
+    public ASTModifier(WandParser p, int id) {
+        super(p, id);
+    }
+    
+    public void setKind( int kind ) {
+        this.tokenKind = kind;
+    }
+    
+    public int getKind( ) {
+        return this.tokenKind;
+    }
+    
+    public void setMeta( String data ) {
+        this.metadata = data;
+    }
+    
+    public String getMeta( ) {
+        return metadata;
+    }
 
-
-  /** Accept the visitor. **/
-  public Object jjtAccept(WandParserVisitor visitor, Object data) {
-    return visitor.visit(this, data);
-  }
+    /** Accept the visitor. **/
+    public Object jjtAccept(WandParserVisitor visitor, Object data) {
+        return visitor.visit(this, data);
+    }
 }
 /* JavaCC - OriginalChecksum=0a4df11b14367abb109738e7228c6fa5 (do not edit this line) */

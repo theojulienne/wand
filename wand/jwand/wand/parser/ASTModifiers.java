@@ -2,20 +2,49 @@
 /* JavaCCOptions:MULTI=true,NODE_USES_PARSER=false,VISITOR=true,TRACK_TOKENS=false,NODE_PREFIX=AST,NODE_EXTENDS=wand.core.WandNode,NODE_FACTORY=,SUPPORT_CLASS_VISIBILITY_PUBLIC=true */
 package wand.parser;
 
+import wand.core.*;
+
 public
 class ASTModifiers extends SimpleNode {
-  public ASTModifiers(int id) {
-    super(id);
-  }
-
-  public ASTModifiers(WandParser p, int id) {
-    super(p, id);
-  }
-
-
-  /** Accept the visitor. **/
-  public Object jjtAccept(WandParserVisitor visitor, Object data) {
-    return visitor.visit(this, data);
-  }
+    public ASTModifiers(int id) {
+        super(id);
+    }
+    
+    public ASTModifiers(WandParser p, int id) {
+        super(p, id);
+    }
+    
+    public boolean hasModifier( int kind ) {
+        boolean found = false;
+        
+        for ( WandNode child: this ) {
+            ASTModifier modifier = (ASTModifier) child;
+            
+            if ( modifier.getKind( ) == kind ) {
+                found = true;
+            }
+        }
+        
+        return found;
+    }
+    
+    public String getModifierMeta( int kind ) {
+        String meta = null;
+        
+        for ( WandNode child: this ) {
+            ASTModifier modifier = (ASTModifier) child;
+            
+            if ( modifier.getKind( ) == kind ) {
+                meta = modifier.getMeta( );
+            }
+        }
+        
+        return meta;
+    }
+    
+    /** Accept the visitor. **/
+    public Object jjtAccept(WandParserVisitor visitor, Object data) {
+        return visitor.visit(this, data);
+    }
 }
 /* JavaCC - OriginalChecksum=3f2e7da3ee0d5cf7a87641a4aa2530c7 (do not edit this line) */
