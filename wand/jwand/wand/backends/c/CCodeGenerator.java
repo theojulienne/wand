@@ -284,6 +284,11 @@ public class CCodeGenerator extends WandVisitor {
         return data;
     }
     
+    public Object visit(ASTFloatingPointLiteral node, Object data) {
+        out.print( node.getDouble( ) );
+        return data;
+    }
+    
     public Object visit(ASTReturnStatement node, Object data) {
         writeString( "return (" );
         visitChildren(node, data);

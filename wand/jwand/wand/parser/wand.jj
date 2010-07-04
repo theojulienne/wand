@@ -29,8 +29,41 @@ SKIP :
 | "\n"
 | "\r"
 | <"//" (~["\n","\r"])* ("\n"|"\r"|"\r\n")>
-| <"/*" (~["*"])* "*" (~["/"] (~["*"])* "*")* "/">
+//| <"/*" (~["*"])* "*" (~["/"] (~["*"])* "*")* "/">
 }
+
+TOKEN_MGR_DECLS : {
+    static int commentNesting=0; 
+}
+
+/* Multi-line (+ nested!) comments */ 
+SKIP : {
+    "/*" { commentNesting++; } : IN_COMMENT
+}
+
+<IN_COMMENT> SKIP : { 
+    "/*" { commentNesting++; } 
+    | "*/" {
+        commentNesting--; 
+        if (commentNesting == 0) 
+            SwitchTo(DEFAULT);
+    } 
+    | <~[]>
+}
+
+/* Single line comments */ 
+SKIP : {
+    "//" : IN_LINE_COMMENT
+}
+
+<IN_LINE_COMMENT> SKIP : {
+    <SINGLE_LINE_COMMENT: "\n" | "\r" | "\r\n" > : DEFAULT
+}
+
+<IN_LINE_COMMENT> MORE : {
+    < ~[] >
+}
+
 
 /* Reserved words */
 TOKEN: {
@@ -1741,14 +1774,22 @@ void IntegerLiteral() : {/*@bgen(jjtree) IntegerLiteral */
 }
 
 void FloatingPointLiteral() : {/*@bgen(jjtree) FloatingPointLiteral */
-  ASTFloatingPointLiteral jjtn000 = new ASTFloatingPointLiteral(JJTFLOATINGPOINTLITERAL);
-  boolean jjtc000 = true;
-  jjtree.openNodeScope(jjtn000);
-/*@egen*/}
+    ASTFloatingPointLiteral jjtn000 = new ASTFloatingPointLiteral(JJTFLOATINGPOINTLITERAL);
+    boolean jjtc000 = true;
+    jjtree.openNodeScope(jjtn000);
+/*@egen*/
+    Token t;
+}
 {/*@bgen(jjtree) FloatingPointLiteral */
     try {
 /*@egen*/
-    <FLOAT_LITERAL>/*@bgen(jjtree)*/
+    t=<FLOAT_LITERAL>/*@bgen(jjtree)*/
+    {
+      jjtree.closeNodeScope(jjtn000, true);
+      jjtc000 = false;
+    }
+/*@egen*/
+    { jjtn000.fromString( t.image ); }/*@bgen(jjtree)*/
     } finally {
       if (jjtc000) {
         jjtree.closeNodeScope(jjtn000, true);
@@ -1756,6 +1797,7 @@ void FloatingPointLiteral() : {/*@bgen(jjtree) FloatingPointLiteral */
     }
 /*@egen*/
 }
+
 /*
 void CharacterLiteral() : {}
 {

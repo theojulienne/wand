@@ -11,132 +11,138 @@ public interface WandParserConstants {
   /** End of File. */
   int EOF = 0;
   /** RegularExpression Id. */
-  int VOID = 7;
+  int SINGLE_LINE_COMMENT = 11;
   /** RegularExpression Id. */
-  int INT = 8;
+  int VOID = 13;
   /** RegularExpression Id. */
-  int FLOAT = 9;
+  int INT = 14;
   /** RegularExpression Id. */
-  int FLOAT_LITERAL = 10;
+  int FLOAT = 15;
   /** RegularExpression Id. */
-  int INTEGER_LITERAL = 11;
+  int FLOAT_LITERAL = 16;
   /** RegularExpression Id. */
-  int DECIMAL_LITERAL = 12;
+  int INTEGER_LITERAL = 17;
   /** RegularExpression Id. */
-  int HEX_LITERAL = 13;
+  int DECIMAL_LITERAL = 18;
   /** RegularExpression Id. */
-  int BINARY_LITERAL = 14;
+  int HEX_LITERAL = 19;
   /** RegularExpression Id. */
-  int OCTAL_LITERAL = 15;
+  int BINARY_LITERAL = 20;
   /** RegularExpression Id. */
-  int LPAREN = 19;
+  int OCTAL_LITERAL = 21;
   /** RegularExpression Id. */
-  int RPAREN = 20;
+  int LPAREN = 25;
   /** RegularExpression Id. */
-  int OPENBLOCK = 21;
+  int RPAREN = 26;
   /** RegularExpression Id. */
-  int CLOSEBLOCK = 22;
+  int OPENBLOCK = 27;
   /** RegularExpression Id. */
-  int OP_INC = 23;
+  int CLOSEBLOCK = 28;
   /** RegularExpression Id. */
-  int OP_DEC = 24;
+  int OP_INC = 29;
   /** RegularExpression Id. */
-  int OP_ADD_ASSIGN = 25;
+  int OP_DEC = 30;
   /** RegularExpression Id. */
-  int OP_SUB_ASSIGN = 26;
+  int OP_ADD_ASSIGN = 31;
   /** RegularExpression Id. */
-  int OP_MUL_ASSIGN = 27;
+  int OP_SUB_ASSIGN = 32;
   /** RegularExpression Id. */
-  int OP_DIV_ASSIGN = 28;
+  int OP_MUL_ASSIGN = 33;
   /** RegularExpression Id. */
-  int OP_MOD_ASSIGN = 29;
+  int OP_DIV_ASSIGN = 34;
   /** RegularExpression Id. */
-  int OP_EQUALS = 30;
+  int OP_MOD_ASSIGN = 35;
   /** RegularExpression Id. */
-  int OP_NOT_EQUAL = 31;
+  int OP_EQUALS = 36;
   /** RegularExpression Id. */
-  int OP_CMP_LTE = 32;
+  int OP_NOT_EQUAL = 37;
   /** RegularExpression Id. */
-  int OP_CMP_LT = 33;
+  int OP_CMP_LTE = 38;
   /** RegularExpression Id. */
-  int OP_CMP_GTE = 34;
+  int OP_CMP_LT = 39;
   /** RegularExpression Id. */
-  int OP_CMP_GT = 35;
+  int OP_CMP_GTE = 40;
   /** RegularExpression Id. */
-  int OP_NOT_IN = 36;
+  int OP_CMP_GT = 41;
   /** RegularExpression Id. */
-  int OP_IN = 37;
+  int OP_NOT_IN = 42;
   /** RegularExpression Id. */
-  int OP_POW = 38;
+  int OP_IN = 43;
   /** RegularExpression Id. */
-  int OP_XOR = 39;
+  int OP_POW = 44;
   /** RegularExpression Id. */
-  int OP_ADD = 40;
+  int OP_XOR = 45;
   /** RegularExpression Id. */
-  int OP_SUB = 41;
+  int OP_ADD = 46;
   /** RegularExpression Id. */
-  int OP_MUL = 42;
+  int OP_SUB = 47;
   /** RegularExpression Id. */
-  int OP_DIV = 43;
+  int OP_MUL = 48;
   /** RegularExpression Id. */
-  int OP_MOD = 44;
+  int OP_DIV = 49;
   /** RegularExpression Id. */
-  int OP_ASSIGN = 45;
+  int OP_MOD = 50;
   /** RegularExpression Id. */
-  int OP_LOGICAL_OR = 46;
+  int OP_ASSIGN = 51;
   /** RegularExpression Id. */
-  int OP_BITWISE_OR = 47;
+  int OP_LOGICAL_OR = 52;
   /** RegularExpression Id. */
-  int MODIFIER_PUBLIC = 48;
+  int OP_BITWISE_OR = 53;
   /** RegularExpression Id. */
-  int MODIFIER_PRIVATE = 49;
+  int MODIFIER_PUBLIC = 54;
   /** RegularExpression Id. */
-  int MODIFIER_PROTECTED = 50;
+  int MODIFIER_PRIVATE = 55;
   /** RegularExpression Id. */
-  int MODIFIER_STATIC = 51;
+  int MODIFIER_PROTECTED = 56;
   /** RegularExpression Id. */
-  int MODIFIER_ABSTRACT = 52;
+  int MODIFIER_STATIC = 57;
   /** RegularExpression Id. */
-  int MODIFIER_FINAL = 53;
+  int MODIFIER_ABSTRACT = 58;
   /** RegularExpression Id. */
-  int MODIFIER_COMPAT = 54;
+  int MODIFIER_FINAL = 59;
   /** RegularExpression Id. */
-  int MODIFIER_ARG = 55;
+  int MODIFIER_COMPAT = 60;
   /** RegularExpression Id. */
-  int STMT_RETURN = 56;
+  int MODIFIER_ARG = 61;
   /** RegularExpression Id. */
-  int STMT_ASSERT = 57;
+  int STMT_RETURN = 62;
   /** RegularExpression Id. */
-  int STMT_IF = 58;
+  int STMT_ASSERT = 63;
   /** RegularExpression Id. */
-  int STMT_ELSE = 59;
+  int STMT_IF = 64;
   /** RegularExpression Id. */
-  int STMT_DO = 60;
+  int STMT_ELSE = 65;
   /** RegularExpression Id. */
-  int STMT_WHILE = 61;
+  int STMT_DO = 66;
   /** RegularExpression Id. */
-  int STMT_LOOP = 62;
+  int STMT_WHILE = 67;
   /** RegularExpression Id. */
-  int STMT_UNTIL = 63;
+  int STMT_LOOP = 68;
   /** RegularExpression Id. */
-  int STMT_FOR = 64;
+  int STMT_UNTIL = 69;
   /** RegularExpression Id. */
-  int STMT_FOREACH = 65;
+  int STMT_FOR = 70;
   /** RegularExpression Id. */
-  int STMT_BREAK = 66;
+  int STMT_FOREACH = 71;
   /** RegularExpression Id. */
-  int STMT_CONTINUE = 67;
+  int STMT_BREAK = 72;
   /** RegularExpression Id. */
-  int DECL_NAMESPACE = 68;
+  int STMT_CONTINUE = 73;
   /** RegularExpression Id. */
-  int STMT_USING = 69;
+  int DECL_NAMESPACE = 74;
   /** RegularExpression Id. */
-  int END_STMT = 70;
+  int STMT_USING = 75;
   /** RegularExpression Id. */
-  int ID = 71;
+  int END_STMT = 76;
+  /** RegularExpression Id. */
+  int ID = 77;
 
   /** Lexical state. */
   int DEFAULT = 0;
+  /** Lexical state. */
+  int IN_COMMENT = 1;
+  /** Lexical state. */
+  int IN_LINE_COMMENT = 2;
 
   /** Literal token values. */
   String[] tokenImage = {
@@ -146,7 +152,13 @@ public interface WandParserConstants {
     "\"\\n\"",
     "\"\\r\"",
     "<token of kind 5>",
-    "<token of kind 6>",
+    "\"/*\"",
+    "\"/*\"",
+    "\"*/\"",
+    "<token of kind 9>",
+    "\"//\"",
+    "<SINGLE_LINE_COMMENT>",
+    "<token of kind 12>",
     "\"void\"",
     "\"int\"",
     "\"float\"",

@@ -4,12 +4,22 @@ package wand.parser;
 
 public
 class ASTFloatingPointLiteral extends ASTLiteral {
+    private Double literal;
+    
     public ASTFloatingPointLiteral(int id) {
         super(id);
     }
-
+    
     public ASTFloatingPointLiteral(WandParser p, int id) {
         super(p, id);
+    }
+    
+    public Double getDouble( ) {
+        return literal;
+    }
+    
+    public void fromString( String str ) {
+        literal = Double.parseDouble( str );
     }
     
     /** Accept the visitor. **/

@@ -25,8 +25,41 @@ SKIP :
 | "\n"
 | "\r"
 | <"//" (~["\n","\r"])* ("\n"|"\r"|"\r\n")>
-| <"/*" (~["*"])* "*" (~["/"] (~["*"])* "*")* "/">
+//| <"/*" (~["*"])* "*" (~["/"] (~["*"])* "*")* "/">
 }
+
+TOKEN_MGR_DECLS : {
+    static int commentNesting=0; 
+}
+
+/* Multi-line (+ nested!) comments */ 
+SKIP : {
+    "/*" { commentNesting++; } : IN_COMMENT
+}
+
+<IN_COMMENT> SKIP : { 
+    "/*" { commentNesting++; } 
+    | "*/" {
+        commentNesting--; 
+        if (commentNesting == 0) 
+            SwitchTo(DEFAULT);
+    } 
+    | <~[]>
+}
+
+/* Single line comments */ 
+SKIP : {
+    "//" : IN_LINE_COMMENT
+}
+
+<IN_LINE_COMMENT> SKIP : {
+    <SINGLE_LINE_COMMENT: "\n" | "\r" | "\r\n" > : DEFAULT
+}
+
+<IN_LINE_COMMENT> MORE : {
+    < ~[] >
+}
+
 
 /* Reserved words */
 TOKEN: {
@@ -637,10 +670,14 @@ void IntegerLiteral() : {
     { jjtThis.fromString( t.image ); }
 }
 
-void FloatingPointLiteral() : {}
-{
-    <FLOAT_LITERAL>
+void FloatingPointLiteral() : {
+    Token t;
 }
+{
+    t=<FLOAT_LITERAL>
+    { jjtThis.fromString( t.image ); }
+}
+
 /*
 void CharacterLiteral() : {}
 {

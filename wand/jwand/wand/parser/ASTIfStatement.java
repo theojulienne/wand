@@ -23,6 +23,9 @@ class ASTIfStatement extends SimpleNode {
     }
     
     public WandNode getElseStatement( ) {
+        if ( jjtGetNumChildren( ) < 3 ) {
+            return null;
+        }
         return (WandNode) jjtGetChild( 2 );
     }
 
