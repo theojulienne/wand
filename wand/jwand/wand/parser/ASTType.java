@@ -2,11 +2,13 @@
 /* JavaCCOptions:MULTI=true,NODE_USES_PARSER=false,VISITOR=false,TRACK_TOKENS=false,NODE_PREFIX=AST,NODE_EXTENDS=wand.core.WandNode,NODE_FACTORY=,SUPPORT_CLASS_VISIBILITY_PUBLIC=true */
 package wand.parser;
 
+import wand.core.*;
 import wand.generators.*;
 
 public
 class ASTType extends SimpleNode {
     private String typeName;
+    private WandType type;
     
     public ASTType(int id) {
         super(id);
@@ -26,6 +28,14 @@ class ASTType extends SimpleNode {
     
     public void setTypeName( String typeName ) {
         this.typeName = typeName;
+    }
+    
+    public void setType( WandType type ) {
+        this.type = type;
+    }
+    
+    public WandType getType( ) {
+        return this.type;
     }
     
     public String toString( ) {

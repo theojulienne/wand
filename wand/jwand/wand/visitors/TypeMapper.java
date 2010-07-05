@@ -18,6 +18,8 @@ public class TypeMapper extends WandVisitor {
         
         //System.out.println( " -> " + type );
         
+        node.setType( type );
+        
         return data;
     }
     

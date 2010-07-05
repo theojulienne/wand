@@ -20,6 +20,7 @@ public class CCodeGenerator extends WandVisitor {
         writeNewline( "// DO NOT EDIT" );
         writeNewline( );
         writeNewline( "#include <stdio.h>" );
+        writeNewline( "#include <stdint.h>" );
         writeNewline( "#include <assert.h>" );
         writeNewline( "#include <math.h>" );
         writeNewline( );
@@ -54,6 +55,38 @@ public class CCodeGenerator extends WandVisitor {
             }
         }
         writeNewline( );
+    }
+    
+    public String cNameForType( WandType type ) {
+        WandBasicType basicType = type.getBasicType( );
+        String cTypeName = null;
+        
+        if ( basicType != null ) {
+            if ( basicType.isInteger( ) ) {
+                StringBuilder builder = new StringBuilder();
+                
+                // use types from stdint
+                // int32_t, uint32_t, etc
+                
+                if ( !basicType.isSigned() ) {
+                    builder.append( "u" );
+                }
+                
+                builder.append( "int" );
+                builder.append( basicType.getBitSize() );
+                builder.append( "_t" );
+                
+                cTypeName = builder.toString( );
+            } else {
+                // other types default to the same name as in wand
+                // FIXME: force these types to explicitly be what we expect
+                cTypeName = basicType.getTypeName( );
+            }
+        }
+        
+        assert cTypeName != null: "Could not convert " + type + " to a C type.";
+        
+        return cTypeName;
     }
     
     public Object visit(ASTBlockStatement node, Object data) {
@@ -131,7 +164,12 @@ public class CCodeGenerator extends WandVisitor {
     }
     
     public Object visit(ASTBuiltinType node, Object data) {
-        writeString( node.getTypeName( ) );
+        WandType type = node.getType( );
+        
+        assert type != null: "Could not find WandType for builtin type";
+        
+        writeString( cNameForType( type ) );
+        //writeString( node.getTypeName( ) );
         
         return data;
     }

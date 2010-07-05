@@ -18,8 +18,10 @@ public class WandTypeSystem {
         }
     }
     
-    private static void initBasicType( WandBasicType type ) {
-        basicTypes.put( type, addType( type.getTypeName() ) );
+    private static void initBasicType( WandBasicType basicType ) {
+        WandType type = addType( basicType.getTypeName() );
+        type.setBasicType( basicType );
+        basicTypes.put( basicType, type );
     }
     
     private static WandType addType( String name ) {
