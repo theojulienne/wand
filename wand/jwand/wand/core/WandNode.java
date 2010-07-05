@@ -65,4 +65,8 @@ public abstract class WandNode implements Node, Iterable<WandNode> {
             }
         };
     }
+    
+    public WandType getExpressionType() {
+        return null;
+    }
 }

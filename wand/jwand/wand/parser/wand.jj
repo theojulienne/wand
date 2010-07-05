@@ -134,6 +134,8 @@ TOKEN: {
 | < OP_LOGICAL_OR: "||" >
 | < OP_BITWISE_OR: "|" >
 
+| < OP_CAST: "cast" >
+
 | < MODIFIER_PUBLIC: "public" >
 | < MODIFIER_PRIVATE: "private" >
 | < MODIFIER_PROTECTED: "protected" >
@@ -669,9 +671,7 @@ void QualifiedIdentifier()                          : {/*@bgen(jjtree) #Qualifie
 {/*@bgen(jjtree) #QualifiedIdentifier(> 1) */
     try {
 /*@egen*/
-    (
-        Identifier() ("." <ID>)*
-    )/*@bgen(jjtree)*/
+    Identifier() ("." Identifier())*/*@bgen(jjtree)*/
     } catch (Throwable jjte000) {
       if (jjtc000) {
         jjtree.clearNodeScope(jjtn000);
@@ -1224,7 +1224,39 @@ void PrimaryExpression()       : {}
 {
     <LPAREN> Expression() <RPAREN> |
     Literal() |
-    FunctionCall()
+    FunctionCall() |
+    CastExpression()
+}
+
+void CastExpression() : {/*@bgen(jjtree) CastExpression */
+  ASTCastExpression jjtn000 = new ASTCastExpression(JJTCASTEXPRESSION);
+  boolean jjtc000 = true;
+  jjtree.openNodeScope(jjtn000);
+/*@egen*/}
+{/*@bgen(jjtree) CastExpression */
+    try {
+/*@egen*/
+    "cast" ":" Type() "(" Expression() ")"/*@bgen(jjtree)*/
+    } catch (Throwable jjte000) {
+      if (jjtc000) {
+        jjtree.clearNodeScope(jjtn000);
+        jjtc000 = false;
+      } else {
+        jjtree.popNode();
+      }
+      if (jjte000 instanceof RuntimeException) {
+        throw (RuntimeException)jjte000;
+      }
+      if (jjte000 instanceof ParseException) {
+        throw (ParseException)jjte000;
+      }
+      throw (Error)jjte000;
+    } finally {
+      if (jjtc000) {
+        jjtree.closeNodeScope(jjtn000, true);
+      }
+    }
+/*@egen*/
 }
 
 void FunctionCall()                   : {/*@bgen(jjtree) #FunctionCall(> 1) */
@@ -1235,6 +1267,8 @@ void FunctionCall()                   : {/*@bgen(jjtree) #FunctionCall(> 1) */
 {/*@bgen(jjtree) #FunctionCall(> 1) */
     try {
 /*@egen*/
+    // FunctionCall node if we have arguments (parentheses),
+    // otherwise fall back on being a QualifiedIdentifier()
     QualifiedIdentifier() [Arguments()]/*@bgen(jjtree)*/
     } catch (Throwable jjte000) {
       if (jjtc000) {

@@ -21,6 +21,10 @@ class ASTPostfixExpression extends SimpleNode {
     public WandNode getOperator( ) {
         return (WandNode) jjtGetChild( 1 );
     }
+    
+    public WandType getExpressionType() {
+        return getExpression( ).getExpressionType( );
+    }
 
     /** Accept the visitor. **/
     public Object jjtAccept(WandParserVisitor visitor, Object data) {

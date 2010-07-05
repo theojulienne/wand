@@ -2,6 +2,8 @@
 /* JavaCCOptions:MULTI=true,NODE_USES_PARSER=false,VISITOR=true,TRACK_TOKENS=false,NODE_PREFIX=AST,NODE_EXTENDS=wand.core.WandNode,NODE_FACTORY=,SUPPORT_CLASS_VISIBILITY_PUBLIC=true */
 package wand.parser;
 
+import wand.core.*;
+
 public
 class ASTIntegerLiteral extends ASTLiteral {
     private Integer literal;
@@ -34,6 +36,11 @@ class ASTIntegerLiteral extends ASTLiteral {
         }
         
         literal = Integer.parseInt( str.substring(contentStart), radix );
+    }
+    
+    public WandType getExpressionType() {
+        // FIXME: suffixes such as "l" can change this type size
+        return WandTypeSystem.getBasicType( WandBasicType.Signed32 );
     }
     
     /** Accept the visitor. **/

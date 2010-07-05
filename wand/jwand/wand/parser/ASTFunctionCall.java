@@ -2,20 +2,31 @@
 /* JavaCCOptions:MULTI=true,NODE_USES_PARSER=false,VISITOR=true,TRACK_TOKENS=false,NODE_PREFIX=AST,NODE_EXTENDS=wand.core.WandNode,NODE_FACTORY=,SUPPORT_CLASS_VISIBILITY_PUBLIC=true */
 package wand.parser;
 
+import java.util.*;
+
+import wand.core.*;
+
 public
 class ASTFunctionCall extends SimpleNode {
-  public ASTFunctionCall(int id) {
-    super(id);
-  }
-
-  public ASTFunctionCall(WandParser p, int id) {
-    super(p, id);
-  }
-
-
-  /** Accept the visitor. **/
-  public Object jjtAccept(WandParserVisitor visitor, Object data) {
-    return visitor.visit(this, data);
-  }
+    public ASTFunctionCall(int id) {
+        super(id);
+    }
+    
+    public ASTFunctionCall(WandParser p, int id) {
+        super(p, id);
+    }
+    
+    public ASTIdentifier getIdentifier( ) {
+        return (ASTIdentifier)jjtGetChild( 0 );
+    }
+    
+    public ASTArguments getArguments( ) {
+        return (ASTArguments)jjtGetChild( 1 );
+    }
+    
+    /** Accept the visitor. **/
+    public Object jjtAccept(WandParserVisitor visitor, Object data) {
+        return visitor.visit(this, data);
+    }
 }
 /* JavaCC - OriginalChecksum=9e1079894e3c8cffff534da095f3c2c6 (do not edit this line) */

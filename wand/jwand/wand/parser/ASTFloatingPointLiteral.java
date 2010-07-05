@@ -2,6 +2,8 @@
 /* JavaCCOptions:MULTI=true,NODE_USES_PARSER=false,VISITOR=true,TRACK_TOKENS=false,NODE_PREFIX=AST,NODE_EXTENDS=wand.core.WandNode,NODE_FACTORY=,SUPPORT_CLASS_VISIBILITY_PUBLIC=true */
 package wand.parser;
 
+import wand.core.*;
+
 public
 class ASTFloatingPointLiteral extends ASTLiteral {
     private Double literal;
@@ -20,6 +22,11 @@ class ASTFloatingPointLiteral extends ASTLiteral {
     
     public void fromString( String str ) {
         literal = Double.parseDouble( str );
+    }
+    
+    public WandType getExpressionType() {
+        // FIXME: suffixes?
+        return WandTypeSystem.getBasicType( WandBasicType.Float32 );
     }
     
     /** Accept the visitor. **/

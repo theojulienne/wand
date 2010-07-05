@@ -26,6 +26,20 @@ class ASTInfixExpression extends ASTExpression {
         return (ASTInfixOperator) jjtGetChild( 1 );
     }
     
+    public WandType getExpressionType() {
+        WandNode lhs = getLHS( );
+        WandNode rhs = getRHS( );
+        
+        WandType leftType = lhs.getExpressionType();
+        WandType rightType = lhs.getExpressionType();
+        
+        assert leftType != null && rightType != null: "Both operands ("+lhs+" and "+rhs+") should have a type!";
+        
+        // FIXME: precedence?
+        
+        return leftType;
+    }
+    
     /** Accept the visitor. **/
     public Object jjtAccept(WandParserVisitor visitor, Object data) {
         return visitor.visit(this, data);

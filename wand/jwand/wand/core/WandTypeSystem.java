@@ -30,6 +30,10 @@ public class WandTypeSystem {
         return type;
     }
     
+    public static WandType getBasicType( WandBasicType basicType ) {
+        return basicTypes.get( basicType );
+    }
+    
     public static WandType getTypeByName( String name ) {
         return typeMap.get( name );
     }

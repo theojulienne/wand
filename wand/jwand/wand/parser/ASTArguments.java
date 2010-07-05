@@ -2,20 +2,29 @@
 /* JavaCCOptions:MULTI=true,NODE_USES_PARSER=false,VISITOR=true,TRACK_TOKENS=false,NODE_PREFIX=AST,NODE_EXTENDS=wand.core.WandNode,NODE_FACTORY=,SUPPORT_CLASS_VISIBILITY_PUBLIC=true */
 package wand.parser;
 
+import wand.core.*;
+
 public
 class ASTArguments extends SimpleNode {
-  public ASTArguments(int id) {
-    super(id);
-  }
+    public ASTArguments(int id) {
+        super(id);
+    }
 
-  public ASTArguments(WandParser p, int id) {
-    super(p, id);
-  }
+    public ASTArguments(WandParser p, int id) {
+        super(p, id);
+    }
+    
+    public int getNumArguments( ) {
+        return jjtGetNumChildren( );
+    }
 
-
-  /** Accept the visitor. **/
-  public Object jjtAccept(WandParserVisitor visitor, Object data) {
-    return visitor.visit(this, data);
-  }
+    public WandNode getArgument( int argIndex ) {
+        return (WandNode)jjtGetChild( argIndex );
+    }
+    
+    /** Accept the visitor. **/
+    public Object jjtAccept(WandParserVisitor visitor, Object data) {
+        return visitor.visit(this, data);
+    }
 }
 /* JavaCC - OriginalChecksum=6658bf0804fbe96978f95740dbacb73f (do not edit this line) */

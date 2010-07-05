@@ -24,6 +24,7 @@ public interface WandParserVisitor
   public Object visit(ASTInfixExpression node, Object data);
   public Object visit(ASTUnaryExpression node, Object data);
   public Object visit(ASTPostfixExpression node, Object data);
+  public Object visit(ASTCastExpression node, Object data);
   public Object visit(ASTFunctionCall node, Object data);
   public Object visit(ASTArguments node, Object data);
   public Object visit(ASTAssignOperator node, Object data);
@@ -48,4 +49,4 @@ public interface WandParserVisitor
   public Object visit(ASTVariableDeclarator node, Object data);
   public Object visit(ASTIdentifier node, Object data);
 }
-/* JavaCC - OriginalChecksum=2c5bac7ff9e3001ee18916ea415b9703 (do not edit this line) */
+/* JavaCC - OriginalChecksum=b18fc7b3237f93e760d03f31fc430143 (do not edit this line) */

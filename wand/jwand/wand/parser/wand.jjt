@@ -130,6 +130,8 @@ TOKEN: {
 | < OP_LOGICAL_OR: "||" >
 | < OP_BITWISE_OR: "|" >
 
+| < OP_CAST: "cast" >
+
 | < MODIFIER_PUBLIC: "public" >
 | < MODIFIER_PRIVATE: "private" >
 | < MODIFIER_PROTECTED: "protected" >
@@ -312,9 +314,7 @@ void ArrayType() : {}
 
 void QualifiedIdentifier() #QualifiedIdentifier(>1) : {}
 {
-    (
-        Identifier() ("." <ID>)*
-    )
+    Identifier() ("." Identifier())*
 }
 
 void Literal() #void : {}
@@ -457,11 +457,19 @@ void PrimaryExpression() #void : {}
 {
     <LPAREN> Expression() <RPAREN> |
     Literal() |
-    FunctionCall()
+    FunctionCall() |
+    CastExpression()
+}
+
+void CastExpression() : {}
+{
+    "cast" ":" Type() "(" Expression() ")"
 }
 
 void FunctionCall() #FunctionCall(>1) : {}
 {
+    // FunctionCall node if we have arguments (parentheses),
+    // otherwise fall back on being a QualifiedIdentifier()
     QualifiedIdentifier() [Arguments()]
 }
 
