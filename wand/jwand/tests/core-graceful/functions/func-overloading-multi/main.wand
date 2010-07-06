@@ -1,0 +1,19 @@
+int foo( short a ) {
+	return 42;
+}
+
+int foo( int a ) {
+	return 123;
+}
+
+
+int main( ) {
+	byte b = 123;
+		
+	// this is invalid, because "b" is only a byte,
+	// so is implicitly coercible to "short" AND "int",
+	// and there is no exact match (byte)
+	assert( foo( b ) == 42 );
+	
+	return 0;
+}

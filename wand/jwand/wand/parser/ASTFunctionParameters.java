@@ -4,18 +4,18 @@ package wand.parser;
 
 public
 class ASTFunctionParameters extends SimpleNode {
-  public ASTFunctionParameters(int id) {
-    super(id);
-  }
+    public ASTFunctionParameters(int id) {
+        super(id);
+    }
 
-  public ASTFunctionParameters(WandParser p, int id) {
-    super(p, id);
-  }
+    public ASTFunctionParameters(WandParser p, int id) {
+        super(p, id);
+    }
 
 
-  /** Accept the visitor. **/
-  public Object jjtAccept(WandParserVisitor visitor, Object data) {
-    return visitor.visit(this, data);
-  }
+    /** Accept the visitor. **/
+    public Object jjtAccept(WandParserVisitor visitor, Object data) {
+        return visitor.visit(this, data);
+    }
 }
 /* JavaCC - OriginalChecksum=5f0ad1cfdaf89c07520f27a8618d6f7c (do not edit this line) */

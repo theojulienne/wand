@@ -14,8 +14,8 @@ class ASTFunctionParameter extends SimpleNode {
         super(p, id);
     }
     
-    public WandNode getType( ) {
-        return (WandNode) jjtGetChild( 0 );
+    public ASTType getType( ) {
+        return (ASTType) jjtGetChild( 0 );
     }
     
     public WandNode getIdentifier( ) {

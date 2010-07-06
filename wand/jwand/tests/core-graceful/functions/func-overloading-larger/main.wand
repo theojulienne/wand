@@ -1,0 +1,18 @@
+int foo( short a ) {
+	return 42;
+}
+
+int foo( char a ) {
+	return 123;
+}
+
+
+int main( ) {
+	int b = 123;
+	
+	// this is invalid, because "b" is a larger type than
+	// any available argument of foo.
+	assert( foo( b ) == 42 );
+	
+	return 0;
+}

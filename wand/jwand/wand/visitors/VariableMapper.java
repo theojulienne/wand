@@ -139,9 +139,9 @@ public class VariableMapper extends WandVisitor {
         argumentsNode.accept( this, data );
         
         // FIXME: use expression type for matching
-        for ( WandNode child: argumentsNode ) {
+        /*for ( WandNode child: argumentsNode ) {
             System.out.println( " --> Param: " + child + ": " + child.getExpressionType() );
-        }
+        }*/
         
         // FIXME: this needs to allow for qualified identifiers
         
@@ -156,7 +156,44 @@ public class VariableMapper extends WandVisitor {
         
         assert symbol != null: "Function " + identifier + " could not be found. Typo or missing a namespace?";
         
-        WandFunctionDeclaration declaration = symbol.getFirstDeclaration( );
+        // we've found our function symbol, now we need to figure out which type declaration fits best
+        
+        // get the types of the arguments being passed to the function
+        WandTypeSet argTypes = node.getArgumentTypeSet( );
+        
+        List<WandFunctionDeclaration> matchingDeclarations = new ArrayList<WandFunctionDeclaration>();
+        WandFunctionDeclaration exactMatch = null;
+        
+        for ( WandFunctionDeclaration declaration: symbol ) {
+            WandTypeSet declTypes = declaration.getParameterTypeSet( );
+            
+            if ( declTypes.canImplicitlyCoerce( argTypes ) ) {
+                matchingDeclarations.add( declaration );
+                
+                if ( declTypes.equals( argTypes ) ) {
+                    // they are the same exact types!
+                    assert exactMatch == null: "2 declarations exactly matched the types in a function call";
+                    exactMatch = declaration;
+                }
+            }
+            
+            //System.out.println( declTypes + " matches " + argTypes + "? " + declTypes.canImplicitlyCoerce( argTypes ) );
+        }
+        
+        WandFunctionDeclaration declaration = null;
+        
+        if ( matchingDeclarations.size() == 1 ) {
+            // found exactly 1, great!
+            declaration = matchingDeclarations.get( 0 );
+        } else if ( matchingDeclarations.size() > 1 ) {
+            // more than one match. this is acceptable, providing as one matches _exactly_
+            assert exactMatch != null: "Multiple function declarations matched the provided argument types, but none matched explicitly.";
+            declaration = exactMatch;
+        }
+        
+        assert declaration != null: "Provided arguments did not match any function declarations.";
+        
+        
         WandFunctionReference reference = new WandFunctionReference( declaration );
         
         // replace node in parent

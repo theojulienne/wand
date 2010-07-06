@@ -1,0 +1,19 @@
+int foo( short a ) {
+	return 42;
+}
+
+int bar( int a ) {
+	return 43;
+}
+
+int baz( byte a ) {
+	return 44;
+}
+
+int main( ) {
+	assert( foo( 123 ) == 42 );
+	assert( bar( 127 ) == 43 );
+	assert( baz( 12 ) == 44 );
+		
+	return 0;
+}

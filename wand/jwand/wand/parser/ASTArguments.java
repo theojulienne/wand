@@ -22,6 +22,20 @@ class ASTArguments extends SimpleNode {
         return (WandNode)jjtGetChild( argIndex );
     }
     
+    public WandTypeSet getTypeSet( ) {
+        WandTypeSet argumentTypes = new WandTypeSet( );
+        
+        for ( WandNode argument: this ) {
+            WandType type = argument.getExpressionType( );
+            
+            assert type != null: "Expression should have a type: " + argument;
+            
+            argumentTypes.addType( type );
+        }
+        
+        return argumentTypes;
+    }
+    
     /** Accept the visitor. **/
     public Object jjtAccept(WandParserVisitor visitor, Object data) {
         return visitor.visit(this, data);

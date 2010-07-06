@@ -1,0 +1,15 @@
+int foo( int a ) {
+	return 42;
+}
+
+int foo( double a ) {
+	return 123;
+}
+
+
+int main( ) {
+	assert( foo( 1 ) == 42 );
+	assert( foo( 1.0 ) == 123 );
+	
+	return 0;
+}

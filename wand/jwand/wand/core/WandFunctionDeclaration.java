@@ -10,6 +10,8 @@ public interface WandFunctionDeclaration {
     public ASTType getReturnType( );
     public ASTFunctionParameters getFunctionParameters( );
     
+    public WandTypeSet getParameterTypeSet( );
+    
     // FIXME: these should use an enum for modifier types instead of token kinds
     public boolean hasModifier( int kind );
     public String getModifierMeta( int kind );

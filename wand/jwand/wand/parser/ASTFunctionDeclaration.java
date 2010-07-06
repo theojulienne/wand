@@ -39,6 +39,21 @@ class ASTFunctionDeclaration extends ASTDeclaration implements WandFunctionDecla
         return (ASTFunctionParameters) jjtGetChild( 1 );
     }
     
+    public WandTypeSet getParameterTypeSet( ) {
+        WandTypeSet paramTypes = new WandTypeSet( );
+        
+        for ( WandNode child: getFunctionParameters( ) ) {
+            ASTFunctionParameter param = (ASTFunctionParameter)child;
+            
+            ASTType typeNode = param.getType( );
+            WandType type = typeNode.getType( );
+            
+            paramTypes.addType( type );
+        }
+        
+        return paramTypes;
+    }
+    
     public ASTBlockStatement getFunctionBody( ) {
         return (ASTBlockStatement) jjtGetChild( 2 );
     }

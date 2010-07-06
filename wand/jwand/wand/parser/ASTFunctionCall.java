@@ -24,6 +24,10 @@ class ASTFunctionCall extends SimpleNode {
         return (ASTArguments)jjtGetChild( 1 );
     }
     
+    public WandTypeSet getArgumentTypeSet( ) {
+        return getArguments( ).getTypeSet( );
+    }
+    
     /** Accept the visitor. **/
     public Object jjtAccept(WandParserVisitor visitor, Object data) {
         return visitor.visit(this, data);
