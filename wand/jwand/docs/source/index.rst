@@ -6,11 +6,21 @@
 Welcome to Wand's documentation!
 ================================
 
+Wand is a new programming language that attempts to take the best features of
+modern languages such as D, Java and Vala and implement them in a reliable and
+simple to use package.
+
+A major goal of Wand is that the compiler should never become an obstacle to
+application design and development. Wand's language design attempts to make 
+good code easier to write, and prefers explicit definition and verboseness
+wherever it makes code easier to understand.
+
 Contents:
 
 .. toctree::
    :maxdepth: 2
    
+   comparison
    testing
 
 Indices and tables
