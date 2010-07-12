@@ -1,0 +1,41 @@
+public class Foo {
+	public int foo( int a ) {
+		return 1;
+	}
+	
+	public int foo( double a ) {
+		return 2;
+	}
+	
+	public int bar( int b ) {
+		return 3;
+	}
+}
+
+public class Bar extends Foo {
+	public int bar( int b ) {
+		return 4;
+	}
+}
+
+int main( ) {
+	Foo foo = new Foo();
+	
+	assert foo.foo( 1 ) == 1;
+	assert foo.foo( 1.0 ) == 2;
+	assert foo.bar( 1 ) == 3;
+	
+	Bar bar = new Bar();
+	
+	assert bar.foo( 1 ) == 1;
+	assert bar.foo( 1.0 ) == 2;
+	assert bar.bar( 1 ) == 4;
+	
+	Foo foobar = new Bar(); // OK, cast to super type
+	
+	assert foobar.foo( 1 ) == 1;
+	assert foobar.foo( 1.0 ) == 2;
+	assert foobar.bar( 1 ) == 4;
+	
+	return 0;
+}

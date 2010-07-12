@@ -1,0 +1,9 @@
+public class Foo {
+
+}
+
+int main( ) {
+	Foo foo = new Foo();
+
+	return 0;
+}

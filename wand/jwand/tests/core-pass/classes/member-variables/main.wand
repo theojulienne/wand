@@ -1,0 +1,27 @@
+public class Foo {
+	private int foo = 12345;
+
+	public int getFoo( ) {
+		return foo;
+	}
+	
+	public void setFoo( int newFoo ) {
+		foo = newFoo;
+	}
+}
+
+int main( ) {
+	Foo foo1 = new Foo();
+	Foo foo2 = new Foo();
+	
+	assert foo1.getFoo( ) == 12345;
+	assert foo2.getFoo( ) == 12345;
+	foo1.setFoo( 54321 );
+	assert foo1.getFoo( ) == 54321;
+	assert foo2.getFoo( ) == 12345;
+	foo2.setFoo( 98765 );
+	assert foo1.getFoo( ) == 54321;
+	assert foo2.getFoo( ) == 98765;
+	
+	return 0;
+}

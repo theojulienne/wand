@@ -1,0 +1,11 @@
+public class Foo {
+	private int bar = 12345;
+}
+
+int main( ) {
+	Foo foo = new Foo();
+	
+	foo.bar = 123; // FAIL, bar is private
+	
+	return 0;
+}

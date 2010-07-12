@@ -1,0 +1,19 @@
+public class Foo {
+	private int bar( ) {
+		return 123;
+	}
+}
+
+public class Bar extends Foo {
+	private int baz( ) {
+		return 3;
+	}
+}
+
+int main( ) {
+	Bar bar = new Bar();
+	
+	bar.bar( ); // FAIL, bar method is private in superclass
+	
+	return 0;
+}

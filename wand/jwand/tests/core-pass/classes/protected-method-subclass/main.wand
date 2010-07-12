@@ -1,0 +1,19 @@
+public class Foo {
+	protected int bar( ) {
+		return 123;
+	}
+}
+
+public class Bar extends Foo {
+	private int baz( ) {
+		return this.bar( ); // OK, bar is only protected
+	}
+}
+
+int main( ) {
+	Bar bar = new Bar();
+	
+	bar.baz( );
+	
+	return 0;
+}

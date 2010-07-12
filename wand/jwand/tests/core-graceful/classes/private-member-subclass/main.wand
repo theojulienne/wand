@@ -1,0 +1,15 @@
+public class Foo {
+	private int bar = 12345;
+}
+
+public class Bar extends Foo {
+	int baz( ) {
+		return this.bar; // FAIL, bar is private
+	}
+}
+
+int main( ) {
+	Foo foo = new Foo();
+	
+	return 0;
+}
