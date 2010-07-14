@@ -39,6 +39,23 @@ class ASTIntegerLiteral extends ASTLiteral {
     }
     
     public WandType getExpressionType() {
+        WandBasicType basicType = WandBasicType.Signed32;
+        
+        boolean signed = false;
+        
+        // find the smallest integer type that will fit this
+        // value. assume unsigned if positive. (signed could
+        // be 1 bit bigger)
+        long longValue = literal.longValue( );
+        
+        if ( longValue < 0 ) {
+            signed = true;
+        }
+        
+        if ( literal.longValue( ) )
+        
+        System.out.println( "Minimum integer for " + literal );
+        
         // FIXME: suffixes such as "l" can change this type size
         return WandTypeSystem.getBasicType( WandBasicType.Signed32 );
     }

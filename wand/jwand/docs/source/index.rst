@@ -21,6 +21,7 @@ Contents:
    :maxdepth: 2
    
    comparison
+   language/*
    testing
 
 Indices and tables
