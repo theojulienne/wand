@@ -1,0 +1,161 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Wand language comparison &mdash; Wand v0.1.1 documentation</title>
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Wand v0.1.1 documentation" href="index.html" />
+    <link rel="next" title="Wand testing framework" href="testing.html" />
+    <link rel="prev" title="Welcome to Wand’s documentation!" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="testing.html" title="Wand testing framework"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to Wand’s documentation!"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Wand v0.1.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="wand-language-comparison">
+<h1>Wand language comparison<a class="headerlink" href="#wand-language-comparison" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="d-programming-language">
+<h2>D Programming Language<a class="headerlink" href="#d-programming-language" title="Permalink to this headline">¶</a></h2>
+<p>The D programming language probably provided the most influence in the design
+of Wand. For the most part, Wand syntax is borrowed from D, however there are
+a few key design differences that make Wand significantly more reliable.</p>
+<p>The most notable difference is that Wand attempts only to provide a language,
+and doesn&#8217;t try to reinvent the compiler. Wand doesn&#8217;t write assembly/machine
+code, this is left up to the already very stable C compiler, GCC.</p>
+<p>Wand doesn&#8217;t support filename-based &#8220;modules&#8221; like D, and instead uses a
+namespace system more similar to that of Vala.</p>
+</div>
+<div class="section" id="vala-programming-language">
+<h2>Vala Programming Language<a class="headerlink" href="#vala-programming-language" title="Permalink to this headline">¶</a></h2>
+<p>Vala uses a similar compiler design to Wand, in that it generates only C code.
+Wand also borrows Vala&#8217;s syntax for multiple named class constructors and other
+features.</p>
+<p>The most notable difference is that Wand uses garbage collection and its own
+class structure, whereas Vala uses reference counting and the GObject type
+system.</p>
+<p>There are both benefits and disadvantages to Vala&#8217;s choice of GObject, the
+largest benefit being its immediate compatibility with GObject-based libraries
+like GTK. However, by Wand using its own class system, it has a greater deal of
+implementation flexibility and requires no external dependency. GObject also
+forces the use of reference counting, and garbage collection was the method
+of choice for Wand.</p>
+<p>The use of garbage collection in Wand also provides many benefits compared to
+reference counting in Vala, especially when using libraries that don&#8217;t use
+GObject. Reference counting works best when you can rely on all libraries that
+are used also using reference counting. This makes compatibility with other
+libraries difficult, and it is a major design requirement of Wand that all C
+libraries should be easy to interface with (and wrap).</p>
+<p>Wand namespaces are very similar to Vala&#8217;s namespaces, though Wand uses
+slightly different rules and syntax.</p>
+</div>
+<div class="section" id="java-programming-language">
+<h2>Java Programming Language<a class="headerlink" href="#java-programming-language" title="Permalink to this headline">¶</a></h2>
+<p>Java is another major source for design concepts for Wand. In fact, D itself
+was largely inspired by Java, so Wand inherits Java concepts this way as well.</p>
+<p>The most notable difference is that Wand is a compiled language (via C),
+whereas Java is (usually) a bytecode language that requires a virtual machine
+(JVM) to run.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Wand language comparison</a><ul>
+<li><a class="reference internal" href="#d-programming-language">D Programming Language</a></li>
+<li><a class="reference internal" href="#vala-programming-language">Vala Programming Language</a></li>
+<li><a class="reference internal" href="#java-programming-language">Java Programming Language</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">Welcome to Wand&#8217;s documentation!</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="testing.html"
+                        title="next chapter">Wand testing framework</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/comparison.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="testing.html" title="Wand testing framework"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to Wand’s documentation!"
+             >previous</a> |</li>
+        <li><a href="index.html">Wand v0.1.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2010, Icy Labs Pty Ltd.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0b2.
+    </div>
+  </body>
+</html>

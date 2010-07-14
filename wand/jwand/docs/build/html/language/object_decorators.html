@@ -1,0 +1,167 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Decorators (Object) &mdash; Wand v0.1.1 documentation</title>
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.1.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="Wand v0.1.1 documentation" href="../index.html" />
+    <link rel="next" title="<no title>" href="providers.html" />
+    <link rel="prev" title="<no title>" href="interfaces.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="providers.html" title="<no title>"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="interfaces.html" title="<no title>"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Wand v0.1.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="decorators-object">
+<h1>Decorators (Object)<a class="headerlink" href="#decorators-object" title="Permalink to this headline">¶</a></h1>
+<p>Wand has language support for the decorator design pattern, which allows a transparent layer to be placed between the class implementing an interface and the user of the interface. Because Wand supports this natively in the language syntax, a decorator can be applied to (and removed from) an instance at runtime, and all references to that instance will immediately use the appropriately decorated methods when they are next called.</p>
+<div class="highlight-python"><pre>public interface Ship {
+        public int getDefenceValue( );
+        public String getShipName( );
+}
+
+public class SimpleShip implements Ship {
+        public int getDefenceValue( ) {
+                return 40;
+        }
+
+        public String getShipName( ) {
+                return "Simple Ship";
+        }
+}
+
+public decorator DefenceShield decorates Ship {
+        private int shieldAmount;
+
+        public this( int shieldAmount ) {
+                this.shieldAmount = shieldAmount;
+        }
+
+        public int getDefenceValue( ) {
+                return super.getDefenceValue( ) + shieldAmount;
+        }
+
+        // getShipName gets default pass-through function
+}
+
+int main( ) {
+
+        Ship ship = new Ship( );
+
+        Console.println( "Defence value: ", ship.getDefenceValue( ) ); // 40
+
+        DefenceShield shield = new DefenceShield( 2 );
+        decorate ship with shield; // NOTE: draft syntax only
+
+        Console.println( "Defence value: ", ship.getDefenceValue( ) ); // 42
+
+        DefenceShield missileDefence = new DefenceShield( 10 );
+        decorate ship with missileDefence; // NOTE: draft syntax only
+
+        // decorating with missileDefence or ship would now cause an error,
+        // only 1 class instance can be decorated with 1 decorator instance
+
+        Console.println( "Defence value: ", ship.getDefenceValue( ) ); // 52
+
+        strip shield from ship; // NOTE: draft syntax only
+
+        Console.println( "Defence value: ", ship.getDefenceValue( ) ); // 50
+
+        strip missileDefence from ship; // NOTE: draft syntax only
+
+        return 0;
+}</pre>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="interfaces.html"
+                        title="previous chapter">&lt;no title&gt;</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="providers.html"
+                        title="next chapter">&lt;no title&gt;</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/language/object_decorators.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="providers.html" title="<no title>"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="interfaces.html" title="<no title>"
+             >previous</a> |</li>
+        <li><a href="../index.html">Wand v0.1.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2010, Icy Labs Pty Ltd.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0b2.
+    </div>
+  </body>
+</html>

@@ -1,7 +1,7 @@
 Decorators (Object)
 ==================
 
-Wand has language support for the decorator design pattern, which allows a transparent layer to be placed between the class implementing an interface and the user of the interface. Because Wand supports this natively in the language syntax, a decorator can be applied to (and removed from) an instance at runtime, and all references to that instance will immediately use the appropriately decorated methods when they are next called.
+Wand has language support for the decorator design pattern, which allows a transparent layer to be placed between the class implementing an interface and the user of the interface. Because Wand supports this natively in the language syntax, a decorator can be applied to (and removed from) an instance at runtime, and all references to that instance will immediately use the appropriately decorated methods when they are next called. ::
 
 	public interface Ship {
 		public int getDefenceValue( );
@@ -39,7 +39,7 @@ Wand has language support for the decorator design pattern, which allows a trans
 		Console.println( "Defence value: ", ship.getDefenceValue( ) ); // 40
 		
 		DefenceShield shield = new DefenceShield( 2 );
-		shield.decorate( ship );
+		decorate ship with shield; // NOTE: draft syntax only
 		
 		Console.println( "Defence value: ", ship.getDefenceValue( ) ); // 42
 		

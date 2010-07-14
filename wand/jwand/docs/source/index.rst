@@ -18,10 +18,11 @@ wherever it makes code easier to understand.
 Contents:
 
 .. toctree::
+   :glob:
    :maxdepth: 2
    
-   comparison
    language/*
+   comparison
    testing
 
 Indices and tables
