@@ -159,6 +159,10 @@ TOKEN: {
 | < DECL_NAMESPACE: "namespace" >
 | < STMT_USING: "using" >
 
+| < DECL_CLASS: "class" >
+| < DECL_EXTENDS: "extends" >
+| < DECL_IMPLEMENTS: "implements" >
+
 | < END_STMT: ";" >
 
 }
@@ -199,7 +203,7 @@ void NamespaceDeclaration() : {}
 // Declaration -> FunctionDeclaration
 void Declaration() #void : {}
 {
-	DecoratedFunctionDeclaration() |
+	DecoratedFunctionOrClassDeclaration() |
 	UsingStatement()
 }
 
@@ -221,9 +225,22 @@ void NamespaceName() : {
     { jjtThis.setName( t.image ); }
 }
 
+void DecoratedFunctionOrClassDeclaration() : {}
+{
+    Modifiers() (
+        FunctionDeclaration() |
+        ClassDeclaration()
+    )
+}
+
 void DecoratedFunctionDeclaration() : {}
 {
     Modifiers() FunctionDeclaration()
+}
+
+void DecoratedClassDeclaration() : {}
+{
+    Modifiers() ClassDeclaration()
 }
 
 void Modifiers() : {}
@@ -252,6 +269,29 @@ void Modifier() : {
             jjtThis.setMeta( meta.image );
         }
     }
+}
+
+void ClassDeclaration() : {
+    Token className;
+}
+{
+    "class" className=<ID> ["extends" QualifiedIdentifier()] ["implements" QualifiedIdentifierList()] "{" ClassFieldDeclarations() "}"
+}
+
+void QualifiedIdentifierList() : {}
+{
+    QualifiedIdentifier() ("," QualifiedIdentifier())*
+}
+
+void ClassFieldDeclarations() : {}
+{
+    (ClassFieldDeclarator())*
+}
+
+void ClassFieldDeclarator() : {}
+{
+    DecoratedFunctionDeclaration()
+    // FIXME: add member variables
 }
 
 // FunctionDeclaration -> "void" Identifier "(" ")" "{" FunctionBody "}"
@@ -706,26 +746,6 @@ void NullLiteral() : {}
 {
     "null"
 }
-
-
-/*
-void Block() : {}
-{
-    "{" BlockStatements() "}"
-}
-
-void BlockStatements() #void : {}
-{
-    (BlockStatement())*
-}
-
-void BlockStatement() #void : {}
-{
-    LOOKAHEAD(2)
-    LocalVariableDeclarationStatement() |
-    Statement()
-}
-*/
 
 void LocalVariableDeclarationStatement() : {}
 {

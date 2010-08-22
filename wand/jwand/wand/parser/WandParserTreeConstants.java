@@ -10,44 +10,50 @@ public interface WandParserTreeConstants
   public int JJTUSINGSTATEMENT = 4;
   public int JJTQUALIFIEDNAMESPACENAME = 5;
   public int JJTNAMESPACENAME = 6;
-  public int JJTDECORATEDFUNCTIONDECLARATION = 7;
-  public int JJTMODIFIERS = 8;
-  public int JJTMODIFIER = 9;
-  public int JJTFUNCTIONDECLARATION = 10;
-  public int JJTFUNCTIONPARAMETERS = 11;
-  public int JJTFUNCTIONPARAMETER = 12;
-  public int JJTBUILTINTYPE = 13;
-  public int JJTARRAYTYPE = 14;
-  public int JJTQUALIFIEDIDENTIFIER = 15;
-  public int JJTASSIGNEXPRESSION = 16;
-  public int JJTCONDITIONALEXPRESSION = 17;
-  public int JJTINFIXEXPRESSION = 18;
-  public int JJTUNARYEXPRESSION = 19;
-  public int JJTPOSTFIXEXPRESSION = 20;
-  public int JJTCASTEXPRESSION = 21;
-  public int JJTFUNCTIONCALL = 22;
-  public int JJTARGUMENTS = 23;
-  public int JJTASSIGNOPERATOR = 24;
-  public int JJTINFIXOPERATOR = 25;
-  public int JJTUNARYOPERATOR = 26;
-  public int JJTPOSTFIXOPERATOR = 27;
-  public int JJTINTEGERLITERAL = 28;
-  public int JJTFLOATINGPOINTLITERAL = 29;
-  public int JJTBOOLEANLITERAL = 30;
-  public int JJTNULLLITERAL = 31;
-  public int JJTLOCALVARIABLEDECLARATIONSTATEMENT = 32;
-  public int JJTBLOCKSTATEMENT = 33;
-  public int JJTIFSTATEMENT = 34;
-  public int JJTWHILESTATEMENT = 35;
-  public int JJTDOWHILESTATEMENT = 36;
-  public int JJTLOOPSTATEMENT = 37;
-  public int JJTBREAKSTATEMENT = 38;
-  public int JJTCONTINUESTATEMENT = 39;
-  public int JJTASSERTSTATEMENT = 40;
-  public int JJTRETURNSTATEMENT = 41;
-  public int JJTEXPRESSIONSTATEMENT = 42;
-  public int JJTVARIABLEDECLARATOR = 43;
-  public int JJTIDENTIFIER = 44;
+  public int JJTDECORATEDFUNCTIONORCLASSDECLARATION = 7;
+  public int JJTDECORATEDFUNCTIONDECLARATION = 8;
+  public int JJTDECORATEDCLASSDECLARATION = 9;
+  public int JJTMODIFIERS = 10;
+  public int JJTMODIFIER = 11;
+  public int JJTCLASSDECLARATION = 12;
+  public int JJTQUALIFIEDIDENTIFIERLIST = 13;
+  public int JJTCLASSFIELDDECLARATIONS = 14;
+  public int JJTCLASSFIELDDECLARATOR = 15;
+  public int JJTFUNCTIONDECLARATION = 16;
+  public int JJTFUNCTIONPARAMETERS = 17;
+  public int JJTFUNCTIONPARAMETER = 18;
+  public int JJTBUILTINTYPE = 19;
+  public int JJTARRAYTYPE = 20;
+  public int JJTQUALIFIEDIDENTIFIER = 21;
+  public int JJTASSIGNEXPRESSION = 22;
+  public int JJTCONDITIONALEXPRESSION = 23;
+  public int JJTINFIXEXPRESSION = 24;
+  public int JJTUNARYEXPRESSION = 25;
+  public int JJTPOSTFIXEXPRESSION = 26;
+  public int JJTCASTEXPRESSION = 27;
+  public int JJTFUNCTIONCALL = 28;
+  public int JJTARGUMENTS = 29;
+  public int JJTASSIGNOPERATOR = 30;
+  public int JJTINFIXOPERATOR = 31;
+  public int JJTUNARYOPERATOR = 32;
+  public int JJTPOSTFIXOPERATOR = 33;
+  public int JJTINTEGERLITERAL = 34;
+  public int JJTFLOATINGPOINTLITERAL = 35;
+  public int JJTBOOLEANLITERAL = 36;
+  public int JJTNULLLITERAL = 37;
+  public int JJTLOCALVARIABLEDECLARATIONSTATEMENT = 38;
+  public int JJTBLOCKSTATEMENT = 39;
+  public int JJTIFSTATEMENT = 40;
+  public int JJTWHILESTATEMENT = 41;
+  public int JJTDOWHILESTATEMENT = 42;
+  public int JJTLOOPSTATEMENT = 43;
+  public int JJTBREAKSTATEMENT = 44;
+  public int JJTCONTINUESTATEMENT = 45;
+  public int JJTASSERTSTATEMENT = 46;
+  public int JJTRETURNSTATEMENT = 47;
+  public int JJTEXPRESSIONSTATEMENT = 48;
+  public int JJTVARIABLEDECLARATOR = 49;
+  public int JJTIDENTIFIER = 50;
 
 
   public String[] jjtNodeName = {
@@ -58,9 +64,15 @@ public interface WandParserTreeConstants
     "UsingStatement",
     "QualifiedNamespaceName",
     "NamespaceName",
+    "DecoratedFunctionOrClassDeclaration",
     "DecoratedFunctionDeclaration",
+    "DecoratedClassDeclaration",
     "Modifiers",
     "Modifier",
+    "ClassDeclaration",
+    "QualifiedIdentifierList",
+    "ClassFieldDeclarations",
+    "ClassFieldDeclarator",
     "FunctionDeclaration",
     "FunctionParameters",
     "FunctionParameter",
@@ -98,4 +110,4 @@ public interface WandParserTreeConstants
     "Identifier",
   };
 }
-/* JavaCC - OriginalChecksum=fd03ccabe629dab6cf48c94d58e747c6 (do not edit this line) */
+/* JavaCC - OriginalChecksum=5dbd9c6036f621fee078b061bb97f1f4 (do not edit this line) */

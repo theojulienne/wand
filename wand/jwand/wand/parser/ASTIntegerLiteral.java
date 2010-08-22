@@ -52,7 +52,7 @@ class ASTIntegerLiteral extends ASTLiteral {
             signed = true;
         }
         
-        if ( literal.longValue( ) )
+        //if ( literal.longValue( ) )
         
         System.out.println( "Minimum integer for " + literal );
         
